@@ -18,16 +18,19 @@ class ShowAllStMaterial:
     def __init__(self, my_frame1):
         super().__init__()
 
-
         my_cursor = mydb.cursor()
 
         my_cursor.execute("SELECT * FROM st_material;")
         my_result = my_cursor.fetchall()
         mydb.commit()
 
+        wraper1 = LabelFrame(my_frame1, text="Steel material")
+        wraper1.pack(fill="both", expand=1)
+
         # SCROLL BAR
         scrolllbary = Scrollbar(my_frame1, orient=VERTICAL)
-        my_tree = ttk.Treeview(my_frame1, selectmode='browse', height=20)
+        my_tree = ttk.Treeview(wraper1, selectmode='browse', height=20)
+
         my_tree.pack()
 
         my_tree.configure(yscrollcommand=scrolllbary.set)
