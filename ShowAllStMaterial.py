@@ -91,7 +91,26 @@ class ShowAllStMaterial:
                 cursor.execute(sql, (x,))
                 mydb.commit()
 
+        id_variable = StringVar()
+
+        def update(rows):
+            entry_search.delete(0, END)
+            my_tree.delete(*my_tree.get_children())
+            for i in rows:
+                my_tree.insert("", "end", values=i)
+
+        def search():
+            id_variable2 = id_variable.get()
+            query = "SELECT * FROM st_material WHERE id LIKE '%"+id_variable2+"%'"
+            my_cursor.execute(query)
+            rows = my_cursor.fetchall()
+            update(rows)
+
         create_material_button = Button(my_frame1, text="Delete material", command=delete)
         create_material_button.pack(side=LEFT)
         create_material_button = Button(my_frame1, text="Update records", command=_build_tree)
+        create_material_button.pack(side=LEFT)
+        entry_search = Entry(my_frame1, textvariable=id_variable)
+        entry_search.pack(side=LEFT, ipady=3)
+        create_material_button = Button(my_frame1, text="Search", command= search)
         create_material_button.pack(side=LEFT)

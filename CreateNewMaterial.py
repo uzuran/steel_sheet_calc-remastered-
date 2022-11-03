@@ -113,12 +113,12 @@ class CreateNewMaterial(tk.Toplevel):
         get_thickness = thickness.get()
         get_xsize = xsize.get()
         get_ysize = ysize.get()
+
         type_material_entry.delete(0, END)
         ID_entry.delete(0, END)
         material_thickness_entry.delete(0, END)
         x_size_entry.delete(0, END)
         y_size_entry.delete(0, END)
-
 
         # Check if material exist  in database
         sql = "SELECT * FROM st_material WHERE id = '%s'" % get_material_id
