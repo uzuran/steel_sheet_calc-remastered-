@@ -92,3 +92,5 @@ class ShowAllStMaterial:
 
         create_material_button = Button(my_frame1, text="Delete material", command=delete)
         create_material_button.pack(side=BOTTOM)
+        create_material_button = Button(my_frame1, text="Update records", command=_build_tree)
+        create_material_button.pack(side=BOTTOM)
