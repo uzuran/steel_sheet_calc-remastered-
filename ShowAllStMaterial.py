@@ -66,12 +66,13 @@ class ShowAllStMaterial:
             cursor = mydb.cursor(buffered=True)
             cursor.execute("SELECT * FROM st_material;")
             result = cursor.fetchall()
+            mydb.commit()
             # First delete
             for i in my_tree.get_children():
                 my_tree.delete(i)
             # Then add in to.
             for i in result:
-                my_tree.insert("", 'end', iid=i[0], text=i[0],
+                my_tree.insert("", 'end',
                                values=(i[0], i[1], i[2], i[3], i[4], i[5], i[6]))
 
         def delete():
@@ -91,6 +92,6 @@ class ShowAllStMaterial:
                 mydb.commit()
 
         create_material_button = Button(my_frame1, text="Delete material", command=delete)
-        create_material_button.pack(side=BOTTOM)
+        create_material_button.pack(side=LEFT)
         create_material_button = Button(my_frame1, text="Update records", command=_build_tree)
-        create_material_button.pack(side=BOTTOM)
+        create_material_button.pack(side=LEFT)
