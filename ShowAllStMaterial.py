@@ -41,7 +41,7 @@ class ShowAllStMaterial:
         # Show headings
         my_tree['show'] = 'headings'
 
-        # width of columns and alignment
+        # Width of columns and alignment
         my_tree.column("1", width=80, anchor='c')
         my_tree.column("2", width=80, anchor='c')
         my_tree.column("3", width=80, anchor='c')
@@ -51,7 +51,7 @@ class ShowAllStMaterial:
         my_tree.column("7", width=80, anchor='c')
 
         # Headings.
-        # respective columns.
+        # Headings.
         my_tree.heading("1", text="Id:")
         my_tree.heading("2", text="Thickness:")
         my_tree.heading("3", text="X size:")
@@ -65,6 +65,8 @@ class ShowAllStMaterial:
 
         my_tree.pack()
 
+        # Function for update records button, firstly select all from database table, then delete treeview
+        # and load again.
         def _build_tree():
             cursor = mydb.cursor(buffered=True)
             cursor.execute("SELECT * FROM st_material;")
@@ -78,22 +80,27 @@ class ShowAllStMaterial:
                 my_tree.insert("", 'end',
                                values=(i[0], i[1], i[2], i[3], i[4], i[5], i[6]))
 
+        # Select item from treeview message yes/no for delete.
         def delete():
             # Db connect.
             mydb = mysql.connector.connect(host="127.0.0.1",
                                            user="root",
                                            passwd="datapass",
                                            database='car_wash_material')
-
             selected_item = my_tree.selection()
-            if selected_item:
-                x = selected_item[0]
-                my_tree.delete(x)
-                sql = "DELETE FROM st_material WHERE id=%s"
-                cursor = mydb.cursor()
-                cursor.execute(sql, (x,))
-                mydb.commit()
 
+            if selected_item:
+
+                if msg.askyesno(title="Warning !", message="Are you sure"
+                                                           " that you want delete this material ?"):
+                    x = selected_item[0]
+                    my_tree.delete(x)
+                    sql = "DELETE FROM st_material WHERE id=%s"
+                    cursor = mydb.cursor()
+                    cursor.execute(sql, (x,))
+                    mydb.commit()
+                else:
+                    return True
         id_variable = StringVar()
 
         def update(rows):
@@ -102,18 +109,68 @@ class ShowAllStMaterial:
             for i in rows:
                 my_tree.insert("", "end", values=i)
 
+        # Function for search material by ID.
         def search():
+
             id_variable2 = id_variable.get()
             query = "SELECT * FROM st_material WHERE id LIKE '%"+id_variable2+"%'"
             my_cursor.execute(query)
             rows = my_cursor.fetchall()
             update(rows)
 
+        def get_row(event):
+            rowid = my_tree.identify_row(event.y)
+            item = my_tree.item(my_tree.focus())
+            id_string.set(item["values"][0])
+            variable.set(item["values"][5])
+
+        my_tree.bind("<Double 1>", get_row)
+
+        def add_ordered_mat():
+            order_value = variable.get()
+
+            cursor = mydb.cursor(buffered=True)
+            item = my_tree.item(my_tree.focus())
+            print(item['values'][0])
+            query = "UPDATE st_material  SET ordered = %s WHERE id = %s"
+            cursor.execute(query, (order_value, item["values"][0]))
+            mydb.commit()
+
+
+        id_string = StringVar()
+
+        # Buttons !
         create_material_button = Button(my_frame1, text="Delete material", command=delete)
         create_material_button.pack(side=LEFT)
-        create_material_button = Button(my_frame1, text="Update records", command=_build_tree)
-        create_material_button.pack(side=LEFT)
+        update_material_button = Button(my_frame1, text="Update records", command=_build_tree)
+        update_material_button.pack(side=LEFT)
         entry_search = Entry(my_frame1, textvariable=id_variable)
         entry_search.pack(side=LEFT, ipady=3)
-        create_material_button = Button(my_frame1, text="Search", command= search)
-        create_material_button.pack(side=LEFT)
+        search_material_button = Button(my_frame1, text="Search", command=search)
+        search_material_button.pack(side=LEFT)
+        id_mat = Entry(my_frame1, textvariable=id_string)
+        id_mat.pack(side=LEFT)
+
+        # Spinbox order.
+        variable = StringVar()
+
+
+        spin_box = ttk.Spinbox(
+            my_frame1,
+            textvariable=variable,
+            from_=0,
+            to=200,
+            width=3,
+
+        )
+        spin_box.pack(side=LEFT, padx=5, ipady=1)
+
+        add_to_storage_material_button = Button(my_frame1, text="Add material", command=add_ordered_mat)
+        add_to_storage_material_button.pack(side=LEFT)
+
+        plus_material_button = Button(my_frame1, text="+")
+        plus_material_button.pack(side=LEFT, ipadx=10)
+
+        minus_material_button = Button(my_frame1, text="-")
+        minus_material_button.pack(side=LEFT, ipadx=10)
+

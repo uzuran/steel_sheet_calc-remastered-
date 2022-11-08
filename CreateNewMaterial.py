@@ -88,8 +88,7 @@ class CreateNewMaterial(tk.Toplevel):
 
         # Button for material register.
         button_for_register_material = Button(self, text='Register material')
-        button_for_register_material['command'] = lambda: [self.create_new_material_click(),
-                                                           ]
+        button_for_register_material['command'] = lambda: [self.create_new_material_click()]
         button_for_register_material.pack()
         # Free space.
         free_space = Label(self, text='')
@@ -113,12 +112,6 @@ class CreateNewMaterial(tk.Toplevel):
         get_thickness = thickness.get()
         get_xsize = xsize.get()
         get_ysize = ysize.get()
-
-        type_material_entry.delete(0, END)
-        ID_entry.delete(0, END)
-        material_thickness_entry.delete(0, END)
-        x_size_entry.delete(0, END)
-        y_size_entry.delete(0, END)
 
         # Check if material exist  in database
         sql = "SELECT * FROM st_material WHERE id = '%s'" % get_material_id
@@ -144,10 +137,11 @@ class CreateNewMaterial(tk.Toplevel):
             mydb.commit()
             # Success registration Label.
             reg_suc = Label(self, text=f'You register ID: {m_identification.get()}'
-                                                             f' Thickness: {thickness.get()} '
-                                                             f'X: {xsize.get()} Y: {ysize.get()}', fg="green")
+                                                            f' Thickness: {thickness.get()} '
+                                                            f'X: {xsize.get()} Y: {ysize.get()}', fg="green")
             reg_suc.pack()
             reg_suc.after(2000, killer)
+
         else:
             msg.showwarning(title="Warning!", message="You cant add this specification of material.")
 
