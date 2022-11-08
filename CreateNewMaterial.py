@@ -125,9 +125,7 @@ class CreateNewMaterial(tk.Toplevel):
         if my_cursor.fetchone():
             msg.showwarning(title="Warning!", message="This material already exist!")
 
-        elif get_material_type == "st" and\
-                get_material_id.isdigit() \
-                and get_thickness != ""\
+        elif get_material_type == "st" and get_thickness != ""\
                 and get_xsize.isdigit()\
                 and get_ysize.isdigit():
 

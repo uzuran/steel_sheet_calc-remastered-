@@ -137,7 +137,6 @@ class ShowAllStMaterial:
             order_value = variable.get()
             cursor = mydb.cursor(buffered=True)
             item = my_tree.item(my_tree.focus())
-            print(item['values'][0])
             if msg.askyesno(title="Warning", message= f"Dou you really "
                                                       f"want add this {order_value} count "
                                                       f"of material ?"):
@@ -175,7 +174,7 @@ class ShowAllStMaterial:
 
         # ID mat entry.
         id_mat = Entry(my_frame1, textvariable=id_string)
-        id_mat.pack(side=LEFT)
+        id_mat.pack(side=LEFT, ipady=3)
 
         # Spinbox order.
         variable = StringVar()
