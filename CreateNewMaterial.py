@@ -2,6 +2,7 @@ import mysql.connector
 from tkinter import messagebox as msg
 from tkinter import *
 import tkinter as tk
+from ShowAllStMaterial import ShowAllStMaterial
 
 
 # Db connect.

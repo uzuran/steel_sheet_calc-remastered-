@@ -147,25 +147,38 @@ class ShowAllStMaterial:
                 mydb.commit()
                 clear()
             else:
-                 return True
+                return True
 
         id_string = StringVar()
 
-        # Buttons !
-        create_material_button = Button(my_frame1, text="Delete material", command=delete)
-        create_material_button.pack(side=LEFT)
-        update_material_button = Button(my_frame1, text="Update records", command=_build_tree)
+        # Delete material button
+        delete_material_button = Button(my_frame1)
+        delete_material_button["text"] = "Delete material"
+        delete_material_button["command"] = delete
+        delete_material_button.pack(side=LEFT)
+
+        # Update material button.
+        update_material_button = Button(my_frame1)
+        update_material_button["text"] = "Update records"
+        update_material_button["command"] = _build_tree
         update_material_button.pack(side=LEFT)
+
+        # Search entry.
         entry_search = Entry(my_frame1, textvariable=id_variable)
         entry_search.pack(side=LEFT, ipady=3)
-        search_material_button = Button(my_frame1, text="Search", command=search)
+
+        # Search button.
+        search_material_button = Button(my_frame1)
+        search_material_button["text"] = "Search"
+        search_material_button["command"] = search
         search_material_button.pack(side=LEFT)
+
+        # ID mat entry.
         id_mat = Entry(my_frame1, textvariable=id_string)
         id_mat.pack(side=LEFT)
 
         # Spinbox order.
         variable = StringVar()
-
 
         spin_box = ttk.Spinbox(
             my_frame1,
@@ -177,7 +190,10 @@ class ShowAllStMaterial:
         )
         spin_box.pack(side=LEFT, padx=5, ipady=1)
 
-        add_to_storage_material_button = Button(my_frame1, text="Add material", command=add_ordered_mat)
+        # Add to storage button.
+        add_to_storage_material_button = Button(my_frame1)
+        add_to_storage_material_button["text"] = "Add material"
+        add_to_storage_material_button["command"] = add_ordered_mat
         add_to_storage_material_button.pack(side=LEFT)
 
         plus_material_button = Button(my_frame1, text="+")
