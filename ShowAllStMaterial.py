@@ -118,6 +118,13 @@ class ShowAllStMaterial:
             rows = my_cursor.fetchall()
             update(rows)
 
+        def clear():
+            query = "SELECT * from st_material"
+            my_cursor.execute(query)
+            rows = my_cursor.fetchall()
+            update(rows)
+
+
         def get_row(event):
             rowid = my_tree.identify_row(event.y)
             item = my_tree.item(my_tree.focus())
@@ -128,14 +135,19 @@ class ShowAllStMaterial:
 
         def add_ordered_mat():
             order_value = variable.get()
-
             cursor = mydb.cursor(buffered=True)
             item = my_tree.item(my_tree.focus())
             print(item['values'][0])
-            query = "UPDATE st_material  SET ordered = %s WHERE id = %s"
-            cursor.execute(query, (order_value, item["values"][0]))
-            mydb.commit()
+            if msg.askyesno(title="Warning", message= f"Dou you really "
+                                                      f"want add this {order_value} count "
+                                                      f"of material ?"):
 
+                query = "UPDATE st_material  SET ordered = %s WHERE id = %s"
+                cursor.execute(query, (order_value, item["values"][0]))
+                mydb.commit()
+                clear()
+            else:
+                 return True
 
         id_string = StringVar()
 
