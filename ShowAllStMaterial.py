@@ -111,7 +111,6 @@ class ShowAllStMaterial:
 
         # Function for search material by ID.
         def search():
-
             id_variable2 = id_variable.get()
             query = "SELECT * FROM st_material WHERE id LIKE '%"+id_variable2+"%'"
             my_cursor.execute(query)
@@ -128,6 +127,7 @@ class ShowAllStMaterial:
             rowid = my_tree.identify_row(event.y)
             item = my_tree.item(my_tree.focus())
             id_string.set(item["values"][0])
+            variable.set(item["values"][5])
 
         my_tree.bind("<Double 1>", get_row)
 
@@ -194,7 +194,7 @@ class ShowAllStMaterial:
 
         # Add to storage button.
         add_to_ordered_material_button = Button(my_frame1)
-        add_to_ordered_material_button["text"] = "Add material"
+        add_to_ordered_material_button["text"] = "Add material ordered material"
         add_to_ordered_material_button["command"] = add_ordered_mat
         add_to_ordered_material_button.pack(side=LEFT)
 
@@ -212,6 +212,7 @@ class ShowAllStMaterial:
         spin_box_storage.pack(side=LEFT, padx=5, ipady=1)
 
         def add_to_storage():
+
             to_storge_var = variable_to_storage.get()
 
             cursor = mydb.cursor(buffered=True)
