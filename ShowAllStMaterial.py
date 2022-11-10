@@ -124,12 +124,10 @@ class ShowAllStMaterial:
             rows = my_cursor.fetchall()
             update(rows)
 
-
         def get_row(event):
             rowid = my_tree.identify_row(event.y)
             item = my_tree.item(my_tree.focus())
             id_string.set(item["values"][0])
-            variable.set(item["values"][5])
 
         my_tree.bind("<Double 1>", get_row)
 
@@ -142,9 +140,14 @@ class ShowAllStMaterial:
                                                       f"of material ?"):
 
                 query = "UPDATE st_material  SET ordered = %s WHERE id = %s"
-                cursor.execute(query, (order_value, item["values"][0]))
+                try:
+                    cursor.execute(query, (order_value, item["values"][0]))
+                except IndexError:
+                    msg.showwarning(title="WARNING", message="Firstly you need select the material !")
+
                 mydb.commit()
                 clear()
+                spin_box.delete(0, END)
             else:
                 return True
 
@@ -190,13 +193,69 @@ class ShowAllStMaterial:
         spin_box.pack(side=LEFT, padx=5, ipady=1)
 
         # Add to storage button.
+        add_to_ordered_material_button = Button(my_frame1)
+        add_to_ordered_material_button["text"] = "Add material"
+        add_to_ordered_material_button["command"] = add_ordered_mat
+        add_to_ordered_material_button.pack(side=LEFT)
+
+        # Spinbox order.
+        variable_to_storage = IntVar()
+
+        spin_box_storage = ttk.Spinbox(
+            my_frame1,
+            textvariable=variable_to_storage,
+            from_=0,
+            to=200,
+            width=3,
+
+        )
+        spin_box_storage.pack(side=LEFT, padx=5, ipady=1)
+
+        def add_to_storage():
+            to_storge_var = variable_to_storage.get()
+
+            cursor = mydb.cursor(buffered=True)
+            item = my_tree.item(my_tree.focus())
+            if msg.askyesno(title="Warning", message= f"Dou you really "
+                                                      f"want add this {to_storge_var} count "
+                                                      f"of material ?"):
+
+                query = "UPDATE st_material  SET in_storage = %s WHERE id = %s"
+                try:
+                    cursor.execute(query, (to_storge_var, item["values"][0]))
+                except IndexError:
+                    msg.showwarning(title="WARNING", message="Firstly you need select the material !")
+                spin_box_storage.delete(0, END)
+                mydb.commit()
+
+                clear()
+            else:
+                return True
+
+        # Add to storage button.
         add_to_storage_material_button = Button(my_frame1)
-        add_to_storage_material_button["text"] = "Add material"
-        add_to_storage_material_button["command"] = add_ordered_mat
+        add_to_storage_material_button["text"] = "Add to storage"
+        add_to_storage_material_button["command"] = add_to_storage
         add_to_storage_material_button.pack(side=LEFT)
+
+
+        #def minus_from_storage():
 
         plus_material_button = Button(my_frame1, text="+")
         plus_material_button.pack(side=LEFT, ipadx=10)
+
+        # Spinbox order.
+        plus_minus = IntVar()
+
+        spin_box = ttk.Spinbox(
+            my_frame1,
+            textvariable=plus_minus,
+            from_=0,
+            to=200,
+            width=3,
+
+        )
+        spin_box.pack(side=LEFT, padx=5, ipady=1)
 
         minus_material_button = Button(my_frame1, text="-")
         minus_material_button.pack(side=LEFT, ipadx=10)
