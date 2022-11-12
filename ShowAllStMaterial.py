@@ -125,9 +125,9 @@ class ShowAllStMaterial:
             order_value = variable.get()
             cursor = mydb.cursor(buffered=True)
             item = my_tree.item(my_tree.focus())
-            if msg.askyesno(title="Warning", message= f"Dou you really "
-                                                      f"want add this {order_value} count "
-                                                      f"of material ?"):
+            if msg.askyesno(title="Warning", message=f"Dou you really "
+                                                     f"want add this {order_value} count "
+                                                     f"of material ?"):
 
                 query = "UPDATE st_material  SET ordered = %s WHERE id = %s"
                 try:
@@ -212,9 +212,9 @@ class ShowAllStMaterial:
 
             cursor = mydb.cursor(buffered=True)
             item = my_tree.item(my_tree.focus())
-            if msg.askyesno(title="Warning", message= f"Dou you really "
-                                                      f"want add this {to_storge_var} count "
-                                                      f"of material ?"):
+            if msg.askyesno(title="Warning", message=f"Dou you really "
+                                                     f"want add this {to_storge_var} count "
+                                                     f"of material ?"):
 
                 query = "UPDATE st_material  SET in_storage = %s WHERE id = %s"
                 try:
