@@ -1,6 +1,5 @@
 import tkinter as tk
 from tkinter import *
-import mysql.connector
 from tkinter import messagebox as msg
 import hashlib
 from AdminScreen import AdminScreen

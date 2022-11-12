@@ -1,4 +1,3 @@
-import mysql.connector
 from tkinter import messagebox as msg
 from tkinter import *
 import tkinter as tk
@@ -133,8 +132,9 @@ class CreateNewMaterial(tk.Toplevel):
             mydb.commit()
             # Success registration Label.
             reg_suc = Label(self, text=f'You register ID: {m_identification.get()}'
-                                                            f' Thickness: {thickness.get()} '
-                                                            f'X: {xsize.get()} Y: {ysize.get()}', fg="green")
+                                                           f' Thickness: {thickness.get()} '
+                                                           f'X: {xsize.get()} Y: {ysize.get()}',
+                                                           fg="green")
             reg_suc.pack()
             reg_suc.after(2000, killer)
 

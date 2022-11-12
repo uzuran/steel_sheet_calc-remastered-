@@ -1,4 +1,3 @@
-import mysql.connector
 from tkinter import messagebox as msg
 from tkinter import *
 from tkinter import ttk

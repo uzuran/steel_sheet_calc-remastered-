@@ -1,6 +1,5 @@
 import tkinter as tk
 from tkinter import *
-import mysql.connector
 import hashlib
 from Connection import *
 
