@@ -2,6 +2,7 @@ import mysql.connector
 from tkinter import messagebox as msg
 from tkinter import *
 from tkinter import ttk
+import tkinter as tk
 
 
 # Db connect.
@@ -211,7 +212,12 @@ class ShowAllStMaterial:
         )
         spin_box_storage.pack(side=LEFT, padx=5, ipady=1)
 
+        # Function for adding material into storage
         def add_to_storage():
+            try:
+                variable_to_storage.get()
+            except tk.TclError:
+                msg.showwarning(title="WARNING", message="You need add only numbers into entry !")
 
             to_storge_var = variable_to_storage.get()
 

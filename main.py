@@ -2,6 +2,23 @@ import tkinter as tk
 from tkinter import *
 from LoginScreen import LoginScreen
 from RegisterUserScreen import RegisterUserScreen
+import mysql.connector
+
+
+mydb = mysql.connector.connect(host="127.0.0.1",
+                               user="root",
+                               passwd="datapass",
+                               database='users_data')
+
+my_cursor = mydb.cursor(buffered=True)
+
+sql = "CREATE DATABASE IF NOT EXISTS car_wash_material"
+my_cursor.execute(sql)
+sql = "CREATE TABLE IF NOT EXISTS st_material(id text, " \
+      "thickness varchar(40), size_x varchar(40), size_y varchar(40)," \
+      "in_storage int, ordered varchar(40), write_off int)"
+my_cursor.execute(sql)
+mydb.commit()
 
 
 class App(tk.Tk):
