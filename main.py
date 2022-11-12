@@ -18,8 +18,21 @@ from Connection import *
 class App(tk.Tk):
     def __init__(self):
         super().__init__()
+        """Write step by step commands for create database and tables for MySQL"""
 
-        my_cursor = mydb.cursor(buffered=True)
+
+        #my_cursor = mydb.cursor(buffered=True)
+        #sql = "CREATE DATABASE " \
+        #      "users_data"
+        #my_cursor.execute(sql)
+        #sql = "CREATE TABLE IF NOT EXISTS st_material(id text, " \
+        #      "thickness varchar(40), size_x varchar(40), size_y varchar(40)," \
+        #      "in_storage int, ordered varchar(40), write_off int)"
+
+        #sql = "CREATE TABLE IF NOT EXISTS login(username varchar(40), userpass varchar (40))"
+
+        #my_cursor.execute(sql)
+        #mydb.commit()
 
     # configure the root window
         self.title("Steel sheet calculator.")
