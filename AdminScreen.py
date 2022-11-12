@@ -5,13 +5,7 @@ import tkinter as tk
 from tkinter import ttk
 from CreateNewMaterial import CreateNewMaterial
 from ShowAllStMaterial import ShowAllStMaterial
-
-
-# Db connect.
-mydb = mysql.connector.connect(host="127.0.0.1",
-                               user="root",
-                               passwd="datapass",
-                               database='car_wash_material')
+from Connection import *
 
 my_cursor = mydb.cursor(buffered=True)
 
