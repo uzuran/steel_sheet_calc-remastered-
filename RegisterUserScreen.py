@@ -7,6 +7,7 @@ from Connection import *
 
 my_cursor = mydb.cursor(buffered=True)
 
+
 class RegisterUserScreen(tk.Toplevel):
     def __init__(self, child):
         super().__init__(child)

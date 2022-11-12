@@ -9,9 +9,8 @@ from Connection import *
 class App(tk.Tk):
     def __init__(self):
         super().__init__()
+
         """Write step by step commands for create database and tables for MySQL"""
-
-
         #my_cursor = mydb.cursor(buffered=True)
         #sql = "CREATE DATABASE " \
         #      "users_data"
