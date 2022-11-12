@@ -2,12 +2,8 @@ import tkinter as tk
 from tkinter import *
 import mysql.connector
 import hashlib
+from Connection import *
 
-
-mydb = mysql.connector.connect(host="127.0.0.1",
-                               user="root",
-                               passwd="datapass",
-                               database='users_data')
 
 my_cursor = mydb.cursor(buffered=True)
 

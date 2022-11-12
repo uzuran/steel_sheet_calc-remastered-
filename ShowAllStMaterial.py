@@ -3,13 +3,7 @@ from tkinter import messagebox as msg
 from tkinter import *
 from tkinter import ttk
 import tkinter as tk
-
-
-# Db connect.
-mydb = mysql.connector.connect(host="127.0.0.1",
-                               user="root",
-                               passwd="datapass",
-                               database='users_data')
+from Connection import *
 
 my_cursor = mydb.cursor(buffered=True)
 
@@ -83,11 +77,6 @@ class ShowAllStMaterial:
 
         # Select item from treeview message yes/no for delete.
         def delete():
-            # Db connect.
-            mydb = mysql.connector.connect(host="127.0.0.1",
-                                           user="root",
-                                           passwd="datapass",
-                                           database='car_wash_material')
             selected_item = my_tree.selection()
 
             if selected_item:

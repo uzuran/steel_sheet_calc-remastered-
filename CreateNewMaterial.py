@@ -2,15 +2,12 @@ import mysql.connector
 from tkinter import messagebox as msg
 from tkinter import *
 import tkinter as tk
+from Connection import *
 from ShowAllStMaterial import ShowAllStMaterial
 
 
 # Db connect.
 
-mydb = mysql.connector.connect(host="127.0.0.1",
-                               user="root",
-                               passwd="datapass",
-                               database='users_data')
 
 my_cursor = mydb.cursor(buffered=True)
 
