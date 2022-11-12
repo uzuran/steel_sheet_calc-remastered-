@@ -10,7 +10,7 @@ from ShowAllStMaterial import ShowAllStMaterial
 mydb = mysql.connector.connect(host="127.0.0.1",
                                user="root",
                                passwd="datapass",
-                               database='car_wash_material')
+                               database='users_data')
 
 my_cursor = mydb.cursor(buffered=True)
 

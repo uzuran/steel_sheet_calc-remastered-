@@ -11,7 +11,6 @@ mydb = mysql.connector.connect(host="127.0.0.1",
 
 my_cursor = mydb.cursor(buffered=True)
 
-
 class RegisterUserScreen(tk.Toplevel):
     def __init__(self, child):
         super().__init__(child)

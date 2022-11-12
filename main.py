@@ -10,20 +10,19 @@ mydb = mysql.connector.connect(host="127.0.0.1",
                                passwd="datapass",
                                database='users_data')
 
-my_cursor = mydb.cursor(buffered=True)
-
-sql = "CREATE DATABASE IF NOT EXISTS car_wash_material"
-my_cursor.execute(sql)
-sql = "CREATE TABLE IF NOT EXISTS st_material(id text, " \
-      "thickness varchar(40), size_x varchar(40), size_y varchar(40)," \
-      "in_storage int, ordered varchar(40), write_off int)"
-my_cursor.execute(sql)
-mydb.commit()
-
-
 class App(tk.Tk):
     def __init__(self):
         super().__init__()
+
+        my_cursor = mydb.cursor(buffered=True)
+
+        sql = "CREATE DATABASE IF NOT EXISTS users_data"
+        my_cursor.execute(sql)
+        sql = "CREATE TABLE IF NOT EXISTS st_material(id text, " \
+              "thickness varchar(40), size_x varchar(40), size_y varchar(40)," \
+              "in_storage int, ordered varchar(40), write_off int)"
+        my_cursor.execute(sql)
+        mydb.commit()
 
     # configure the root window
         self.title("Steel sheet calculator.")
