@@ -241,14 +241,19 @@ class ShowAllStMaterial:
         add_to_storage_material_button["command"] = add_to_storage
         add_to_storage_material_button.pack(side=LEFT)
 
-
-        #def minus_from_storage():
-
         plus_material_button = Button(my_frame1, text="+")
         plus_material_button.pack(side=LEFT, ipadx=10)
 
         # Spinbox order.
         plus_minus = IntVar()
+
+        #def write_off_from_storage():
+        #    var = plus_minus.get()
+        #    query = "SELECT in_storage, concat(in_storage - '%"+var_str+"%') AS write_off \
+        #             FROM st_material"
+            # Execute the query
+        #    my_cursor.execute(query)
+        #    clear()
 
         spin_box = ttk.Spinbox(
             my_frame1,
