@@ -99,7 +99,7 @@ class ShowAllStMaterial:
                 my_tree.insert("", "end", values=i)
 
         # Function for search material by ID.
-        def search():
+        def search(event):
             id_variable2 = id_variable.get()
             query = "SELECT * FROM st_material WHERE id LIKE '%"+id_variable2+"%'"
             my_cursor.execute(query)
@@ -120,7 +120,7 @@ class ShowAllStMaterial:
 
         my_tree.bind("<Double 1>", get_row)
 
-        def add_ordered_mat():
+        def add_ordered_mat(event):
             order_value = variable.get()
             cursor = mydb.cursor(buffered=True)
             item = my_tree.item(my_tree.focus())
@@ -163,6 +163,8 @@ class ShowAllStMaterial:
         search_material_button["text"] = "Search"
         search_material_button["command"] = search
         search_material_button.pack(side=LEFT)
+        # Bind entry search for enter using.
+        entry_search.bind("<Return>", search)
 
         # ID mat entry.
         id_mat = Entry(my_frame1, textvariable=id_string)
@@ -180,6 +182,9 @@ class ShowAllStMaterial:
 
         )
         spin_box.pack(side=LEFT, padx=5, ipady=1)
+
+        # Bind spinbox for enter using.
+        spin_box.bind("<Return>", add_ordered_mat)
 
         # Add to storage button.
         add_to_ordered_material_button = Button(my_frame1)
@@ -201,7 +206,7 @@ class ShowAllStMaterial:
         spin_box_storage.pack(side=LEFT, padx=5, ipady=1)
 
         # Function for adding material into storage
-        def add_to_storage():
+        def add_to_storage(event):
             try:
                 variable_to_storage.get()
             except tk.TclError:
@@ -226,6 +231,9 @@ class ShowAllStMaterial:
                 clear()
             else:
                 return True
+
+        # Bind spinbox for enter using.
+        spin_box_storage.bind("<Return>", add_to_storage)
 
         # Add to storage button.
         add_to_storage_material_button = Button(my_frame1)
