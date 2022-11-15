@@ -32,8 +32,8 @@ class RegisterUserScreen(tk.Toplevel):
         register_label.pack()
 
         # User name label.
-        user_n = Label(self, text="Username")
-        user_n.pack()
+        user_name_label = Label(self, text="Username")
+        user_name_label.pack()
 
         # Username entry.
         self.user_name_entry = Entry(self, textvariable=self.user_name)
