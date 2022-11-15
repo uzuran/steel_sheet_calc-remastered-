@@ -14,15 +14,9 @@ class RegisterUserScreen(tk.Toplevel):
         self.geometry("350x450")
         self.title("Steel sheet calculator.")
 
-        # Global
-        global user_name
-        global password
-        global user_name_entry
-        global pass_entry
-
         # Add username, password string line.
-        user_name = StringVar()
-        password = StringVar()
+        self.user_name = StringVar()
+        self.password = StringVar()
 
         # Register options.
         register_label_option = {
@@ -42,16 +36,16 @@ class RegisterUserScreen(tk.Toplevel):
         user_n.pack()
 
         # Username entry.
-        user_name_entry = Entry(self, textvariable=user_name)
-        user_name_entry.pack()
+        self.user_name_entry = Entry(self, textvariable=self.user_name)
+        self.user_name_entry.pack()
 
         # Password label.
         pass_label = Label(self, text="Password")
         pass_label.pack()
 
         # User password entry.
-        pass_entry = Entry(self, textvariable=password, show="*")
-        pass_entry.pack()
+        self.pass_entry = Entry(self, textvariable=self.password, show="*")
+        self.pass_entry.pack()
 
         register_btn_option = {
             "text": "Register",
@@ -68,14 +62,14 @@ class RegisterUserScreen(tk.Toplevel):
         register_user_button['command'] = self.register_users
         register_user_button.pack()
         # Bind Enter key for entry lines.
-        user_name_entry.bind("<Return>", self.register_users)
-        pass_entry.bind("<Return>", self.register_users)
+        self.user_name_entry.bind("<Return>", self.register_users)
+        self.pass_entry.bind("<Return>", self.register_users)
 
     def register_users(self, event=None):
         """Function for register new users, validate name without numbers,store all info in text file,
         hash password."""
-        username_info = user_name.get()
-        password_info = password.get()
+        username_info = self.user_name.get()
+        password_info = self.password.get()
 
         # If username have some numbers label send it on screen.
         options = {"text": "You can not have a numbers, or blank line in name!",
@@ -105,8 +99,8 @@ class RegisterUserScreen(tk.Toplevel):
             my_cursor.execute(sql, val)
             mydb.commit()
 
-            user_name_entry.delete(0, END)
-            pass_entry.delete(0, END)
+            self.user_name_entry.delete(0, END)
+            self.pass_entry.delete(0, END)
 
             # Label option
             success_option = {"text": "Registration success.",

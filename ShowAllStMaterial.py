@@ -99,7 +99,7 @@ class ShowAllStMaterial:
                 my_tree.insert("", "end", values=i)
 
         # Function for search material by ID.
-        def search(event):
+        def search(event=None):
             id_variable2 = id_variable.get()
             query = "SELECT * FROM st_material WHERE id LIKE '%"+id_variable2+"%'"
             my_cursor.execute(query)
@@ -120,7 +120,7 @@ class ShowAllStMaterial:
 
         my_tree.bind("<Double 1>", get_row)
 
-        def add_ordered_mat(event):
+        def add_ordered_mat(event=None):
             order_value = variable.get()
             cursor = mydb.cursor(buffered=True)
             item = my_tree.item(my_tree.focus())
@@ -206,7 +206,7 @@ class ShowAllStMaterial:
         spin_box_storage.pack(side=LEFT, padx=5, ipady=1)
 
         # Function for adding material into storage
-        def add_to_storage(event):
+        def add_to_storage(event=None):
             try:
                 variable_to_storage.get()
             except tk.TclError:
