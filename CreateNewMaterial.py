@@ -4,10 +4,6 @@ import tkinter as tk
 from Connection import *
 from ShowAllStMaterial import ShowAllStMaterial
 
-
-# Db connect.
-
-
 my_cursor = mydb.cursor(buffered=True)
 
 
