@@ -12,7 +12,7 @@ my_cursor = mydb.cursor(buffered=True)
 
 class AdminScreen(tk.Toplevel):
 
-    def __init__(self, child, user_name_v):
+    def __init__(self, child, user_name_get):
         super().__init__(child)
         self.title("Steel sheet calculator.")
         # setting tkinter window size
@@ -34,7 +34,7 @@ class AdminScreen(tk.Toplevel):
         main_label.pack()
 
         # Check users,  who is log in.
-        user_name_label = user_name_v
+        user_name_label = user_name_get
 
         check_user = Label(self, text=str(user_name_label.capitalize()) + " Is log in now.",
                            fg="green",

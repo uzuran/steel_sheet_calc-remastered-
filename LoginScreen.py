@@ -25,14 +25,14 @@ class LoginScreen(tk.Toplevel):
         login_label = Label(self, **login_l_option)
         login_label.pack()
 
-        self.user_name_verify = StringVar()
+        self.user_name_geterify = StringVar()
         self.user_pass_verify = StringVar()
 
         # Username label
         Label(self, text="Username").pack()
 
         # Username entry.
-        self.user_name_entry1 = Entry(self, textvariable=self.user_name_verify)
+        self.user_name_entry1 = Entry(self, textvariable=self.user_name_geterify)
         self.user_name_entry1.pack()
 
         # Blank line.
@@ -63,15 +63,15 @@ class LoginScreen(tk.Toplevel):
     # Login verify function for check users.
 
     def login_verify(self, event=None):
-        user_name_v = self.user_name_verify.get()
-        password_v = self.user_pass_verify.get()
+        user_name_get = self.user_name_geterify.get()
+        password_get = self.user_pass_verify.get()
         # Clean entry after press the button.
         self.user_name_entry1.delete(0, END)
         self.user_pass_entry2.delete(0, END)
 
         # Check a database for username and userpass.
         sql = "SELECT * FROM login WHERE BINARY username = '%s'" \
-              " AND BINARY userpass = '%s'" % (user_name_v, hashlib.md5(str.encode(password_v)).hexdigest())
+              " AND BINARY userpass = '%s'" % (user_name_get, hashlib.md5(str.encode(password_get)).hexdigest())
 
         my_cursor.execute(sql)
 
@@ -84,13 +84,13 @@ class LoginScreen(tk.Toplevel):
             pass_success.pack()
 
             # Open admin screen
-            self.open_admin_screen(user_name_v)
+            self.open_admin_screen(user_name_get)
 
         else:
             msg.showwarning(title="Warning", message="Warning user not exist!")
 
-    def open_admin_screen(self, user_name_v):
-        window = AdminScreen(self, user_name_v)
+    def open_admin_screen(self, user_name_get):
+        window = AdminScreen(self, user_name_get)
         window.grab_set()
         window.lift()
         window.focus_force()
