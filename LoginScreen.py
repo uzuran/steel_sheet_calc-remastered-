@@ -66,7 +66,7 @@ class LoginScreen(tk.Toplevel):
         user_name_label_get = self.user_name_label_get.get()
         password_get = self.user_pass_verify.get()
         # Clean entry after press the button.
-        self.user_name_labelame_entry1.delete(0, END)
+        self.user_name_label_entry1.delete(0, END)
         self.user_pass_entry2.delete(0, END)
 
         # Check a database for username and userpass.
