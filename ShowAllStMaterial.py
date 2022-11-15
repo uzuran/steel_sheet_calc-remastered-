@@ -268,3 +268,4 @@ class ShowAllStMaterial:
         minus_material_button = Button(my_frame1, text="-")
         minus_material_button.pack(side=LEFT, ipadx=10)
 
+
