@@ -12,7 +12,7 @@ my_cursor = mydb.cursor(buffered=True)
 
 class AdminScreen(tk.Toplevel):
 
-    def __init__(self, child, user_name_v):
+    def __init__(self, child, user_name_label_get):
         super().__init__(child)
         self.title("Steel sheet calculator.")
         # setting tkinter window size
@@ -34,7 +34,7 @@ class AdminScreen(tk.Toplevel):
         main_label.pack()
 
         # Check users,  who is log in.
-        user_name_label = user_name_v
+        user_name_label = user_name_label_get
 
         check_user = Label(self, text=str(user_name_label.capitalize()) + " Is log in now.",
                            fg="green",
@@ -56,20 +56,20 @@ class AdminScreen(tk.Toplevel):
         frame_options = {"width": "500",
                          "height": "400"}
 
-        my_frame1 = Frame(notebook, **frame_options)
-        my_frame2 = Frame(notebook, **frame_options)
-        my_frame3 = Frame(notebook, **frame_options)
-        my_frame4 = Frame(notebook, **frame_options)
-        my_frame5 = Frame(notebook, **frame_options)
+        frame1 = Frame(notebook, **frame_options)
+        frame2 = Frame(notebook, **frame_options)
+        frame3 = Frame(notebook, **frame_options)
+        frame4 = Frame(notebook, **frame_options)
+        frame5 = Frame(notebook, **frame_options)
 
         # Add notebook on screen.
-        notebook.add(my_frame1, text="Steel material")
-        notebook.add(my_frame2, text="Aluminium material")
-        notebook.add(my_frame3, text="Stainless steel material")
-        notebook.add(my_frame4, text="Special material")
-        notebook.add(my_frame5, text="Write off")
+        notebook.add(frame1, text="Steel material")
+        notebook.add(frame2, text="Aluminium material")
+        notebook.add(frame3, text="Stainless steel material")
+        notebook.add(frame4, text="Special material")
+        notebook.add(frame5, text="Write off")
 
-        ShowAllStMaterial(my_frame1)
+        ShowAllStMaterial(frame1)
 
     # Function for create material in new window.
     def open_create_material_window(self):

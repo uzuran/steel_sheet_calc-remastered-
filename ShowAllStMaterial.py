@@ -9,7 +9,7 @@ my_cursor = mydb.cursor(buffered=True)
 
 class ShowAllStMaterial:
 
-    def __init__(self, my_frame1):
+    def __init__(self, frame1):
         super().__init__()
 
         my_cursor = mydb.cursor()
@@ -18,11 +18,11 @@ class ShowAllStMaterial:
         my_result = my_cursor.fetchall()
         mydb.commit()
 
-        wraper1 = LabelFrame(my_frame1, text="Steel material")
+        wraper1 = LabelFrame(frame1, text="Steel material")
         wraper1.pack(fill="both", expand=1)
 
         # SCROLL BAR
-        scrolllbary = Scrollbar(my_frame1, orient=VERTICAL)
+        scrolllbary = Scrollbar(frame1, orient=VERTICAL)
         my_tree = ttk.Treeview(wraper1, selectmode='browse', height=20)
 
         my_tree.pack()
@@ -99,7 +99,7 @@ class ShowAllStMaterial:
                 my_tree.insert("", "end", values=i)
 
         # Function for search material by ID.
-        def search(event):
+        def search(event=None):
             id_variable2 = id_variable.get()
             query = "SELECT * FROM st_material WHERE id LIKE '%"+id_variable2+"%'"
             my_cursor.execute(query)
@@ -120,7 +120,7 @@ class ShowAllStMaterial:
 
         my_tree.bind("<Double 1>", get_row)
 
-        def add_ordered_mat(event):
+        def add_ordered_mat(event=None):
             order_value = variable.get()
             cursor = mydb.cursor(buffered=True)
             item = my_tree.item(my_tree.focus())
@@ -143,23 +143,23 @@ class ShowAllStMaterial:
         id_string = StringVar()
 
         # Delete material button
-        delete_material_button = Button(my_frame1)
+        delete_material_button = Button(frame1)
         delete_material_button["text"] = "Delete material"
         delete_material_button["command"] = delete
         delete_material_button.pack(side=LEFT)
 
         # Update material button.
-        update_material_button = Button(my_frame1)
+        update_material_button = Button(frame1)
         update_material_button["text"] = "Update records"
         update_material_button["command"] = _build_tree
         update_material_button.pack(side=LEFT)
 
         # Search entry.
-        entry_search = Entry(my_frame1, textvariable=id_variable)
+        entry_search = Entry(frame1, textvariable=id_variable)
         entry_search.pack(side=LEFT, ipady=3)
 
         # Search button.
-        search_material_button = Button(my_frame1)
+        search_material_button = Button(frame1)
         search_material_button["text"] = "Search"
         search_material_button["command"] = search
         search_material_button.pack(side=LEFT)
@@ -167,14 +167,14 @@ class ShowAllStMaterial:
         entry_search.bind("<Return>", search)
 
         # ID mat entry.
-        id_mat = Entry(my_frame1, textvariable=id_string)
+        id_mat = Entry(frame1, textvariable=id_string)
         id_mat.pack(side=LEFT, ipady=3)
 
         # Spinbox order.
         variable = StringVar()
 
         spin_box = ttk.Spinbox(
-            my_frame1,
+            frame1,
             textvariable=variable,
             from_=0,
             to=200,
@@ -187,7 +187,7 @@ class ShowAllStMaterial:
         spin_box.bind("<Return>", add_ordered_mat)
 
         # Add to storage button.
-        add_to_ordered_material_button = Button(my_frame1)
+        add_to_ordered_material_button = Button(frame1)
         add_to_ordered_material_button["text"] = "Add material ordered material"
         add_to_ordered_material_button["command"] = add_ordered_mat
         add_to_ordered_material_button.pack(side=LEFT)
@@ -196,7 +196,7 @@ class ShowAllStMaterial:
         variable_to_storage = IntVar()
 
         spin_box_storage = ttk.Spinbox(
-            my_frame1,
+            frame1,
             textvariable=variable_to_storage,
             from_=0,
             to=200,
@@ -206,7 +206,7 @@ class ShowAllStMaterial:
         spin_box_storage.pack(side=LEFT, padx=5, ipady=1)
 
         # Function for adding material into storage
-        def add_to_storage(event):
+        def add_to_storage(event=None):
             try:
                 variable_to_storage.get()
             except tk.TclError:
@@ -236,12 +236,12 @@ class ShowAllStMaterial:
         spin_box_storage.bind("<Return>", add_to_storage)
 
         # Add to storage button.
-        add_to_storage_material_button = Button(my_frame1)
+        add_to_storage_material_button = Button(frame1)
         add_to_storage_material_button["text"] = "Add to storage"
         add_to_storage_material_button["command"] = add_to_storage
         add_to_storage_material_button.pack(side=LEFT)
 
-        plus_material_button = Button(my_frame1, text="+")
+        plus_material_button = Button(frame1, text="+")
         plus_material_button.pack(side=LEFT, ipadx=10)
 
         # Spinbox order.
@@ -256,7 +256,7 @@ class ShowAllStMaterial:
         #    clear()
 
         spin_box = ttk.Spinbox(
-            my_frame1,
+            frame1,
             textvariable=plus_minus,
             from_=0,
             to=200,
@@ -265,6 +265,7 @@ class ShowAllStMaterial:
         )
         spin_box.pack(side=LEFT, padx=5, ipady=1)
 
-        minus_material_button = Button(my_frame1, text="-")
+        minus_material_button = Button(frame1, text="-")
         minus_material_button.pack(side=LEFT, ipadx=10)
+
 

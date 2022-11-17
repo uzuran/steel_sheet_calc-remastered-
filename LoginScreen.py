@@ -25,28 +25,23 @@ class LoginScreen(tk.Toplevel):
         login_label = Label(self, **login_l_option)
         login_label.pack()
 
-        global user_name_verify
-        global user_pass_verify
-        global user_name_entry1
-        global user_pass_entry2
-
-        user_name_verify = StringVar()
-        user_pass_verify = StringVar()
+        self.user_name_label_get = StringVar()
+        self.user_pass_verify = StringVar()
 
         # Username label
         Label(self, text="Username").pack()
 
         # Username entry.
-        user_name_entry1 = Entry(self, textvariable=user_name_verify)
-        user_name_entry1.pack()
+        self.user_name_label_entry1 = Entry(self, textvariable=self.user_name_label_get)
+        self.user_name_label_entry1.pack()
 
         # Blank line.
         Label(self, text="").pack()
         Label(self, text="Password").pack()
 
         # User pass entry.
-        user_pass_entry2 = Entry(self, textvariable=user_pass_verify, show="*")
-        user_pass_entry2.pack()
+        self.user_pass_entry2 = Entry(self, textvariable=self.user_pass_verify, show="*")
+        self.user_pass_entry2.pack()
 
         # Login button option.
         login_btn_option = {"text": "Login",
@@ -62,21 +57,21 @@ class LoginScreen(tk.Toplevel):
         # Command for button
         login_user_button['command'] = self.login_verify
         # user_pass_entry bind for enter use.
-        user_pass_entry2.bind("<Return>", self.login_verify)
+        self.user_pass_entry2.bind("<Return>", self.login_verify)
         login_user_button.pack()
 
     # Login verify function for check users.
 
     def login_verify(self, event=None):
-        user_name_v = user_name_verify.get()
-        password_v = user_pass_verify.get()
+        user_name_label_get = self.user_name_label_get.get()
+        password_get = self.user_pass_verify.get()
         # Clean entry after press the button.
-        user_name_entry1.delete(0, END)
-        user_pass_entry2.delete(0, END)
+        self.user_name_label_entry1.delete(0, END)
+        self.user_pass_entry2.delete(0, END)
 
         # Check a database for username and userpass.
         sql = "SELECT * FROM login WHERE BINARY username = '%s'" \
-              " AND BINARY userpass = '%s'" % (user_name_v, hashlib.md5(str.encode(password_v)).hexdigest())
+              " AND BINARY userpass = '%s'" % (user_name_label_get, hashlib.md5(str.encode(password_get)).hexdigest())
 
         my_cursor.execute(sql)
 
@@ -89,13 +84,13 @@ class LoginScreen(tk.Toplevel):
             pass_success.pack()
 
             # Open admin screen
-            self.open_admin_screen(user_name_v)
+            self.open_admin_screen(user_name_label_get)
 
         else:
             msg.showwarning(title="Warning", message="Warning user not exist!")
 
-    def open_admin_screen(self, user_name_v):
-        window = AdminScreen(self, user_name_v)
+    def open_admin_screen(self, user_name_get):
+        window = AdminScreen(self, user_name_get)
         window.grab_set()
         window.lift()
         window.focus_force()
