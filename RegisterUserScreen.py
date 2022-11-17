@@ -95,8 +95,8 @@ class RegisterUserScreen(tk.Toplevel):
         else:
             hashed = hashlib.md5(str.encode(password_info)).hexdigest()
             sql = "INSERT INTO login (username, userpass) VALUES(%s, %s)"
-            val = (username_info, hashed)
-            my_cursor.execute(sql, val)
+            values = (username_info, hashed)
+            my_cursor.execute(sql, values)
             mydb.commit()
 
             self.user_name_entry.delete(0, END)
