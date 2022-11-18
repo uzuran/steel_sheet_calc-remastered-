@@ -24,14 +24,14 @@ class LoginScreen(tk.Toplevel):
         login_label = tk.Label(self, **login_l_option)
         login_label.pack()
 
-        self.user_name_label_get = tk.StringVar()
+        self.user_name = tk.StringVar()
         self.user_pass_verify = tk.StringVar()
 
         # Username label
         tk.Label(self, text="Username").pack()
 
         # Username entry.
-        self.user_name_entry = tk.Entry(self, textvariable=self.user_name_verify)
+        self.user_name_entry = tk.Entry(self, textvariable=self.user_name)
         self.user_name_entry.pack()
 
         # Blank line.
@@ -61,7 +61,7 @@ class LoginScreen(tk.Toplevel):
 
     # Login verify function for check users.
     def login_verify(self, event=None):
-        user_name_label_get = self.user_name_label_get.get()
+        user_name_label_get = self.user_name.get()
         password_get = self.user_pass_verify.get()
         # Clean entry after press the button.
         self.user_name_entry.delete(0, tk.END)
@@ -82,7 +82,7 @@ class LoginScreen(tk.Toplevel):
             pass_success.pack()
 
             # Open admin screen
-            self.open_admin_screen(self.user_name_label_get)
+            self.open_admin_screen(user_name_label_get)
 
         else:
             msg.showwarning(title="Warning", message="Warning user not exist!")

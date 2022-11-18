@@ -28,11 +28,6 @@ class CreateNewMaterial(tk.Toplevel):
         self.thickness = StringVar()
         self.x_size = StringVar()
         self.y_size = StringVar()
-        self.material_type = tk.StringVar()
-        self.m_identification = tk.StringVar()
-        self.thickness = tk.StringVar()
-        self.x_size = tk.StringVar()
-        self.y_size = tk.StringVar()
 
         # Register new material window label.
         create_material_label = tk.Label(self, **new_material_label_option)
