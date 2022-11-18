@@ -1,12 +1,10 @@
-import mysql.connector
-from tkinter import messagebox as msg
-from tkinter import *
 import tkinter as tk
 from tkinter import ttk
 from CreateNewMaterial import CreateNewMaterial
 from ShowAllStMaterial import ShowAllStMaterial
 from Connection import *
 
+# My cursor.
 my_cursor = mydb.cursor(buffered=True)
 
 
@@ -30,20 +28,20 @@ class AdminScreen(tk.Toplevel):
                         "height": "2",
                         "font": "Calibri, 13"}
 
-        main_label = Label(self, **label_option)
+        main_label = tk.Label(self, **label_option)
         main_label.pack()
 
         # Check users,  who is log in.
         user_name_label = user_name_v
 
-        check_user = Label(self, text=str(user_name_label.capitalize()) + " Is log in now.",
-                           fg="green",
-                           font="Arial",
+        check_user = tk.Label(self, text=str(user_name_label.capitalize()) + " Is log in now.",
+                                    fg="green",
+                                    font="Arial",
 
-                           )
+                            )
         check_user.pack(anchor="e")
 
-        create_new_material = Button(self)
+        create_new_material = tk.Button(self)
         create_new_material["text"] = "Create new material"
         create_new_material["command"] = self.open_create_material_window
         create_new_material.pack()
@@ -56,11 +54,11 @@ class AdminScreen(tk.Toplevel):
         frame_options = {"width": "500",
                          "height": "400"}
 
-        my_frame1 = Frame(notebook, **frame_options)
-        my_frame2 = Frame(notebook, **frame_options)
-        my_frame3 = Frame(notebook, **frame_options)
-        my_frame4 = Frame(notebook, **frame_options)
-        my_frame5 = Frame(notebook, **frame_options)
+        my_frame1 = tk.Frame(notebook, **frame_options)
+        my_frame2 = tk.Frame(notebook, **frame_options)
+        my_frame3 = tk.Frame(notebook, **frame_options)
+        my_frame4 = tk.Frame(notebook, **frame_options)
+        my_frame5 = tk.Frame(notebook, **frame_options)
 
         # Add notebook on screen.
         notebook.add(my_frame1, text="Steel material")

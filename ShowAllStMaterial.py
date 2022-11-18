@@ -1,9 +1,9 @@
 from tkinter import messagebox as msg
-from tkinter import *
 from tkinter import ttk
 import tkinter as tk
 from Connection import *
 
+# My cursor.
 my_cursor = mydb.cursor(buffered=True)
 
 
@@ -18,11 +18,11 @@ class ShowAllStMaterial:
         my_result = my_cursor.fetchall()
         mydb.commit()
 
-        wraper1 = LabelFrame(my_frame1, text="Steel material")
+        wraper1 = tk.LabelFrame(my_frame1, text="Steel material")
         wraper1.pack(fill="both", expand=1)
 
         # SCROLL BAR
-        scrolllbary = Scrollbar(my_frame1, orient=VERTICAL)
+        scrolllbary = tk.Scrollbar(my_frame1, orient=tk.VERTICAL)
         my_tree = ttk.Treeview(wraper1, selectmode='browse', height=20)
 
         my_tree.pack()
@@ -90,10 +90,10 @@ class ShowAllStMaterial:
                     mydb.commit()
                 else:
                     return True
-        id_variable = StringVar()
+        id_variable = tk.StringVar()
 
         def update(rows):
-            entry_search.delete(0, END)
+            entry_search.delete(0, tk.END)
             my_tree.delete(*my_tree.get_children())
             for i in rows:
                 my_tree.insert("", "end", values=i)
@@ -136,42 +136,42 @@ class ShowAllStMaterial:
 
                 mydb.commit()
                 clear()
-                spin_box.delete(0, END)
+                spin_box.delete(0, tk.END)
             else:
                 return True
 
-        id_string = StringVar()
+        id_string = tk.StringVar()
 
         # Delete material button
-        delete_material_button = Button(my_frame1)
+        delete_material_button = tk.Button(my_frame1)
         delete_material_button["text"] = "Delete material"
         delete_material_button["command"] = delete
-        delete_material_button.pack(side=LEFT)
+        delete_material_button.pack(side=tk.LEFT)
 
         # Update material button.
-        update_material_button = Button(my_frame1)
+        update_material_button = tk.Button(my_frame1)
         update_material_button["text"] = "Update records"
         update_material_button["command"] = _build_tree
-        update_material_button.pack(side=LEFT)
+        update_material_button.pack(side=tk.LEFT)
 
         # Search entry.
-        entry_search = Entry(my_frame1, textvariable=id_variable)
-        entry_search.pack(side=LEFT, ipady=3)
+        entry_search = tk.Entry(my_frame1, textvariable=id_variable)
+        entry_search.pack(side=tk.LEFT, ipady=3)
 
         # Search button.
-        search_material_button = Button(my_frame1)
+        search_material_button = tk.Button(my_frame1)
         search_material_button["text"] = "Search"
         search_material_button["command"] = search
-        search_material_button.pack(side=LEFT)
+        search_material_button.pack(side=tk.LEFT)
         # Bind entry search for enter using.
         entry_search.bind("<Return>", search)
 
         # ID mat entry.
-        id_mat = Entry(my_frame1, textvariable=id_string)
-        id_mat.pack(side=LEFT, ipady=3)
+        id_mat = tk.Entry(my_frame1, textvariable=id_string)
+        id_mat.pack(side=tk.LEFT, ipady=3)
 
         # Spinbox order.
-        variable = StringVar()
+        variable = tk.StringVar()
 
         spin_box = ttk.Spinbox(
             my_frame1,
@@ -181,19 +181,19 @@ class ShowAllStMaterial:
             width=3,
 
         )
-        spin_box.pack(side=LEFT, padx=5, ipady=1)
+        spin_box.pack(side=tk.LEFT, padx=5, ipady=1)
 
         # Bind spinbox for enter using.
         spin_box.bind("<Return>", add_ordered_mat)
 
         # Add to storage button.
-        add_to_ordered_material_button = Button(my_frame1)
+        add_to_ordered_material_button = tk.Button(my_frame1)
         add_to_ordered_material_button["text"] = "Add material ordered material"
         add_to_ordered_material_button["command"] = add_ordered_mat
-        add_to_ordered_material_button.pack(side=LEFT)
+        add_to_ordered_material_button.pack(side=tk.LEFT)
 
         # Spinbox order.
-        variable_to_storage = IntVar()
+        variable_to_storage = tk.IntVar()
 
         spin_box_storage = ttk.Spinbox(
             my_frame1,
@@ -203,7 +203,7 @@ class ShowAllStMaterial:
             width=3,
 
         )
-        spin_box_storage.pack(side=LEFT, padx=5, ipady=1)
+        spin_box_storage.pack(side=tk.LEFT, padx=5, ipady=1)
 
         # Function for adding material into storage
         def add_to_storage(event):
@@ -225,7 +225,7 @@ class ShowAllStMaterial:
                     cursor.execute(query, (to_storge_var, item["values"][0]))
                 except IndexError:
                     msg.showwarning(title="WARNING", message="Firstly you need select the material !")
-                spin_box_storage.delete(0, END)
+                spin_box_storage.delete(0, tk.END)
                 mydb.commit()
 
                 clear()
@@ -236,16 +236,16 @@ class ShowAllStMaterial:
         spin_box_storage.bind("<Return>", add_to_storage)
 
         # Add to storage button.
-        add_to_storage_material_button = Button(my_frame1)
+        add_to_storage_material_button = tk.Button(my_frame1)
         add_to_storage_material_button["text"] = "Add to storage"
         add_to_storage_material_button["command"] = add_to_storage
-        add_to_storage_material_button.pack(side=LEFT)
+        add_to_storage_material_button.pack(side=tk.LEFT)
 
-        plus_material_button = Button(my_frame1, text="+")
-        plus_material_button.pack(side=LEFT, ipadx=10)
+        plus_material_button = tk.Button(my_frame1, text="+")
+        plus_material_button.pack(side=tk.LEFT, ipadx=10)
 
         # Spinbox order.
-        plus_minus = IntVar()
+        plus_minus = tk.IntVar()
 
         #def write_off_from_storage():
         #    var = plus_minus.get()
@@ -263,8 +263,8 @@ class ShowAllStMaterial:
             width=3,
 
         )
-        spin_box.pack(side=LEFT, padx=5, ipady=1)
+        spin_box.pack(side=tk.LEFT, padx=5, ipady=1)
 
-        minus_material_button = Button(my_frame1, text="-")
-        minus_material_button.pack(side=LEFT, ipadx=10)
+        minus_material_button = tk.Button(my_frame1, text="-")
+        minus_material_button.pack(side=tk.LEFT, ipadx=10)
 

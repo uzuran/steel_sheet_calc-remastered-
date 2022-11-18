@@ -1,11 +1,10 @@
 import tkinter as tk
-from tkinter import *
 from tkinter import messagebox as msg
 import hashlib
 from AdminScreen import AdminScreen
 from Connection import *
 
-
+# My cursor.
 my_cursor = mydb.cursor(buffered=True)
 
 
@@ -22,31 +21,26 @@ class LoginScreen(tk.Toplevel):
                           "height": "2",
                           "font": "Calibri, 13"}
         # Main label.
-        login_label = Label(self, **login_l_option)
+        login_label = tk.Label(self, **login_l_option)
         login_label.pack()
 
-        global user_name_verify
-        global user_pass_verify
-        global user_name_entry1
-        global user_pass_entry2
-
-        user_name_verify = StringVar()
-        user_pass_verify = StringVar()
+        self.user_name_verify = tk.StringVar()
+        self.user_pass_verify = tk.StringVar()
 
         # Username label
-        Label(self, text="Username").pack()
+        tk.Label(self, text="Username").pack()
 
         # Username entry.
-        user_name_entry1 = Entry(self, textvariable=user_name_verify)
-        user_name_entry1.pack()
+        self.user_name_entry = tk.Entry(self, textvariable=self.user_name_verify)
+        self.user_name_entry.pack()
 
         # Blank line.
-        Label(self, text="").pack()
-        Label(self, text="Password").pack()
+        tk.Label(self, text="").pack()
+        tk.Label(self, text="Password").pack()
 
         # User pass entry.
-        user_pass_entry2 = Entry(self, textvariable=user_pass_verify, show="*")
-        user_pass_entry2.pack()
+        self.user_pass_entry = tk.Entry(self, textvariable=self.user_pass_verify, show="*")
+        self.user_pass_entry.pack()
 
         # Login button option.
         login_btn_option = {"text": "Login",
@@ -54,25 +48,24 @@ class LoginScreen(tk.Toplevel):
                             "height": "1",
                             }
 
-        empty_space = Label(self, text="")
+        empty_space = tk.Label(self, text="")
         empty_space.pack()
 
         # Login button.
-        login_user_button = Button(self, **login_btn_option)
+        login_user_button = tk.Button(self, **login_btn_option)
         # Command for button
         login_user_button['command'] = self.login_verify
         # user_pass_entry bind for enter use.
-        user_pass_entry2.bind("<Return>", self.login_verify)
+        self.user_pass_entry.bind("<Return>", self.login_verify)
         login_user_button.pack()
 
     # Login verify function for check users.
-
     def login_verify(self, event=None):
-        user_name_v = user_name_verify.get()
-        password_v = user_pass_verify.get()
+        user_name_v = self.user_name_verify.get()
+        password_v = self.user_pass_verify.get()
         # Clean entry after press the button.
-        user_name_entry1.delete(0, END)
-        user_pass_entry2.delete(0, END)
+        self.user_name_entry.delete(0, tk.END)
+        self.user_pass_entry.delete(0, tk.END)
 
         # Check a database for username and userpass.
         sql = "SELECT * FROM login WHERE BINARY username = '%s'" \
@@ -85,7 +78,7 @@ class LoginScreen(tk.Toplevel):
                                "font": "Calibri, 12"}
 
         if my_cursor.fetchone():
-            pass_success = Label(self, **pass_success_option)
+            pass_success = tk.Label(self, **pass_success_option)
             pass_success.pack()
 
             # Open admin screen
