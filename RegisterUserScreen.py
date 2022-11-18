@@ -1,9 +1,8 @@
 import tkinter as tk
-from tkinter import *
 import hashlib
 from Connection import *
 
-
+# My cursor.
 my_cursor = mydb.cursor(buffered=True)
 
 
@@ -15,8 +14,8 @@ class RegisterUserScreen(tk.Toplevel):
         self.title("Steel sheet calculator.")
 
         # Add username, password string line.
-        self.user_name = StringVar()
-        self.password = StringVar()
+        self.user_name = tk.StringVar()
+        self.password = tk.StringVar()
 
         # Register options.
         register_label_option = {
@@ -28,23 +27,23 @@ class RegisterUserScreen(tk.Toplevel):
         }
 
         # Register window label.
-        register_label = Label(self, **register_label_option)
+        register_label = tk.Label(self, **register_label_option)
         register_label.pack()
 
         # User name label.
-        user_name_label = Label(self, text="Username")
+        user_name_label = tk.Label(self, text="Username")
         user_name_label.pack()
 
         # Username entry.
-        self.user_name_entry = Entry(self, textvariable=self.user_name)
+        self.user_name_entry = tk.Entry(self, textvariable=self.user_name)
         self.user_name_entry.pack()
 
         # Password label.
-        pass_label = Label(self, text="Password")
+        pass_label = tk.Label(self, text="Password")
         pass_label.pack()
 
         # User password entry.
-        self.pass_entry = Entry(self, textvariable=self.password, show="*")
+        self.pass_entry = tk.Entry(self, textvariable=self.password, show="*")
         self.pass_entry.pack()
 
         register_btn_option = {
@@ -53,11 +52,11 @@ class RegisterUserScreen(tk.Toplevel):
             "height": "1"
         }
 
-        empty_space = Label(self, text="")
+        empty_space = tk.Label(self, text="")
         empty_space.pack()
 
         # Register button.
-        register_user_button = Button(self, **register_btn_option)
+        register_user_button = tk.Button(self, **register_btn_option)
         # Command for button
         register_user_button['command'] = self.register_users
         register_user_button.pack()
@@ -80,32 +79,32 @@ class RegisterUserScreen(tk.Toplevel):
         my_cursor.execute(sql)
 
         if username_info.isdigit():
-            no_num = Label(self, **options)
+            no_num = tk.Label(self, **options)
             no_num.pack()
             # If password have only blank on field label say it.
 
         elif password_info == "":
-            pass_inf = Label(self, **options)
+            pass_inf = tk.Label(self, **options)
             pass_inf.pack()
 
         elif my_cursor.fetchone():
-            user_ex = Label(self, text="User exist", fg="red", font="Calibri, 12")
+            user_ex = tk.Label(self, text="User exist", fg="red", font="Calibri, 12")
             user_ex.pack()
 
         else:
             hashed = hashlib.md5(str.encode(password_info)).hexdigest()
             sql = "INSERT INTO login (username, userpass) VALUES(%s, %s)"
-            values = (username_info, hashed)
-            my_cursor.execute(sql, values)
+            values_user_name_user_pass = (username_info, hashed)
+            my_cursor.execute(sql, values_user_name_user_pass)
             mydb.commit()
 
-            self.user_name_entry.delete(0, END)
-            self.pass_entry.delete(0, END)
+            self.user_name_entry.delete(0, tk.END)
+            self.pass_entry.delete(0, tk.END)
 
             # Label option
             success_option = {"text": "Registration success.",
                               "fg": "green",
                               "font": "Calibri, 11"}
 
-            reg_success = Label(self, success_option)
+            reg_success = tk.Label(self, success_option)
             reg_success.pack()
