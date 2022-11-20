@@ -1,7 +1,7 @@
 import tkinter as tk
+import hashlib
 
 import Connection
-from Connection import *
 
 
 class RegisterUserScreen(tk.Toplevel):

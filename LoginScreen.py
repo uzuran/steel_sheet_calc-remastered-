@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox as msg
+import hashlib
 
 import Connection
 from AdminScreen import AdminScreen
@@ -65,7 +66,8 @@ class LoginScreen(tk.Toplevel):
         self.user_pass_entry.delete(0, tk.END)
 
         # Check a database for username and userpass.
-        Connection.check_for_user_and_pass(user_name_label_get, password_get)
+        hashed = hashlib.md5(str.encode(password_get)).hexdigest()
+        Connection.check_for_user_and_pass(user_name_label_get, hashed)
 
         pass_success_option = {"text": "Login success",
                                "fg": "green",

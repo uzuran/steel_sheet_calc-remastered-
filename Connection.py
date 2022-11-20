@@ -1,5 +1,5 @@
 import mysql.connector
-import hashlib
+
 
 # Db connect.
 mydb = mysql.connector.connect(host="127.0.0.1",
@@ -11,10 +11,10 @@ mydb = mysql.connector.connect(host="127.0.0.1",
 my_cursor = mydb.cursor(buffered=True)
 
 
-def check_for_user_and_pass(user_name_label_get, password_get):
+def check_for_user_and_pass(user_name_label_get, hashed):
     """# Check a database for username and userpass."""
     query = "SELECT * FROM login WHERE BINARY username = '%s'" \
-            " AND BINARY userpass = '%s'" % (user_name_label_get, hashlib.md5(str.encode(password_get)).hexdigest())
+            " AND BINARY userpass = '%s'" % (user_name_label_get, hashed)
 
     my_cursor.execute(query)
 
@@ -63,7 +63,7 @@ def delete_material_from_database(x):
 
 def search_material_in_database(id_variable2):
     """Search material in database where id."""
-    query = "SELECT * FROM st_material WHERE id LIKE '%" + id_variable2 + "%'"
+    query = f"SELECT * FROM st_material WHERE id LIKE '%{id_variable2}%'"
     my_cursor.execute(query)
 
 
