@@ -37,7 +37,7 @@ class AdminScreen(tk.Toplevel):
         # Check users,  who is log in.
         user_name_label = user_name_label_get
 
-        check_user = tk.Label(self, text=str(user_name_label.capitalize()) + " Is log in now.",
+        check_user = tk.Label(self, text=user_name_label.capitalize() + " Is log in now.",
                                     fg="green",
                                     font="Arial",
 

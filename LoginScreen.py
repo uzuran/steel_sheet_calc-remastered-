@@ -31,7 +31,7 @@ class LoginScreen(tk.Toplevel):
         tk.Label(self, text="Username").pack()
 
         # Username entry.
-        self.user_name_entry = tk.Entry(self, textvariable=self.user_name_verify)
+        self.user_name_entry = tk.Entry(self, textvariable=self.user_name_label_get)
         self.user_name_entry.pack()
 
         # Blank line.
@@ -82,7 +82,7 @@ class LoginScreen(tk.Toplevel):
             pass_success.pack()
 
             # Open admin screen
-            self.open_admin_screen(self.user_name_label_get)
+            self.open_admin_screen(user_name_label_get)
 
         else:
             msg.showwarning(title="Warning", message="Warning user not exist!")

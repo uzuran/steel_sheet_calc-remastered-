@@ -207,7 +207,7 @@ class ShowAllStMaterial:
         spin_box_storage.pack(side=LEFT, padx=5, ipady=1)
 
         # Function for adding material into storage
-        def add_to_storage(event):
+        def add_to_storage(event=None):
             try:
                 variable_to_storage.get()
             except tk.TclError:
