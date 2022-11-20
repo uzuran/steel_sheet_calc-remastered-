@@ -1,11 +1,8 @@
 import tkinter as tk
 from tkinter import messagebox as msg
-import hashlib
-from AdminScreen import AdminScreen
-from Connection import *
 
-# My cursor.
-my_cursor = mydb.cursor(buffered=True)
+import Connection
+from AdminScreen import AdminScreen
 
 
 class LoginScreen(tk.Toplevel):
@@ -68,16 +65,13 @@ class LoginScreen(tk.Toplevel):
         self.user_pass_entry.delete(0, tk.END)
 
         # Check a database for username and userpass.
-        sql = "SELECT * FROM login WHERE BINARY username = '%s'" \
-              " AND BINARY userpass = '%s'" % (user_name_label_get, hashlib.md5(str.encode(password_get)).hexdigest())
-
-        my_cursor.execute(sql)
+        Connection.check_for_user_and_pass(user_name_label_get, password_get)
 
         pass_success_option = {"text": "Login success",
                                "fg": "green",
                                "font": "Calibri, 12"}
 
-        if my_cursor.fetchone():
+        if Connection.my_cursor.fetchone():
             pass_success = tk.Label(self, **pass_success_option)
             pass_success.pack()
 

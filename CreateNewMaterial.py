@@ -1,10 +1,9 @@
 from tkinter import messagebox as msg
 from tkinter import *
 import tkinter as tk
-from Connection import *
 
-# My cursor.
-my_cursor = mydb.cursor(buffered=True)
+import Connection
+from Connection import *
 
 
 class CreateNewMaterial(tk.Toplevel):
@@ -102,9 +101,8 @@ class CreateNewMaterial(tk.Toplevel):
         get_x_size = self.x_size.get()
         get_y_size = self.y_size.get()
 
-        # Check if material exist  in database
-        sql = "SELECT * FROM st_material WHERE id = '%s'" % get_material_id
-        my_cursor.execute(sql)
+        # Check if material is in database.
+        Connection.check_if_material_is_exist_in_database(get_material_id)
 
         def killer():
             reg_suc.destroy()
@@ -118,10 +116,7 @@ class CreateNewMaterial(tk.Toplevel):
                 and get_y_size.isdigit():
 
             # If condition complete add material in to database.
-            sql = "INSERT INTO st_material (id, thickness, size_x, size_y) VALUES(%s, %s, %s, %s)"
-            val = (get_material_id, get_thickness, get_x_size, get_y_size)
-            my_cursor.execute(sql, val)
-            mydb.commit()
+            Connection.add_material_to_database(get_material_id, get_thickness, get_x_size, get_y_size)
             # Success registration Label.
             reg_suc = tk.Label(self, text=f'You register ID: {self.m_identification.get()}'
                                                            f' Thickness: {self.thickness.get()} '

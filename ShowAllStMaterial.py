@@ -2,10 +2,9 @@ from tkinter import messagebox as msg
 from tkinter import *
 from tkinter import ttk
 import tkinter as tk
-from Connection import *
 
-# My cursor.
-my_cursor = mydb.cursor(buffered=True)
+import Connection
+from Connection import *
 
 
 class ShowAllStMaterial:
@@ -13,11 +12,9 @@ class ShowAllStMaterial:
     def __init__(self, frame1):
         super().__init__()
 
-        my_cursor = mydb.cursor()
-
-        my_cursor.execute("SELECT * FROM st_material;")
-        my_result = my_cursor.fetchall()
-        mydb.commit()
+        # Select all material from database.
+        Connection.select_all_material()
+        my_result = Connection.my_cursor.fetchall()
 
         wraper1 = tk.LabelFrame(frame1, text="Steel material")
         wraper1.pack(fill="both", expand=1)
@@ -63,10 +60,10 @@ class ShowAllStMaterial:
         # Function for update records button, firstly select all from database table, then delete treeview
         # and load again.
         def _build_tree():
-            cursor = mydb.cursor(buffered=True)
-            cursor.execute("SELECT * FROM st_material;")
-            result = cursor.fetchall()
-            mydb.commit()
+
+            # Select all material from database.
+            Connection.select_all_material()
+            result = Connection.my_cursor.fetchall()
             # First delete
             for i in my_tree.get_children():
                 my_tree.delete(i)
@@ -85,10 +82,9 @@ class ShowAllStMaterial:
                                                            " that you want delete this material ?"):
                     x = selected_item[0]
                     my_tree.delete(x)
-                    sql = "DELETE FROM st_material WHERE id=%s"
-                    cursor = mydb.cursor()
-                    cursor.execute(sql, (x,))
-                    mydb.commit()
+                    # Delete material from database.
+                    Connection.delete_material_from_database(x)
+
                 else:
                     return True
         id_variable = tk.StringVar()
@@ -102,19 +98,19 @@ class ShowAllStMaterial:
         # Function for search material by ID.
         def search(event=None):
             id_variable2 = id_variable.get()
-            query = "SELECT * FROM st_material WHERE id LIKE '%"+id_variable2+"%'"
-            my_cursor.execute(query)
-            rows = my_cursor.fetchall()
+            # Search material in database where id.
+            Connection.search_material_in_database(id_variable2)
+            rows = Connection.my_cursor.fetchall()
             update(rows)
 
         def clear():
-            query = "SELECT * from st_material"
-            my_cursor.execute(query)
-            rows = my_cursor.fetchall()
+            # Select all material.
+            Connection.select_all_material()
+            rows = Connection.my_cursor.fetchall()
             update(rows)
 
         def get_row(event):
-            rowid = my_tree.identify_row(event.y)
+            my_tree.identify_row(event.y)
             item = my_tree.item(my_tree.focus())
             id_string.set(item["values"][0])
             variable.set(item["values"][5])
@@ -123,19 +119,16 @@ class ShowAllStMaterial:
 
         def add_ordered_mat(event=None):
             order_value = variable.get()
-            cursor = mydb.cursor(buffered=True)
             item = my_tree.item(my_tree.focus())
             if msg.askyesno(title="Warning", message=f"Dou you really "
                                                      f"want add this {order_value} count "
                                                      f"of material ?"):
-
-                query = "UPDATE st_material  SET ordered = %s WHERE id = %s"
                 try:
-                    cursor.execute(query, (order_value, item["values"][0]))
+                    update_ordered_material(order_value, item)
                 except IndexError:
                     msg.showwarning(title="WARNING", message="Firstly you need select the material !")
 
-                mydb.commit()
+                Connection.mydb.commit()
                 clear()
                 spin_box.delete(0, tk.END)
             else:
@@ -207,27 +200,25 @@ class ShowAllStMaterial:
         spin_box_storage.pack(side=LEFT, padx=5, ipady=1)
 
         # Function for adding material into storage
-        def add_to_storage(event):
+        def add_to_storage(event=None):
             try:
                 variable_to_storage.get()
             except tk.TclError:
                 msg.showwarning(title="WARNING", message="You need add only numbers into entry !")
 
-            to_storge_var = variable_to_storage.get()
+            to_storage_var = variable_to_storage.get()
 
-            cursor = mydb.cursor(buffered=True)
             item = my_tree.item(my_tree.focus())
             if msg.askyesno(title="Warning", message=f"Dou you really "
-                                                     f"want add this {to_storge_var} count "
+                                                     f"want add this {to_storage_var} count "
                                                      f"of material ?"):
-
-                query = "UPDATE st_material  SET in_storage = %s WHERE id = %s"
                 try:
-                    cursor.execute(query, (to_storge_var, item["values"][0]))
+                    # Update material in storage.
+                    Connection.update_material_in_storage(to_storage_var, item)
                 except IndexError:
                     msg.showwarning(title="WARNING", message="Firstly you need select the material !")
                 spin_box_storage.delete(0, END)
-                mydb.commit()
+                Connection.mydb.commit()
 
                 clear()
             else:
