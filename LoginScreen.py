@@ -61,7 +61,7 @@ class LoginScreen(tk.Toplevel):
 
     # Login verify function for check users.
     def login_verify(self, event=None):
-        user_name_label_get = self.user_name_label_get.get()
+        user_name_label_get = self.user_name.get()
         password_get = self.user_pass_verify.get()
         # Clean entry after press the button.
         self.user_name_entry.delete(0, tk.END)
@@ -82,7 +82,7 @@ class LoginScreen(tk.Toplevel):
             pass_success.pack()
 
             # Open admin screen
-            self.open_admin_screen(self.user_name_label_get)
+            self.open_admin_screen(user_name_label_get)
 
         else:
             msg.showwarning(title="Warning", message="Warning user not exist!")
