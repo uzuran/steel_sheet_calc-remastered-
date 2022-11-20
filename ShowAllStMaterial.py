@@ -4,7 +4,6 @@ from tkinter import ttk
 import tkinter as tk
 
 import Connection
-from Connection import *
 
 
 class ShowAllStMaterial:
@@ -124,7 +123,7 @@ class ShowAllStMaterial:
                                                      f"want add this {order_value} count "
                                                      f"of material ?"):
                 try:
-                    update_ordered_material(order_value, item)
+                    Connection.update_ordered_material(order_value, item)
                 except IndexError:
                     msg.showwarning(title="WARNING", message="Firstly you need select the material !")
 
