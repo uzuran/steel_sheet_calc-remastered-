@@ -2,8 +2,8 @@ from tkinter import messagebox as msg
 from tkinter import *
 import tkinter as tk
 from Connection import *
-from ShowAllStMaterial import ShowAllStMaterial
 
+# My cursor.
 my_cursor = mydb.cursor(buffered=True)
 
 
@@ -30,68 +30,68 @@ class CreateNewMaterial(tk.Toplevel):
         self.y_size = StringVar()
 
         # Register new material window label.
-        create_material_label = Label(self, **new_material_label_option)
+        create_material_label = tk.Label(self, **new_material_label_option)
         create_material_label.pack()
 
         # Basic information about registered material.
-        type_material = Label(self, text='Type material')
+        type_material = tk.Label(self, text='Type material')
         type_material.pack()
 
-        type_material_entry = Entry(self, textvariable=self.material_type)
+        type_material_entry = tk.Entry(self, textvariable=self.material_type)
         type_material_entry.pack()
 
-        material_id = Label(self, text="Id")
+        material_id = tk.Label(self, text="Id")
         material_id.pack()
 
         # ID entry.
-        ID_entry = Entry(self, textvariable=self.m_identification)
+        ID_entry = tk.Entry(self, textvariable=self.m_identification)
         ID_entry.pack()
 
         # Material thickness.
-        material_thickness = Label(self, text='Thickness')
+        material_thickness = tk.Label(self, text='Thickness')
         material_thickness.pack()
 
         # Material thickness entry.
-        material_thickness_entry = Entry(self, textvariable=self.thickness)
+        material_thickness_entry = tk.Entry(self, textvariable=self.thickness)
         material_thickness_entry.pack()
 
         # Material size_x
-        x_size = Label(self, text='X_size')
+        x_size = tk.Label(self, text='X_size')
         x_size.pack()
 
         # Material size_x entry
-        x_size_entry = Entry(self, textvariable=self.x_size)
-        x_size_entry.pack()
+        self.x_size_entry = tk.Entry(self, textvariable=self.x_size)
+        self.x_size_entry.pack()
 
         # Material size_y
-        y_size = Label(self, text='Y_size')
+        y_size = tk.Label(self, text='Y_size')
         y_size.pack()
 
         # Material size_y entry
-        y_size_entry = Entry(self, textvariable=self.y_size)
-        y_size_entry.pack()
+        self.y_size_entry = tk.Entry(self, textvariable=self.y_size)
+        self.y_size_entry.pack()
 
         # Empty space
-        e_space = Label(self, text=' ')
+        e_space = tk.Label(self, text=' ')
         e_space.pack()
 
         # Button for material register.
-        button_for_register_material = Button(self, text='Register material')
+        button_for_register_material = tk.Button(self, text='Register material')
         button_for_register_material['command'] = lambda: [self.create_new_material_click()]
         button_for_register_material.pack()
         # Free space.
-        free_space = Label(self, text='')
+        free_space = tk.Label(self, text='')
         free_space.pack()
 
         # Free space.
-        free_space = Label(self, text='')
+        free_space = tk.Label(self, text='')
         free_space.pack()
 
         # Free space.
-        free_space = Label(self, text='')
+        free_space = tk.Label(self, text='')
         free_space.pack()
 
-        info_label = Label(self, text='Please register your new material.')
+        info_label = tk.Label(self, text='Please register your new material.')
         info_label.pack()
 
     # Function for button for add material to database.
@@ -123,7 +123,7 @@ class CreateNewMaterial(tk.Toplevel):
             my_cursor.execute(sql, val)
             mydb.commit()
             # Success registration Label.
-            reg_suc = Label(self, text=f'You register ID: {self.m_identification.get()}'
+            reg_suc = tk.Label(self, text=f'You register ID: {self.m_identification.get()}'
                                                            f' Thickness: {self.thickness.get()} '
                                                            f'X: {self.x_size.get()} Y: {self.y_size.get()}',
                                                            fg="green")

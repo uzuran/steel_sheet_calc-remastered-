@@ -7,6 +7,7 @@ from CreateNewMaterial import CreateNewMaterial
 from ShowAllStMaterial import ShowAllStMaterial
 from Connection import *
 
+# My cursor.
 my_cursor = mydb.cursor(buffered=True)
 
 
@@ -30,20 +31,18 @@ class AdminScreen(tk.Toplevel):
                         "height": "2",
                         "font": "Calibri, 13"}
 
-        main_label = Label(self, **label_option)
+        main_label = tk.Label(self, **label_option)
         main_label.pack()
 
-        # Check users,  who is log in.
-        user_name_label = user_name_label_get
+        self.who_is_log_in = user_name_label_get
+        check_user = tk.Label(self, text=str(self.who_is_log_in).capitalize() + " Is log in now.",
+                                    fg="green",
+                                    font="Arial",
 
-        check_user = Label(self, text=str(user_name_label.capitalize()) + " Is log in now.",
-                           fg="green",
-                           font="Arial",
-
-                           )
+                            )
         check_user.pack(anchor="e")
 
-        create_new_material = Button(self)
+        create_new_material = tk.Button(self)
         create_new_material["text"] = "Create new material"
         create_new_material["command"] = self.open_create_material_window
         create_new_material.pack()

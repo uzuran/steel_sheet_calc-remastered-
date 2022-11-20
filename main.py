@@ -1,9 +1,6 @@
 import tkinter as tk
-from tkinter import *
 from LoginScreen import LoginScreen
 from RegisterUserScreen import RegisterUserScreen
-import mysql.connector
-from Connection import *
 
 
 class App(tk.Tk):
@@ -11,18 +8,6 @@ class App(tk.Tk):
         super().__init__()
 
         """Write step by step commands for create database and tables for MySQL"""
-        #my_cursor = mydb.cursor(buffered=True)
-        #sql = "CREATE DATABASE " \
-        #      "users_data"
-        #my_cursor.execute(sql)
-        #sql = "CREATE TABLE IF NOT EXISTS st_material(id text, " \
-        #      "thickness varchar(40), size_x varchar(40), size_y varchar(40)," \
-        #      "in_storage int, ordered varchar(40), write_off int)"
-
-        #sql = "CREATE TABLE IF NOT EXISTS login(username varchar(40), userpass varchar (40))"
-
-        #my_cursor.execute(sql)
-        #mydb.commit()
 
     # configure the root window
         self.title("Steel sheet calculator.")
@@ -37,7 +22,7 @@ class App(tk.Tk):
                                 "font": "Calibri, 12"}
 
         # Enter label.
-        self.enter_label = Label(self, **enter_label_options)
+        self.enter_label = tk.Label(self, **enter_label_options)
         self.enter_label.pack(**options)
         self.attributes()
 
@@ -48,7 +33,7 @@ class App(tk.Tk):
                          }
 
         # Log in button.
-        self.log_in_button = Button(self, **btn_options_l)
+        self.log_in_button = tk.Button(self, **btn_options_l)
         # Command for button
         self.log_in_button['command'] = self.open_login_window
         self.log_in_button.pack(**options)
@@ -60,7 +45,7 @@ class App(tk.Tk):
                          }
 
         # Register button.
-        self.register_button = Button(self, **btn_options_r)
+        self.register_button = tk.Button(self, **btn_options_r)
         # Command for button
         self.register_button['command'] = self.open_register_user_screen
         self.register_button.pack(**options)
