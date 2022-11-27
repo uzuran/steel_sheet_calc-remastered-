@@ -65,16 +65,16 @@ def search_material_in_database(id_variable2):
 
 # Here have some troubles with update material in order, ordered material update only one time
 # **Always need restart program for update ordered material.
-def update_ordered_material(order_value, item):
+def update_ordered_material(order_value, set_selection):
     """Update ordered, material."""
     query = "UPDATE st_material  SET ordered = ? WHERE id = ?"
-    my_cursor.execute(query, (order_value, item[0]))
+    my_cursor.execute(query, (order_value, set_selection))
 
 
 # Here have some troubles with update material in storage.
 # **
-def update_material_in_storage(to_storage_var, item):
+def update_material_in_storage(to_storage_var, set_selection):
     """Update material in storage."""
     query = "UPDATE st_material  SET in_storage = ? WHERE id = ?"
-    my_cursor.execute(query, (to_storage_var, item[0]))
+    my_cursor.execute(query, (to_storage_var, set_selection))
 
