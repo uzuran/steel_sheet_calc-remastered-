@@ -107,7 +107,7 @@ class CreateNewMaterial(tk.Toplevel):
             reg_suc.destroy()
 
         # Condition.
-        if my_cursor.fetchone():
+        if Connection.my_cursor.fetchone():
             msg.showwarning(title="Warning!", message="This material already exist!")
 
         elif get_material_type == "st" and get_thickness != ""\

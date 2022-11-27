@@ -118,7 +118,7 @@ class ShowAllStMaterial:
 
         def add_ordered_mat(event=None):
             order_value = variable.get()
-            item = my_tree.item(my_tree.focus())
+            item = my_tree.selection()
             if msg.askyesno(title="Warning", message=f"Dou you really "
                                                      f"want add this {order_value} count "
                                                      f"of material ?"):
@@ -207,7 +207,8 @@ class ShowAllStMaterial:
 
             to_storage_var = variable_to_storage.get()
 
-            item = my_tree.item(my_tree.focus())
+            item = my_tree.selection()
+
             if msg.askyesno(title="Warning", message=f"Dou you really "
                                                      f"want add this {to_storage_var} count "
                                                      f"of material ?"):
@@ -217,7 +218,7 @@ class ShowAllStMaterial:
                 except IndexError:
                     msg.showwarning(title="WARNING", message="Firstly you need select the material !")
                 spin_box_storage.delete(0, END)
-                Connection.mydb.commit()
+
 
                 clear()
             else:
