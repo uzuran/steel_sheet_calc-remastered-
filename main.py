@@ -1,4 +1,5 @@
 import tkinter as tk
+
 from LoginScreen import LoginScreen
 from RegisterUserScreen import RegisterUserScreen
 
@@ -7,9 +8,7 @@ class App(tk.Tk):
     def __init__(self):
         super().__init__()
 
-        """Write step by step commands for create database and tables for MySQL"""
-
-    # configure the root window
+    # Configure the root window.
         self.title("Steel sheet calculator.")
         self.geometry("350x200")
         self.eval("tk::PlaceWindow . center")

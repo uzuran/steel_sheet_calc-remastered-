@@ -1,14 +1,9 @@
-import mysql.connector
-from tkinter import messagebox as msg
 from tkinter import *
 import tkinter as tk
 from tkinter import ttk
+
 from CreateNewMaterial import CreateNewMaterial
 from ShowAllStMaterial import ShowAllStMaterial
-from Connection import *
-
-# My cursor.
-my_cursor = mydb.cursor(buffered=True)
 
 
 class AdminScreen(tk.Toplevel):
