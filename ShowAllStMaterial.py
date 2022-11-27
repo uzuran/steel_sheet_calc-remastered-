@@ -78,7 +78,8 @@ class ShowAllStMaterial:
             if selected_item:
 
                 if msg.askyesno(title="Warning !", message="Are you sure"
-                                                           " that you want delete this material ?"):
+                                                           " that you want delete this material ?",
+                                parent=frame1):
                     x = selected_item[0]
                     my_tree.delete(x)
                     # Delete material from database.
@@ -121,7 +122,8 @@ class ShowAllStMaterial:
             item = my_tree.selection()
             if msg.askyesno(title="Warning", message=f"Dou you really "
                                                      f"want add this {order_value} count "
-                                                     f"of material ?"):
+                                                     f"of material ?",
+                            parent=frame1):
                 try:
                     Connection.update_ordered_material(order_value, item)
                 except IndexError:
@@ -203,7 +205,8 @@ class ShowAllStMaterial:
             try:
                 variable_to_storage.get()
             except tk.TclError:
-                msg.showwarning(title="WARNING", message="You need add only numbers into entry !")
+                msg.showwarning(title="WARNING", message="You need add only numbers into entry !",
+                                parent=frame1)
 
             to_storage_var = variable_to_storage.get()
 
@@ -211,14 +214,15 @@ class ShowAllStMaterial:
 
             if msg.askyesno(title="Warning", message=f"Dou you really "
                                                      f"want add this {to_storage_var} count "
-                                                     f"of material ?"):
+                                                     f"of material ?",
+                            parent=frame1):
                 try:
                     # Update material in storage.
                     Connection.update_material_in_storage(to_storage_var, item)
                 except IndexError:
-                    msg.showwarning(title="WARNING", message="Firstly you need select the material !")
+                    msg.showwarning(title="WARNING", message="Firstly you need select the material !",
+                                    parent=frame1)
                 spin_box_storage.delete(0, END)
-
 
                 clear()
             else:

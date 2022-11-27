@@ -108,7 +108,8 @@ class CreateNewMaterial(tk.Toplevel):
 
         # Condition.
         if Connection.my_cursor.fetchone():
-            msg.showwarning(title="Warning!", message="This material already exist!")
+            msg.showwarning(title="Warning!", message="This material already exist!",
+                            parent=self)
 
         elif get_material_type == "st" and get_thickness != ""\
                 and get_x_size.isdigit()\
@@ -125,5 +126,6 @@ class CreateNewMaterial(tk.Toplevel):
             reg_suc.after(2000, killer)
 
         else:
-            msg.showwarning(title="Warning!", message="You cant add this specification of material.")
+            msg.showwarning(title="Warning!", message="You cant add this specification of material.",
+                            parent=self)
 
