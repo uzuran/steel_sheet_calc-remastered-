@@ -127,7 +127,8 @@ class ShowAllStMaterial:
                 try:
                     Connection.update_ordered_material(order_value, item)
                 except IndexError:
-                    msg.showwarning(title="WARNING", message="Firstly you need select the material !")
+                    msg.showwarning(title="WARNING", message="Firstly you need select the material !",
+                                    parent=frame1)
 
                 Connection.mydb.commit()
                 clear()
