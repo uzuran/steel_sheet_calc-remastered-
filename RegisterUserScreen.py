@@ -1,9 +1,7 @@
 import tkinter as tk
 import hashlib
-from Connection import *
 
-# My cursor.
-my_cursor = mydb.cursor(buffered=True)
+import Connection
 
 
 class RegisterUserScreen(tk.Toplevel):
@@ -75,8 +73,8 @@ class RegisterUserScreen(tk.Toplevel):
                    "fg": "red",
                    "font": "Calibri, 12"}
 
-        sql = "SELECT * FROM login WHERE username = '%s'" % username_info
-        my_cursor.execute(sql)
+        # Check if user exist in database
+        Connection.check_if_user_exist_in_database(username_info)
 
         if username_info.isdigit():
             no_num = tk.Label(self, **options)
@@ -87,16 +85,14 @@ class RegisterUserScreen(tk.Toplevel):
             pass_inf = tk.Label(self, **options)
             pass_inf.pack()
 
-        elif my_cursor.fetchone():
+        elif Connection.my_cursor.fetchone():
             user_ex = tk.Label(self, text="User exist", fg="red", font="Calibri, 12")
             user_ex.pack()
 
         else:
+            # Register user to database
             hashed = hashlib.md5(str.encode(password_info)).hexdigest()
-            sql = "INSERT INTO login (username, userpass) VALUES(%s, %s)"
-            values_user_name_user_pass = (username_info, hashed)
-            my_cursor.execute(sql, values_user_name_user_pass)
-            mydb.commit()
+            Connection.register_user_to_database(username_info, hashed)
 
             self.user_name_entry.delete(0, tk.END)
             self.pass_entry.delete(0, tk.END)
