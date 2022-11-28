@@ -119,13 +119,18 @@ class ShowAllStMaterial:
 
         def add_ordered_mat(event=None):
             order_value = variable.get()
-            item = my_tree.item(my_tree.focus())
+
             if msg.askyesno(title="Warning", message=f"Dou you really "
                                                      f"want add this {order_value} count "
-                                                     f"of material ?", parent=frame1):
+                                                     f"of material ?",
+                            parent=frame1):
+
+                for selected in my_tree.selection():
+                    self.set_selection = my_tree.set(selected, "#1")
+
                 try:
-                    Connection.update_ordered_material(order_value, item)
-                except IndexError:
+                    Connection.update_ordered_material(order_value, self.set_selection)
+                except UnboundLocalError:
                     msg.showwarning(title="WARNING", message="Firstly you need select the material !",
                                     parent=frame1)
 
@@ -210,13 +215,18 @@ class ShowAllStMaterial:
 
             to_storage_var = variable_to_storage.get()
 
-            item = my_tree.item(my_tree.focus())
+            item = my_tree.selection()
+
             if msg.askyesno(title="Warning", message=f"Dou you really "
                                                      f"want add this {to_storage_var} count "
-                                                     f"of material ?", parent=frame1):
+                                                     f"of material ?",
+                            parent=frame1):
+                # Select item from treeview
+                for selected in my_tree.selection():
+                    self.set_selection = my_tree.set(selected, "#1")
                 try:
                     # Update material in storage.
-                    Connection.update_material_in_storage(to_storage_var, item)
+                    Connection.update_material_in_storage(to_storage_var, self.set_selection)
                 except IndexError:
                     msg.showwarning(title="WARNING", message="Firstly you need select the material !",
                                     parent=frame1)
