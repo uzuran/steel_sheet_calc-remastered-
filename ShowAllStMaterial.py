@@ -130,7 +130,7 @@ class ShowAllStMaterial:
 
                 try:
                     Connection.update_ordered_material(order_value, self.set_selection)
-                except UnboundLocalError:
+                except AttributeError:
                     msg.showwarning(title="WARNING", message="Firstly you need select the material !",
                                     parent=frame1)
 
@@ -227,7 +227,7 @@ class ShowAllStMaterial:
                 try:
                     # Update material in storage.
                     Connection.update_material_in_storage(to_storage_var, self.set_selection)
-                except IndexError:
+                except AttributeError:
                     msg.showwarning(title="WARNING", message="Firstly you need select the material !",
                                     parent=frame1)
                 spin_box_storage.delete(0, END)
