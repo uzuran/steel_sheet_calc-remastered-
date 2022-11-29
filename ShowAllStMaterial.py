@@ -4,6 +4,7 @@ from tkinter import ttk
 import tkinter as tk
 
 import Connection
+import Config
 
 
 class ShowAllStMaterial:
@@ -77,9 +78,7 @@ class ShowAllStMaterial:
 
             if selected_item:
 
-                if msg.askyesno(title="Warning !", message="Are you sure"
-                                                           " that you want delete this material ?",
-                                parent=frame1):
+                if Config.warning_for_delete_material(frame1):
                     x = selected_item[0]
                     my_tree.delete(x)
                     # Delete material from database.
@@ -131,8 +130,7 @@ class ShowAllStMaterial:
                 try:
                     Connection.update_ordered_material(order_value, self.set_selection)
                 except AttributeError:
-                    msg.showwarning(title="WARNING", message="Firstly you need select the material !",
-                                    parent=frame1)
+                    Config.warning_for_selecting_material()
 
                 Connection.mydb.commit()
                 clear()
@@ -214,8 +212,6 @@ class ShowAllStMaterial:
                                 parent=frame1)
 
             to_storage_var = variable_to_storage.get()
-
-            item = my_tree.selection()
 
             if msg.askyesno(title="Warning", message=f"Dou you really "
                                                      f"want add this {to_storage_var} count "

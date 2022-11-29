@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import messagebox as msg
 import hashlib
 
+import Config
 import Connection
 from AdminScreen import AdminScreen
 
@@ -13,13 +14,8 @@ class LoginScreen(tk.Toplevel):
         self.title("Please login!")
         self.geometry("350x450")
 
-        login_l_option = {"text": "Please login, or register",
-                          "bg": "#d1dffa",
-                          "width": "300",
-                          "height": "2",
-                          "font": "Calibri, 13"}
         # Main label.
-        login_label = tk.Label(self, **login_l_option)
+        login_label = tk.Label(self, Config.login_user_conf())
         login_label.pack()
 
         self.user_name = tk.StringVar()
@@ -40,17 +36,11 @@ class LoginScreen(tk.Toplevel):
         self.user_pass_entry = tk.Entry(self, textvariable=self.user_pass_verify, show="*")
         self.user_pass_entry.pack()
 
-        # Login button option.
-        login_btn_option = {"text": "Login",
-                            "width": "10",
-                            "height": "1",
-                            }
-
         empty_space = tk.Label(self, text="")
         empty_space.pack()
 
         # Login button.
-        login_user_button = tk.Button(self, **login_btn_option)
+        login_user_button = tk.Button(self, Config.login_button())
         # Command for button
         login_user_button['command'] = self.login_verify
         # user_pass_entry bind for enter use.
@@ -69,19 +59,13 @@ class LoginScreen(tk.Toplevel):
         hashed = hashlib.md5(str.encode(password_get)).hexdigest()
         Connection.check_for_user_and_pass(user_name_label_get, hashed)
 
-        pass_success_option = {"text": "Login success",
-                               "fg": "green",
-                               "font": "Calibri, 12"}
-
         if Connection.my_cursor.fetchone():
-            pass_success = tk.Label(self, **pass_success_option)
-            pass_success.pack()
 
             # Open admin screen
             self.open_admin_screen(user_name_label_get)
 
         else:
-            msg.showwarning(title="Warning", message="Warning user not exist!")
+            Config.warning_msg_user_not_exist()
 
     def open_admin_screen(self, user_name_get):
         window = AdminScreen(self, user_name_get)

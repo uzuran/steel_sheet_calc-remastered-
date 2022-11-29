@@ -2,6 +2,7 @@ from tkinter import *
 import tkinter as tk
 from tkinter import ttk
 
+import Config
 from CreateNewMaterial import CreateNewMaterial
 from ShowAllStMaterial import ShowAllStMaterial
 
@@ -19,14 +20,7 @@ class AdminScreen(tk.Toplevel):
         height = self.winfo_screenheight()
         self.geometry("%dx%d" % (width, height))
 
-        # Main label.
-        label_option = {"text": "Steel sheet calculator",
-                        "bg": "#d1dffa",
-                        "width": "300",
-                        "height": "2",
-                        "font": "Calibri, 13"}
-
-        main_label = tk.Label(self, **label_option)
+        main_label = tk.Label(self, Config.admin_label_conf())
         main_label.pack()
 
         self.who_is_log_in = user_name_label_get
