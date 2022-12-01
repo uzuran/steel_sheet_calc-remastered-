@@ -3,6 +3,35 @@ import tkinter as tk
 
 
 # <<<Warnings!>>>
+def attribute_error_warning(frame1):
+    error = msg.showwarning(title="WARNING", message="Firstly you need select the material !",
+                            parent=frame1)
+    return error
+
+
+def warning_msg_for_add_material_to_storage(frame1, to_storage_var):
+    warning = msg.askyesno(title="Warning", message=f"Dou you really "
+                                 f"want add this {to_storage_var} count "
+                                 f"of material ?",
+                           parent=frame1)
+    return warning
+
+
+def tk_tlc_error_msg(frame1):
+    tk_tlc_error = msg.showwarning(title="WARNING", message="You need add only numbers into entry !",
+                                   parent=frame1)
+
+    return tk_tlc_error
+
+
+def warning_msg_for_add_mat_to_order(frame1, order_value):
+    warning = msg.askyesno(title="Warning", message=f"Dou you really "
+                                 f"want add this {order_value} count "
+                                 f"of material ?",
+                           parent=frame1)
+    return warning
+
+
 def check_who_is_login(self, user_name_label_get):
     self.who_is_log_in = user_name_label_get
     check_user = tk.Label(self, text=str(self.who_is_log_in).capitalize() + " Is log in now.",
@@ -16,11 +45,11 @@ def check_who_is_login(self, user_name_label_get):
 
 def warning_for_registration():
     """If username have some numbers label send it on screen."""
-    warnings = {"text": "You can not have a numbers, or blank line in name!",
+    warning = {"text": "You can not have a numbers, or blank line in name!",
                 "fg": "red",
                 "font": "Calibri, 12"}
 
-    return warnings
+    return warning
 
 
 def warning_user_exist():
@@ -82,6 +111,36 @@ def warning_for_selecting_material(frame1):
 
 
 # <<<BUTTONS>>>
+def add_material_to_storage_button():
+    add_mat_to_storage_button = {"text": "Add to storage"}
+
+    return add_mat_to_storage_button
+
+
+def add_to_order_button():
+    add_mat_button = {"text": "Add ordered material"}
+
+    return add_mat_button
+
+
+def search_button():
+    search_button = {"text": "Search"}
+
+    return search_button
+
+
+def update_records_button():
+    delete_button = {"text": "Update records"}
+
+    return delete_button
+
+
+def delete_material_button():
+    delete_button = {"text": "Delete material"}
+
+    return delete_button
+
+
 def main_button_conf_login():
     """"Button for login, config."""
     log_in = {"text": "Log in",
@@ -125,6 +184,7 @@ def login_button():
 def create_new_material_button():
     """Button for create material config."""
     create_new_mat_button = {"text": "Create new material"}
+
     return create_new_mat_button
 
 
@@ -152,10 +212,10 @@ def registration_new_user_conf():
 def login_user_conf():
     """Configurate , text, background, width, height, font for login user."""
     label = {"text": "Please login, or register",
-                    "bg": "#d1dffa",
-                    "width": "300",
-                    "height": "2",
-                    "font": "Calibri, 13"}
+                     "bg": "#d1dffa",
+                     "width": "300",
+                     "height": "2",
+                     "font": "Calibri, 13"}
 
     return label
 

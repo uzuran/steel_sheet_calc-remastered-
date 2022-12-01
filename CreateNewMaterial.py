@@ -1,4 +1,3 @@
-from tkinter import messagebox as msg
 from tkinter import *
 import tkinter as tk
 

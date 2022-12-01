@@ -1,4 +1,3 @@
-from tkinter import messagebox as msg
 from tkinter import *
 from tkinter import ttk
 import tkinter as tk
@@ -118,11 +117,10 @@ class ShowAllStMaterial:
 
         def add_ordered_mat(event=None):
             order_value = variable.get()
+            if order_value.isalpha():
+                Config.tk_tlc_error_msg(frame1)
 
-            if msg.askyesno(title="Warning", message=f"Dou you really "
-                                                     f"want add this {order_value} count "
-                                                     f"of material ?",
-                            parent=frame1):
+            elif Config.warning_msg_for_add_mat_to_order(frame1, order_value):
 
                 for selected in my_tree.selection():
                     self.set_selection = my_tree.set(selected, "#1")
@@ -130,7 +128,7 @@ class ShowAllStMaterial:
                 try:
                     Connection.update_ordered_material(order_value, self.set_selection)
                 except AttributeError:
-                    Config.warning_for_selecting_material()
+                    Config.warning_for_selecting_material(frame1)
 
                 Connection.mydb.commit()
                 clear()
@@ -141,14 +139,12 @@ class ShowAllStMaterial:
         id_string = tk.StringVar()
 
         # Delete material button
-        delete_material_button = tk.Button(frame1)
-        delete_material_button["text"] = "Delete material"
+        delete_material_button = tk.Button(frame1, Config.delete_material_button())
         delete_material_button["command"] = delete
         delete_material_button.pack(side=tk.LEFT)
 
         # Update material button.
-        update_material_button = tk.Button(frame1)
-        update_material_button["text"] = "Update records"
+        update_material_button = tk.Button(frame1, Config.update_records_button())
         update_material_button["command"] = _build_tree
         update_material_button.pack(side=tk.LEFT)
 
@@ -157,8 +153,7 @@ class ShowAllStMaterial:
         entry_search.pack(side=tk.LEFT, ipady=3)
 
         # Search button.
-        search_material_button = tk.Button(frame1)
-        search_material_button["text"] = "Search"
+        search_material_button = tk.Button(frame1, Config.search_button())
         search_material_button["command"] = search
         search_material_button.pack(side=LEFT)
         # Bind entry search for enter using.
@@ -185,8 +180,7 @@ class ShowAllStMaterial:
         spin_box.bind("<Return>", add_ordered_mat)
 
         # Add to storage button.
-        add_to_ordered_material_button = tk.Button(frame1)
-        add_to_ordered_material_button["text"] = "Add material ordered material"
+        add_to_ordered_material_button = tk.Button(frame1, Config.add_to_order_button())
         add_to_ordered_material_button["command"] = add_ordered_mat
         add_to_ordered_material_button.pack(side=tk.LEFT)
 
@@ -208,15 +202,12 @@ class ShowAllStMaterial:
             try:
                 variable_to_storage.get()
             except tk.TclError:
-                msg.showwarning(title="WARNING", message="You need add only numbers into entry !",
-                                parent=frame1)
+                # Warning for TlcError
+                Config.tk_tlc_error_msg(frame1)
 
             to_storage_var = variable_to_storage.get()
 
-            if msg.askyesno(title="Warning", message=f"Dou you really "
-                                                     f"want add this {to_storage_var} count "
-                                                     f"of material ?",
-                            parent=frame1):
+            if Config.warning_msg_for_add_material_to_storage(frame1, to_storage_var):
                 # Select item from treeview
                 for selected in my_tree.selection():
                     self.set_selection = my_tree.set(selected, "#1")
@@ -224,8 +215,8 @@ class ShowAllStMaterial:
                     # Update material in storage.
                     Connection.update_material_in_storage(to_storage_var, self.set_selection)
                 except AttributeError:
-                    msg.showwarning(title="WARNING", message="Firstly you need select the material !",
-                                    parent=frame1)
+                    Config.attribute_error_warning(frame1)
+
                 spin_box_storage.delete(0, END)
                 Connection.mydb.commit()
 
@@ -237,8 +228,7 @@ class ShowAllStMaterial:
         spin_box_storage.bind("<Return>", add_to_storage)
 
         # Add to storage button.
-        add_to_storage_material_button = Button(frame1)
-        add_to_storage_material_button["text"] = "Add to storage"
+        add_to_storage_material_button = Button(frame1, Config.add_material_to_storage_button())
         add_to_storage_material_button["command"] = add_to_storage
         add_to_storage_material_button.pack(side=LEFT)
 
