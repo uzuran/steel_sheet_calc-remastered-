@@ -23,16 +23,10 @@ class AdminScreen(tk.Toplevel):
         main_label = tk.Label(self, Config.admin_label_conf())
         main_label.pack()
 
-        self.who_is_log_in = user_name_label_get
-        check_user = tk.Label(self, text=str(self.who_is_log_in).capitalize() + " Is log in now.",
-                                    fg="green",
-                                    font="Arial",
+        # Check who is login
+        Config.check_who_is_login(self, user_name_label_get)
 
-                            )
-        check_user.pack(anchor="e")
-
-        create_new_material = tk.Button(self)
-        create_new_material["text"] = "Create new material"
+        create_new_material = tk.Button(self, Config.create_new_material_button())
         create_new_material["command"] = self.open_create_material_window
         create_new_material.pack()
 

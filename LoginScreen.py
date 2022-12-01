@@ -1,5 +1,4 @@
 import tkinter as tk
-from tkinter import messagebox as msg
 import hashlib
 
 import Config

@@ -1,7 +1,19 @@
 from tkinter import messagebox as msg
+import tkinter as tk
 
 
 # <<<Warnings!>>>
+def check_who_is_login(self, user_name_label_get):
+    self.who_is_log_in = user_name_label_get
+    check_user = tk.Label(self, text=str(self.who_is_log_in).capitalize() + " Is log in now.",
+                          fg="green",
+                          font="Arial",
+
+                          )
+    check_user.pack(anchor="e")
+    return check_user
+
+
 def warning_for_registration():
     """If username have some numbers label send it on screen."""
     warnings = {"text": "You can not have a numbers, or blank line in name!",
@@ -110,6 +122,12 @@ def login_button():
     return button_for_login
 
 
+def create_new_material_button():
+    """Button for create material config."""
+    create_new_mat_button = {"text": "Create new material"}
+    return create_new_mat_button
+
+
 # <<<LABELS>>>
 def main_label_conf():
     """Configurate , text, background, width, height, font for main label."""
@@ -163,3 +181,10 @@ def create_new_material_label():
              }
 
     return label
+
+
+def option_for_labels():
+    option = {"padx": 5,
+              "pady": 5}
+
+    return option
