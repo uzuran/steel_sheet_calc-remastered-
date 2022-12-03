@@ -1,7 +1,7 @@
-from tkinter import messagebox as msg
 from tkinter import *
 import tkinter as tk
 
+import Config
 import Connection
 
 
@@ -12,14 +12,6 @@ class CreateNewMaterial(tk.Toplevel):
         self.geometry("350x450")
         self.title("Create new material.")
 
-        new_material_label_option = {
-            "text": "Create new material.",
-            "bg": "#d1dffa",
-            "width": "300",
-            "height": "2",
-            "font": "Calibri, 12"
-        }
-
         # String variables for material entry
         self.material_type = StringVar()
         self.m_identification = StringVar()
@@ -28,7 +20,7 @@ class CreateNewMaterial(tk.Toplevel):
         self.y_size = StringVar()
 
         # Register new material window label.
-        create_material_label = tk.Label(self, **new_material_label_option)
+        create_material_label = tk.Label(self, Config.create_new_material_label())
         create_material_label.pack()
 
         # Basic information about registered material.
@@ -108,8 +100,7 @@ class CreateNewMaterial(tk.Toplevel):
 
         # Condition.
         if Connection.my_cursor.fetchone():
-            msg.showwarning(title="Warning!", message="This material already exist!",
-                            parent=self)
+            Config.warning_material_is_exist_msg(self)
 
         elif get_material_type == "st" and get_thickness != ""\
                 and get_x_size.isdigit()\
@@ -126,6 +117,5 @@ class CreateNewMaterial(tk.Toplevel):
             reg_suc.after(2000, killer)
 
         else:
-            msg.showwarning(title="Warning!", message="You cant add this specification of material.",
-                            parent=self)
+            Config.warning_material_specification(self)
 

@@ -2,6 +2,7 @@ import tkinter as tk
 import hashlib
 
 import Connection
+import Config
 
 
 class RegisterUserScreen(tk.Toplevel):
@@ -15,17 +16,8 @@ class RegisterUserScreen(tk.Toplevel):
         self.user_name = tk.StringVar()
         self.password = tk.StringVar()
 
-        # Register options.
-        register_label_option = {
-            "text": "Please enter your name and password.",
-            "bg": "#d1dffa",
-            "width": "300",
-            "height": "2",
-            "font": "Calibri, 12"
-        }
-
         # Register window label.
-        register_label = tk.Label(self, **register_label_option)
+        register_label = tk.Label(self, Config.registration_new_user_conf())
         register_label.pack()
 
         # User name label.
@@ -44,17 +36,11 @@ class RegisterUserScreen(tk.Toplevel):
         self.pass_entry = tk.Entry(self, textvariable=self.password, show="*")
         self.pass_entry.pack()
 
-        register_btn_option = {
-            "text": "Register",
-            "width": "10",
-            "height": "1"
-        }
-
         empty_space = tk.Label(self, text="")
         empty_space.pack()
 
         # Register button.
-        register_user_button = tk.Button(self, **register_btn_option)
+        register_user_button = tk.Button(self, Config.registration_button())
         # Command for button
         register_user_button['command'] = self.register_users
         register_user_button.pack()
@@ -68,25 +54,20 @@ class RegisterUserScreen(tk.Toplevel):
         username_info = self.user_name.get()
         password_info = self.password.get()
 
-        # If username have some numbers label send it on screen.
-        options = {"text": "You can not have a numbers, or blank line in name!",
-                   "fg": "red",
-                   "font": "Calibri, 12"}
-
         # Check if user exist in database
         Connection.check_if_user_exist_in_database(username_info)
 
         if username_info.isdigit():
-            no_num = tk.Label(self, **options)
+            no_num = tk.Label(self, Config.warning_for_registration())
             no_num.pack()
             # If password have only blank on field label say it.
 
         elif password_info == "":
-            pass_inf = tk.Label(self, **options)
+            pass_inf = tk.Label(self, Config.warning_for_registration())
             pass_inf.pack()
 
         elif Connection.my_cursor.fetchone():
-            user_ex = tk.Label(self, text="User exist", fg="red", font="Calibri, 12")
+            user_ex = tk.Label(self, Config.warning_user_exist())
             user_ex.pack()
 
         else:
@@ -97,10 +78,5 @@ class RegisterUserScreen(tk.Toplevel):
             self.user_name_entry.delete(0, tk.END)
             self.pass_entry.delete(0, tk.END)
 
-            # Label option
-            success_option = {"text": "Registration success.",
-                              "fg": "green",
-                              "font": "Calibri, 11"}
-
-            reg_success = tk.Label(self, success_option)
+            reg_success = tk.Label(self, Config.registration_success())
             reg_success.pack()

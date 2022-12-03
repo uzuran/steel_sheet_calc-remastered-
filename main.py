@@ -1,5 +1,6 @@
 import tkinter as tk
 
+import Config
 from LoginScreen import LoginScreen
 from RegisterUserScreen import RegisterUserScreen
 
@@ -13,41 +14,22 @@ class App(tk.Tk):
         self.geometry("350x200")
         self.eval("tk::PlaceWindow . center")
 
-        options = {"padx": 5, "pady": 5}
-        enter_label_options = {"text": "Please login, or register.",
-                                "bg": "#d1dffa",
-                                "width": "300",
-                                "height": "2",
-                                "font": "Calibri, 12"}
-
         # Enter label.
-        self.enter_label = tk.Label(self, **enter_label_options)
-        self.enter_label.pack(**options)
+        self.enter_label = tk.Label(self, Config.main_label_conf())
+        self.enter_label.pack(Config.option_for_labels())
         self.attributes()
 
-        # Options for buttons.
-        btn_options_l = {"text": "Log in",
-                         "width": "30",
-                         "height": "2"
-                         }
-
         # Log in button.
-        self.log_in_button = tk.Button(self, **btn_options_l)
+        self.log_in_button = tk.Button(self, Config.main_button_conf_login())
         # Command for button
         self.log_in_button['command'] = self.open_login_window
-        self.log_in_button.pack(**options)
-
-        btn_options_r = {"text": "Register",
-                         "width": "30",
-                         "height": "2"
-
-                         }
+        self.log_in_button.pack(Config.option_for_labels())
 
         # Register button.
-        self.register_button = tk.Button(self, **btn_options_r)
+        self.register_button = tk.Button(self, Config.main_button_conf_registration())
         # Command for button
         self.register_button['command'] = self.open_register_user_screen
-        self.register_button.pack(**options)
+        self.register_button.pack(Config.option_for_labels())
 
     # Open login screen window function.
     def open_login_window(self):
