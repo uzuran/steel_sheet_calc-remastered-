@@ -2,7 +2,7 @@ import tkinter as tk
 import hashlib
 
 import Connection
-import Config
+import Components
 
 
 class RegisterUserScreen(tk.Toplevel):
@@ -17,7 +17,7 @@ class RegisterUserScreen(tk.Toplevel):
         self.password = tk.StringVar()
 
         # Register window label.
-        register_label = tk.Label(self, Config.registration_new_user_conf())
+        register_label = tk.Label(self, Components.registration_new_user_conf())
         register_label.pack()
 
         # User name label.
@@ -40,7 +40,7 @@ class RegisterUserScreen(tk.Toplevel):
         empty_space.pack()
 
         # Register button.
-        register_user_button = tk.Button(self, Config.registration_button())
+        register_user_button = tk.Button(self, Components.registration_button())
         # Command for button
         register_user_button['command'] = self.register_users
         register_user_button.pack()
@@ -54,21 +54,15 @@ class RegisterUserScreen(tk.Toplevel):
         username_info = self.user_name.get()
         password_info = self.password.get()
 
-        # Check if user exist in database
-        Connection.check_if_user_exist_in_database(username_info)
-
         if username_info.isdigit():
-            no_num = tk.Label(self, Config.warning_for_registration())
-            no_num.pack()
+            Components.warning_for_registration()
             # If password have only blank on field label say it.
 
         elif password_info == "":
-            pass_inf = tk.Label(self, Config.warning_for_registration())
-            pass_inf.pack()
+            Components.warning_for_registration()
 
-        elif Connection.my_cursor.fetchone():
-            user_ex = tk.Label(self, Config.warning_user_exist())
-            user_ex.pack()
+        elif Connection.check_if_user_exist_in_database(username_info):
+            Components.warning_user_exist()
 
         else:
             # Register user to database
@@ -78,5 +72,5 @@ class RegisterUserScreen(tk.Toplevel):
             self.user_name_entry.delete(0, tk.END)
             self.pass_entry.delete(0, tk.END)
 
-            reg_success = tk.Label(self, Config.registration_success())
-            reg_success.pack()
+            Components.registration_success()
+

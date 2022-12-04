@@ -1,7 +1,7 @@
 from tkinter import *
 import tkinter as tk
 
-import Config
+import Components
 import Connection
 
 
@@ -20,7 +20,7 @@ class CreateNewMaterial(tk.Toplevel):
         self.y_size = StringVar()
 
         # Register new material window label.
-        create_material_label = tk.Label(self, Config.create_new_material_label())
+        create_material_label = tk.Label(self, Components.create_new_material_label())
         create_material_label.pack()
 
         # Basic information about registered material.
@@ -95,12 +95,9 @@ class CreateNewMaterial(tk.Toplevel):
         # Check if material is in database.
         Connection.check_if_material_is_exist_in_database(get_material_id)
 
-        def killer():
-            reg_suc.destroy()
-
         # Condition.
-        if Connection.my_cursor.fetchone():
-            Config.warning_material_is_exist_msg(self)
+        if Connection.check_if_material_is_exist_in_database(get_material_id):
+            Components.warning_material_is_exist_msg()
 
         elif get_material_type == "st" and get_thickness != ""\
                 and get_x_size.isdigit()\
@@ -109,13 +106,8 @@ class CreateNewMaterial(tk.Toplevel):
             # If condition complete add material in to database.
             Connection.add_material_to_database(get_material_id, get_thickness, get_x_size, get_y_size)
             # Success registration Label.
-            reg_suc = tk.Label(self, text=f'You register ID: {self.m_identification.get()}'
-                                                           f' Thickness: {self.thickness.get()} '
-                                                           f'X: {self.x_size.get()} Y: {self.y_size.get()}',
-                                                           fg="green")
-            reg_suc.pack()
-            reg_suc.after(2000, killer)
+            Components.registration_success()
 
         else:
-            Config.warning_material_specification(self)
+            Components.warning_material_specification()
 

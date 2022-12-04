@@ -3,7 +3,7 @@ from tkinter import ttk
 import tkinter as tk
 
 import Connection
-import Config
+import Components
 
 
 class ShowAllStMaterial:
@@ -13,7 +13,7 @@ class ShowAllStMaterial:
 
         # Select all material from database.
         Connection.select_all_material()
-        my_result = Connection.my_cursor.fetchall()
+        my_result = Connection.cursor_fetch_all()
 
         wraper1 = tk.LabelFrame(frame1, text="Steel material")
         wraper1.pack(fill="both", expand=1)
@@ -59,10 +59,9 @@ class ShowAllStMaterial:
         # Function for update records button, firstly select all from database table, then delete treeview
         # and load again.
         def _build_tree():
-
             # Select all material from database.
             Connection.select_all_material()
-            result = Connection.my_cursor.fetchall()
+            result = Connection.cursor_fetch_all()
             # First delete
             for i in my_tree.get_children():
                 my_tree.delete(i)
@@ -77,7 +76,7 @@ class ShowAllStMaterial:
 
             if selected_item:
 
-                if Config.warning_for_delete_material(frame1):
+                if Components.warning_for_delete_material(frame1):
                     x = selected_item[0]
                     my_tree.delete(x)
                     # Delete material from database.
@@ -98,13 +97,13 @@ class ShowAllStMaterial:
             id_variable2 = id_variable.get()
             # Search material in database where id.
             Connection.search_material_in_database(id_variable2)
-            rows = Connection.my_cursor.fetchall()
+            rows = Connection.cursor_fetch_all()
             update(rows)
 
         def clear():
             # Select all material.
             Connection.select_all_material()
-            rows = Connection.my_cursor.fetchall()
+            rows = Connection.cursor_fetch_all()
             update(rows)
 
         def get_row(event):
@@ -118,9 +117,9 @@ class ShowAllStMaterial:
         def add_ordered_mat(event=None):
             order_value = variable.get()
             if order_value.isalpha():
-                Config.tk_tlc_error_msg(frame1)
+                Components.tk_tlc_error_msg(frame1)
 
-            elif Config.warning_msg_for_add_mat_to_order(frame1, order_value):
+            elif Components.warning_msg_for_add_mat_to_order(frame1, order_value):
 
                 for selected in my_tree.selection():
                     self.set_selection = my_tree.set(selected, "#1")
@@ -128,7 +127,7 @@ class ShowAllStMaterial:
                 try:
                     Connection.update_ordered_material(order_value, self.set_selection)
                 except AttributeError:
-                    Config.warning_for_selecting_material(frame1)
+                    Components.warning_for_selecting_material(frame1)
 
                 Connection.mydb.commit()
                 clear()
@@ -139,12 +138,12 @@ class ShowAllStMaterial:
         id_string = tk.StringVar()
 
         # Delete material button
-        delete_material_button = tk.Button(frame1, Config.delete_material_button())
+        delete_material_button = tk.Button(frame1, Components.delete_material_button())
         delete_material_button["command"] = delete
         delete_material_button.pack(side=tk.LEFT)
 
         # Update material button.
-        update_material_button = tk.Button(frame1, Config.update_records_button())
+        update_material_button = tk.Button(frame1, Components.update_records_button())
         update_material_button["command"] = _build_tree
         update_material_button.pack(side=tk.LEFT)
 
@@ -153,7 +152,7 @@ class ShowAllStMaterial:
         entry_search.pack(side=tk.LEFT, ipady=3)
 
         # Search button.
-        search_material_button = tk.Button(frame1, Config.search_button())
+        search_material_button = tk.Button(frame1, Components.search_button())
         search_material_button["command"] = search
         search_material_button.pack(side=LEFT)
         # Bind entry search for enter using.
@@ -180,7 +179,7 @@ class ShowAllStMaterial:
         spin_box.bind("<Return>", add_ordered_mat)
 
         # Add to storage button.
-        add_to_ordered_material_button = tk.Button(frame1, Config.add_to_order_button())
+        add_to_ordered_material_button = tk.Button(frame1, Components.add_to_order_button())
         add_to_ordered_material_button["command"] = add_ordered_mat
         add_to_ordered_material_button.pack(side=tk.LEFT)
 
@@ -203,11 +202,11 @@ class ShowAllStMaterial:
                 variable_to_storage.get()
             except tk.TclError:
                 # Warning for TlcError
-                Config.tk_tlc_error_msg(frame1)
+                Components.tk_tlc_error_msg(frame1)
 
             to_storage_var = variable_to_storage.get()
 
-            if Config.warning_msg_for_add_material_to_storage(frame1, to_storage_var):
+            if Components.warning_msg_for_add_material_to_storage(frame1, to_storage_var):
                 # Select item from treeview
                 for selected in my_tree.selection():
                     self.set_selection = my_tree.set(selected, "#1")
@@ -215,7 +214,7 @@ class ShowAllStMaterial:
                     # Update material in storage.
                     Connection.update_material_in_storage(to_storage_var, self.set_selection)
                 except AttributeError:
-                    Config.attribute_error_warning(frame1)
+                    Components.attribute_error_warning(frame1)
 
                 spin_box_storage.delete(0, END)
                 Connection.mydb.commit()
@@ -228,7 +227,7 @@ class ShowAllStMaterial:
         spin_box_storage.bind("<Return>", add_to_storage)
 
         # Add to storage button.
-        add_to_storage_material_button = Button(frame1, Config.add_material_to_storage_button())
+        add_to_storage_material_button = Button(frame1, Components.add_material_to_storage_button())
         add_to_storage_material_button["command"] = add_to_storage
         add_to_storage_material_button.pack(side=LEFT)
 

@@ -1,40 +1,48 @@
 from tkinter import messagebox as msg
 import tkinter as tk
 
+import Languages
+
 
 # <<<Warnings!>>>
 def attribute_error_warning(frame1):
-    error = msg.showwarning(title="WARNING", message="Firstly you need select the material !",
+    error = msg.showwarning(title=Languages.english.get("warning_title"),
+                            message=Languages.english.get("select_material_warning"),
                             parent=frame1)
     return error
 
 
 def warning_msg_for_add_material_to_storage(frame1, to_storage_var):
-    warning = msg.askyesno(title="Warning", message=f"Dou you really "
-                                 f"want add this {to_storage_var} count "
-                                 f"of material ?",
+    warning = msg.askyesno(title=Languages.english.get("warning_title"),
+                           message=f"Dou you really "
+                                   f"want add this {to_storage_var} count "
+                                   f"of material ?",
                            parent=frame1)
     return warning
 
 
 def tk_tlc_error_msg(frame1):
-    tk_tlc_error = msg.showwarning(title="WARNING", message="You need add only numbers into entry !",
+    tk_tlc_error = msg.showwarning(Languages.english.get("warning_title"),
+                                   message=Languages.english.get("only_numbers_warning"),
                                    parent=frame1)
 
     return tk_tlc_error
 
 
 def warning_msg_for_add_mat_to_order(frame1, order_value):
-    warning = msg.askyesno(title="Warning", message=f"Dou you really "
-                                 f"want add this {order_value} count "
-                                 f"of material ?",
+    warning = msg.askyesno(title=Languages.english.get("warning_title"),
+                           message=f"Dou you really "
+                                   f"want add this {order_value} count "
+                                   f"of material ?",
                            parent=frame1)
     return warning
 
 
+# To do here, wrong usage self! Need fix here.
 def check_who_is_login(self, user_name_label_get):
     self.who_is_log_in = user_name_label_get
-    check_user = tk.Label(self, text=str(self.who_is_log_in).capitalize() + " Is log in now.",
+    check_user = tk.Label(self,
+                          text=str(self.who_is_log_in).capitalize() + Languages.english.get("check_who_is_login_label"),
                           fg="green",
                           font="Arial",
 
@@ -44,59 +52,57 @@ def check_who_is_login(self, user_name_label_get):
 
 
 def warning_for_registration():
-    """If username have some numbers label send it on screen."""
-    warning = {"text": "You can not have a numbers, or blank line in name!",
-                "fg": "red",
-                "font": "Calibri, 12"}
-
+    """If username have some numbers msg send it on screen."""
+    warning = msg.showwarning(title=Languages.english.get("warning_title"),
+                              message=Languages.english.get("registration_warning"),
+                              )
     return warning
 
 
 def warning_user_exist():
-    """If username exist send it on screen."""
-    user_exist = {"text": "User exist!",
-                  "fg": "red",
-                  "font": "Calibri, 12"}
 
-    return user_exist
+    """If username have some numbers msg send it on screen."""
+    warning = msg.showwarning(title=Languages.english.get("warning_title"),
+                              message=Languages.english.get("user_exist_warning"),
+                              )
+    return warning
 
 
 def registration_success():
     """If registration is success send it on screen."""
-    success = {"text": "Registration success.",
-                       "fg": "green",
-                       "font": "Calibri, 11"}
+    success = msg.showinfo(title=Languages.english.get("Registration complete"),
+                           message=Languages.english.get("registration_success"))
 
     return success
 
 
 def warning_msg_user_not_exist():
     """Message if user not exist"""
-    user_not_exist_message = msg.showwarning(title="Warning", message="Warning user not exist!")
+    user_not_exist_message = msg.showwarning(title=Languages.english.get("warning_title"),
+                                             message=Languages.english.get("user_not_exist_warning"))
 
     return user_not_exist_message
 
 
-def warning_material_is_exist_msg(self):
+def warning_material_is_exist_msg():
     """Message if user not exist"""
-    material_exist_warning = msg.showwarning(title="Warning!", message="This material already exist!",
-                                             parent=self)
+    material_exist_warning = msg.showwarning(title=Languages.english.get("warning_title"),
+                                             message=Languages.english.get("material_exist_warning"))
 
     return material_exist_warning
 
 
-def warning_material_specification(self):
+def warning_material_specification():
     """Warning for material specification"""
-    material_specification = msg.showwarning(title="Warning!", message="You cant add this specification of material.",
-                                             parent=self)
-
+    material_specification = msg.showwarning(title=Languages.english.get("warning_title"),
+                                             message=Languages.english.get("material_specification_warning"))
     return material_specification
 
 
 def warning_for_delete_material(frame1):
     """Message if you want to delete material from DB"""
-    delete_material_warning = msg.askyesno(title="Warning !", message="Are you sure"
-                                                                      " that you want delete this material ?",
+    delete_material_warning = msg.askyesno(title=Languages.english.get("warning_title"),
+                                           message=Languages.english.get("delete_material_warning"),
                                            parent=frame1)
 
     return delete_material_warning
@@ -104,7 +110,8 @@ def warning_for_delete_material(frame1):
 
 def warning_for_selecting_material(frame1):
     """Message if user not exist"""
-    select_material_warning = msg.showwarning(title="WARNING", message="Firstly you need select the material !",
+    select_material_warning = msg.showwarning(title=Languages.english.get("warning_title"),
+                                              message=Languages.english.get("select_material_warning"),
                                               parent=frame1)
 
     return select_material_warning

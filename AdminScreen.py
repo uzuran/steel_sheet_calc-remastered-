@@ -2,7 +2,7 @@ from tkinter import *
 import tkinter as tk
 from tkinter import ttk
 
-import Config
+import Components
 from CreateNewMaterial import CreateNewMaterial
 from ShowAllStMaterial import ShowAllStMaterial
 
@@ -20,13 +20,13 @@ class AdminScreen(tk.Toplevel):
         height = self.winfo_screenheight()
         self.geometry("%dx%d" % (width, height))
 
-        main_label = tk.Label(self, Config.admin_label_conf())
+        main_label = tk.Label(self, Components.admin_label_conf())
         main_label.pack()
 
         # Check who is login
-        Config.check_who_is_login(self, user_name_label_get)
+        Components.check_who_is_login(self, user_name_label_get)
 
-        create_new_material = tk.Button(self, Config.create_new_material_button())
+        create_new_material = tk.Button(self, Components.create_new_material_button())
         create_new_material["command"] = self.open_create_material_window
         create_new_material.pack()
 

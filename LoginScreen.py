@@ -1,7 +1,7 @@
 import tkinter as tk
 import hashlib
 
-import Config
+import Components
 import Connection
 from AdminScreen import AdminScreen
 
@@ -14,7 +14,7 @@ class LoginScreen(tk.Toplevel):
         self.geometry("350x450")
 
         # Main label.
-        login_label = tk.Label(self, Config.login_user_conf())
+        login_label = tk.Label(self, Components.login_user_conf())
         login_label.pack()
 
         self.user_name = tk.StringVar()
@@ -39,7 +39,7 @@ class LoginScreen(tk.Toplevel):
         empty_space.pack()
 
         # Login button.
-        login_user_button = tk.Button(self, Config.login_button())
+        login_user_button = tk.Button(self, Components.login_button())
         # Command for button
         login_user_button['command'] = self.login_verify
         # user_pass_entry bind for enter use.
@@ -58,13 +58,13 @@ class LoginScreen(tk.Toplevel):
         hashed = hashlib.md5(str.encode(password_get)).hexdigest()
         Connection.check_for_user_and_pass(user_name_label_get, hashed)
 
-        if Connection.my_cursor.fetchone():
+        if Connection.check_for_user_and_pass(user_name_label_get, hashed):
 
             # Open admin screen
             self.open_admin_screen(user_name_label_get)
 
         else:
-            Config.warning_msg_user_not_exist()
+            Components.warning_msg_user_not_exist()
 
     def open_admin_screen(self, user_name_get):
         window = AdminScreen(self, user_name_get)

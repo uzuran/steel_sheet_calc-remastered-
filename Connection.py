@@ -14,12 +14,14 @@ def check_for_user_and_pass(user_name_label_get, hashed):
             " AND userpass = '%s'" % (user_name_label_get, hashed)
 
     my_cursor.execute(query)
+    return my_cursor.fetchone()
 
 
 def check_if_user_exist_in_database(username_info):
     """ Check if user exist in database."""
     query = "SELECT * FROM login WHERE username = '%s'" % username_info
     my_cursor.execute(query)
+    return my_cursor.fetchone()
 
 
 def register_user_to_database(username_info, hashed):
@@ -34,6 +36,7 @@ def check_if_material_is_exist_in_database(get_material_id):
     """Check if material exist  in database"""
     query = "SELECT * FROM st_material WHERE id = '%s'" % get_material_id
     my_cursor.execute(query)
+    return my_cursor.fetchone()
 
 
 def add_material_to_database(get_material_id, get_thickness, get_x_size, get_y_size):
@@ -77,4 +80,8 @@ def update_material_in_storage(to_storage_var, set_selection):
     """Update material in storage."""
     query = "UPDATE st_material  SET in_storage = ? WHERE id = ?"
     my_cursor.execute(query, (to_storage_var, set_selection))
+
+
+def cursor_fetch_all():
+    return my_cursor.fetchall()
 
