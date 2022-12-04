@@ -2,6 +2,7 @@ from tkinter import messagebox as msg
 import tkinter as tk
 
 import Languages
+import Config
 
 
 # <<<Warnings!>>>
@@ -151,8 +152,8 @@ def delete_material_button():
 def main_button_conf_login():
     """"Button for login, config."""
     log_in = {"text": "Log in",
-                      "width": "30",
-                      "height": "2"
+                      "width": Config.main_button_width,
+                      "height": Config.main_button_height
               }
     return log_in
 
@@ -160,8 +161,8 @@ def main_button_conf_login():
 def main_button_conf_registration():
     """Button for registration config."""
     registration_new_user_button = {"text": "New user registration",
-                                    "width": "30",
-                                    "height": "2"
+                                    "width": Config.main_button_width,
+                                    "height": Config.main_button_height
                                     }
 
     return registration_new_user_button
@@ -171,8 +172,8 @@ def registration_button():
     """Button for registration config."""
     registration = {
         "text": "Create new user",
-        "width": "15",
-        "height": "2"
+        "width": Config.lr_button_width,
+        "height": Config.lr_button_height
     }
 
     return registration
@@ -181,8 +182,8 @@ def registration_button():
 def login_button():
     """Button for login config."""
     button_for_login = {"text": "Login",
-                        "width": "15",
-                        "height": "2",
+                        "width": Config.lr_button_width,
+                        "height": Config.lr_button_height
                         }
 
     return button_for_login
@@ -199,30 +200,30 @@ def create_new_material_button():
 def main_label_conf():
     """Configurate , text, background, width, height, font for main label."""
     label = {"text": "Please login, or register.",
-                     "bg": "#d1dffa",
-                     "width": "300",
-                     "height": "2",
-                     "font": "Calibri, 12"}
+                     "bg": Config.main_background,
+                     "width": Config.main_label_width,
+                     "height": Config.main_label_height,
+                     "font": Config.font}
     return label
 
 
 def registration_new_user_conf():
     """Configurate , text, background, width, height, font for registration user."""
-    label = {"text": "Please login, or register.",
-                     "bg": "#d1dffa",
-                     "width": "300",
-                     "height": "2",
-                     "font": "Calibri, 12"}
+    label = {"text": "Registration for new users.",
+                     "bg": Config.main_background,
+                     "width": Config.main_label_width,
+                     "height": Config.main_label_height,
+                     "font": Config.font}
     return label
 
 
 def login_user_conf():
     """Configurate , text, background, width, height, font for login user."""
-    label = {"text": "Please login, or register",
-                     "bg": "#d1dffa",
-                     "width": "300",
-                     "height": "2",
-                     "font": "Calibri, 13"}
+    label = {"text": "Please login, or register.",
+                     "bg": Config.main_background,
+                     "width": Config.main_label_width,
+                     "height": Config.main_label_height,
+                     "font": Config.font}
 
     return label
 
@@ -230,10 +231,10 @@ def login_user_conf():
 def admin_label_conf():
     """Configurate , text, background, width, height, font for admin screen."""
     label = {"text": "Steel sheet calculator",
-                    "bg": "#d1dffa",
-                    "width": "300",
-                    "height": "2",
-                    "font": "Calibri, 13"}
+                     "bg": Config.main_background,
+                     "width": Config.main_label_width,
+                     "height": Config.main_label_height,
+                     "font": Config.font}
 
     return label
 
@@ -241,17 +242,16 @@ def admin_label_conf():
 def create_new_material_label():
     """Configurate , text, background, width, height, font for create new material."""
     label = {"text": "Create new material.",
-             "bg": "#d1dffa",
-             "width": "300",
-             "height": "2",
-             "font": "Calibri, 12"
-             }
+             "bg": Config.main_background,
+             "width": Config.main_label_width,
+             "height": Config.main_label_height,
+             "font": Config.font}
 
     return label
 
 
 def option_for_labels():
-    option = {"padx": 5,
-              "pady": 5}
+    option = {"padx": Config.option_for_labels,
+              "pady": Config.option_for_labels}
 
     return option
