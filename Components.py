@@ -44,8 +44,8 @@ def check_who_is_login(self, user_name_label_get):
     self.who_is_log_in = user_name_label_get
     check_user = tk.Label(self,
                           text=str(self.who_is_log_in).capitalize() + Languages.english.get("check_who_is_login_label"),
-                          fg="green",
-                          font="Arial",
+                          fg=Config.green,
+                          font=Config.font,
 
                           )
     check_user.pack(anchor="e")

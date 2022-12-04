@@ -16,3 +16,6 @@ main_label_height = "2"
 
 # Option for labels
 option_for_labels = 5
+
+# Green colour
+green = "green"
