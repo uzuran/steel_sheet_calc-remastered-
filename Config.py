@@ -10,7 +10,7 @@ configuration["Font"] = "Calibri, 12"
 
 # Config for buttons at the beginning of program
 configuration["Main_button_width"] = "30"
-configuration["Main_button_height"] = "30"
+configuration["Main_button_height"] = "2"
 
 # Config for registration user_button, and login
 configuration["lr_button_width"] = "17"

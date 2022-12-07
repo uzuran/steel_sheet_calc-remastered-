@@ -62,8 +62,6 @@ with open('English.ini', 'w') as configfile:
   config.write(configfile)
 
 
-
-
 # <<<Languages>>>
 english = {"main_work_title": "Steel sheet calculator.",
            "main_label": "Please login or register",

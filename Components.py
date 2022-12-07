@@ -52,7 +52,8 @@ def warning_msg_for_add_mat_to_order(frame1, order_value):
 def check_who_is_login(self, user_name_label_get):
     self.who_is_log_in = user_name_label_get
     check_user = tk.Label(self,
-                          text=str(self.who_is_log_in).capitalize() + Languages.english.get("check_who_is_login_label"),
+                          text=str(self.who_is_log_in).capitalize() + ""
+                          + Languages.english.get("check_who_is_login_label"),
                           fg=default_conf["colour_green"],
                           font=default_conf["font"],
 
