@@ -1,13 +1,22 @@
 from tkinter import messagebox as msg
 import tkinter as tk
+from configparser import ConfigParser
+
 
 import Languages
 import Config
 
 
+# Read config.ini file
+config_object = ConfigParser()
+config_object.read("Config.ini")
+
+default_conf = config_object["DEFAULT"]
+
+
 # <<<Warnings!>>>
 def attribute_error_warning(frame1):
-    error = msg.showwarning(title=Languages.english.get("warning_title"),
+    error = msg.showwarning(title="warning_title",
                             message=Languages.english.get("select_material_warning"),
                             parent=frame1)
     return error
@@ -44,8 +53,8 @@ def check_who_is_login(self, user_name_label_get):
     self.who_is_log_in = user_name_label_get
     check_user = tk.Label(self,
                           text=str(self.who_is_log_in).capitalize() + Languages.english.get("check_who_is_login_label"),
-                          fg=Config.green,
-                          font=Config.font,
+                          fg=default_conf["colour_green"],
+                          font=default_conf["font"],
 
                           )
     check_user.pack(anchor="e")
@@ -152,8 +161,8 @@ def delete_material_button():
 def main_button_conf_login():
     """"Button for login, config."""
     log_in = {"text": "Log in",
-                      "width": Config.main_button_width,
-                      "height": Config.main_button_height
+              "width": default_conf["main_button_width"],
+              "height": default_conf["main_button_height"]
               }
     return log_in
 
@@ -161,8 +170,8 @@ def main_button_conf_login():
 def main_button_conf_registration():
     """Button for registration config."""
     registration_new_user_button = {"text": "New user registration",
-                                    "width": Config.main_button_width,
-                                    "height": Config.main_button_height
+                                    "width": default_conf["main_button_width"],
+                                    "height": default_conf["main_button_height"]
                                     }
 
     return registration_new_user_button
@@ -172,8 +181,8 @@ def registration_button():
     """Button for registration config."""
     registration = {
         "text": "Create new user",
-        "width": Config.lr_button_width,
-        "height": Config.lr_button_height
+        "width": default_conf["lr_button_width"],
+        "height": default_conf["lr_button_height"]
     }
 
     return registration
@@ -182,8 +191,8 @@ def registration_button():
 def login_button():
     """Button for login config."""
     button_for_login = {"text": "Login",
-                        "width": Config.lr_button_width,
-                        "height": Config.lr_button_height
+                        "width": default_conf["lr_button_width"],
+                        "height": default_conf["lr_button_height"]
                         }
 
     return button_for_login
@@ -200,41 +209,41 @@ def create_new_material_button():
 def main_label_conf():
     """Configurate , text, background, width, height, font for main label."""
     label = {"text": "Please login, or register.",
-                     "bg": Config.main_background,
-                     "width": Config.main_label_width,
-                     "height": Config.main_label_height,
-                     "font": Config.font}
+             "bg": default_conf["main_background"],
+             "width": default_conf["main_label_width"],
+             "height": default_conf["main_label_height"],
+             "font": default_conf["font"]}
     return label
 
 
 def registration_new_user_conf():
     """Configurate , text, background, width, height, font for registration user."""
     label = {"text": "Registration for new users.",
-                     "bg": Config.main_background,
-                     "width": Config.main_label_width,
-                     "height": Config.main_label_height,
-                     "font": Config.font}
+             "bg": default_conf["main_background"],
+             "width": default_conf["main_label_width"],
+             "height": default_conf["main_label_height"],
+             "font": default_conf["font"]}
     return label
 
 
 def login_user_conf():
     """Configurate , text, background, width, height, font for login user."""
     label = {"text": "Please login, or register.",
-                     "bg": Config.main_background,
-                     "width": Config.main_label_width,
-                     "height": Config.main_label_height,
-                     "font": Config.font}
+             "bg": default_conf["main_background"],
+             "width": default_conf["main_label_width"],
+             "height": default_conf["main_label_height"],
+             "font": default_conf["font"]}
 
     return label
 
 
 def admin_label_conf():
     """Configurate , text, background, width, height, font for admin screen."""
-    label = {"text": "Steel sheet calculator",
-                     "bg": Config.main_background,
-                     "width": Config.main_label_width,
-                     "height": Config.main_label_height,
-                     "font": Config.font}
+    label = {"text": "Steel sheet calculator.",
+             "bg":  default_conf["main_background"],
+             "width": default_conf["main_label_width"],
+             "height": default_conf["main_label_height"],
+             "font": default_conf["font"]}
 
     return label
 
@@ -242,10 +251,10 @@ def admin_label_conf():
 def create_new_material_label():
     """Configurate , text, background, width, height, font for create new material."""
     label = {"text": "Create new material.",
-             "bg": Config.main_background,
-             "width": Config.main_label_width,
-             "height": Config.main_label_height,
-             "font": Config.font}
+             "bg":  default_conf["main_background"],
+             "width": default_conf["main_label_width"],
+             "height": default_conf["main_label_height"],
+             "font": default_conf["font"]}
 
     return label
 
