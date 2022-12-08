@@ -13,7 +13,6 @@ configuration["main_label"] = "Please login or register"
 configuration["username_label"] = "Username"
 configuration["password_label"] = "Password"
 configuration["main_work_screen_label"] = "Steel sheet calculator."
-configuration["main_work_screen_label"] = "Password"
 configuration["check_who_is_login_label"] = "is log in now."
 
 # Buttons
@@ -46,20 +45,16 @@ configuration["treeview_write_off"] = "Write off"
 
 # Warnings
 configuration["warning_title"] = "Warning!"
-configuration["select_material_warning"] = "Firstly you need select the material!"
+configuration["select_material_warning"] = "Firstly you need to select the material!"
 configuration["add_mater_to_storage_warning"] = "Do you really want add this count of materia?"
 configuration["only_numbers_warning"] = "You need add only numbers into entry!"
 configuration["user_exist_warning"] = "User exist!"
-configuration["registration_warning"] = "You can not have a numbers, or blank line in name!"
+configuration["registration_warning"] = "User name cant be empty or contain digit!"
 configuration["registration_success"] = "Registration success."
-configuration["user_not_exist_warning"] = "User not exist!"
+configuration["user_not_exist_warning"] = "User dose not exist!"
 configuration["material_exist_warning"] = "This material already exist!"
 configuration["material_specification_warning"] = "You cant` add this specification of material"
 configuration["delete_material_warning"] = "Are you sure that you want delete this material ?"
-
-with open('English.ini', 'w') as configfile:
-
-  config.write(configfile)
 
 
 # <<<Languages>>>

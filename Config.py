@@ -1,12 +1,18 @@
-import configparser
+from configparser import ConfigParser
+
+# Read config.ini file
+config_object = ConfigParser()
+config_object.read("Config.ini")
+conf = config_object["DEFAULT"]
 
 # Basic configuration configparser
-config = configparser.ConfigParser()
+config = ConfigParser()
 config["DEFAULT"] = {}
 configuration = config["DEFAULT"]
 
 # Font for all strings.
 configuration["Font"] = "Calibri, 12"
+configuration["Font_size"] = "12"
 
 # Config for buttons at the beginning of program
 configuration["Main_button_width"] = "30"
@@ -29,8 +35,6 @@ configuration["option_for_labels"] = "5"
 option_for_labels = 5
 
 configuration["Colour_green"] = "green"
-
-print(configuration)
 
 
 
