@@ -3,13 +3,6 @@ import tkinter as tk
 import Components
 from LoginScreen import LoginScreen
 from RegisterUserScreen import RegisterUserScreen
-from configparser import ConfigParser
-
-# Read config.ini file
-config_object = ConfigParser()
-config_object.read("Config.ini")
-
-default_conf = config_object["DEFAULT"]
 
 
 class App(tk.Tk):
