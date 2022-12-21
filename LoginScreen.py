@@ -4,13 +4,14 @@ import hashlib
 import Components
 import Connection
 from AdminScreen import AdminScreen
+import Languages
 
 
 class LoginScreen(tk.Toplevel):
     def __init__(self, child):
         super().__init__(child)
 
-        self.title("Please login!")
+        self.title(Languages.current_lang["login_title"])
         self.geometry("350x450")
 
         # Main label.
@@ -21,7 +22,7 @@ class LoginScreen(tk.Toplevel):
         self.user_pass_verify = tk.StringVar()
 
         # Username label
-        tk.Label(self, text="Username").pack()
+        tk.Label(self, text=Languages.current_lang["username_label"]).pack()
 
         # Username entry.
         self.user_name_entry = tk.Entry(self, textvariable=self.user_name)
@@ -29,7 +30,7 @@ class LoginScreen(tk.Toplevel):
 
         # Blank line.
         tk.Label(self, text="").pack()
-        tk.Label(self, text="Password").pack()
+        tk.Label(self, text=Languages.current_lang["password_label"]).pack()
 
         # User pass entry.
         self.user_pass_entry = tk.Entry(self, textvariable=self.user_pass_verify, show="*")

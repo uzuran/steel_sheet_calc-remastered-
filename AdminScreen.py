@@ -5,17 +5,17 @@ from tkinter import ttk
 import Components
 from CreateNewMaterial import CreateNewMaterial
 from ShowAllStMaterial import ShowAllStMaterial
+import Languages
 
 
 class AdminScreen(tk.Toplevel):
 
     def __init__(self, child, user_name_label_get):
         super().__init__(child)
-        self.title("Steel sheet calculator.")
         # setting tkinter window size
         self.child = child
         self.geometry("1000x600")
-        self.title("Steel sheet calculator.")
+        self.title(Languages.conf_lang["main_work_label"])
         width = self.winfo_screenwidth()
         height = self.winfo_screenheight()
         self.geometry("%dx%d" % (width, height))
@@ -34,22 +34,18 @@ class AdminScreen(tk.Toplevel):
         notebook = ttk.Notebook(self)
         notebook.pack()
 
-        # Add frame options.
-        frame_options = {"width": "500",
-                         "height": "400"}
-
-        frame1 = Frame(notebook, **frame_options)
-        frame2 = Frame(notebook, **frame_options)
-        frame3 = Frame(notebook, **frame_options)
-        frame4 = Frame(notebook, **frame_options)
-        frame5 = Frame(notebook, **frame_options)
+        frame1 = Frame(notebook, Components.option_for_size_frame())
+        frame2 = Frame(notebook, Components.option_for_size_frame())
+        frame3 = Frame(notebook, Components.option_for_size_frame())
+        frame4 = Frame(notebook, Components.option_for_size_frame())
+        frame5 = Frame(notebook, Components.option_for_size_frame())
 
         # Add notebook on screen.
-        notebook.add(frame1, text="Steel material")
-        notebook.add(frame2, text="Aluminium material")
-        notebook.add(frame3, text="Stainless steel material")
-        notebook.add(frame4, text="Special material")
-        notebook.add(frame5, text="Write off")
+        notebook.add(frame1, text=Languages.current_lang["frame1"])
+        notebook.add(frame2, text=Languages.current_lang["frame2"])
+        notebook.add(frame3, text=Languages.current_lang["frame3"])
+        notebook.add(frame4, text=Languages.current_lang["frame4"])
+        notebook.add(frame5, text=Languages.current_lang["frame5"])
 
         ShowAllStMaterial(frame1)
 

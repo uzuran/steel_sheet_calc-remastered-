@@ -3,6 +3,7 @@ import hashlib
 
 import Connection
 import Components
+import Languages
 
 
 class RegisterUserScreen(tk.Toplevel):
@@ -21,7 +22,7 @@ class RegisterUserScreen(tk.Toplevel):
         register_label.pack()
 
         # User name label.
-        user_name_label = tk.Label(self, text="Username")
+        user_name_label = tk.Label(self, text=Languages.current_lang["username_label"])
         user_name_label.pack()
 
         # Username entry.
@@ -29,7 +30,7 @@ class RegisterUserScreen(tk.Toplevel):
         self.user_name_entry.pack()
 
         # Password label.
-        pass_label = tk.Label(self, text="Password")
+        pass_label = tk.Label(self, text=Languages.current_lang["password_label"])
         pass_label.pack()
 
         # User password entry.

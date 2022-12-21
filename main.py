@@ -3,6 +3,7 @@ import tkinter as tk
 import Components
 from LoginScreen import LoginScreen
 from RegisterUserScreen import RegisterUserScreen
+import Languages
 
 
 class App(tk.Tk):
@@ -10,7 +11,7 @@ class App(tk.Tk):
         super().__init__()
 
     # Configure the root window.
-        self.title("Steel sheet calculator.")
+        self.title(Languages.conf_lang["main_work_label"])
         self.geometry("350x200")
         self.eval("tk::PlaceWindow . center")
 
