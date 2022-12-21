@@ -4,6 +4,7 @@ import tkinter as tk
 
 import Connection
 import Components
+import Languages
 
 
 class ShowAllStMaterial:
@@ -15,7 +16,7 @@ class ShowAllStMaterial:
         Connection.select_all_material()
         my_result = Connection.cursor_fetch_all()
 
-        wraper1 = tk.LabelFrame(frame1, text="Steel material")
+        wraper1 = tk.LabelFrame(frame1, text=Languages.current_lang["frame1"])
         wraper1.pack(fill="both", expand=1)
 
         # SCROLL BAR
@@ -43,13 +44,13 @@ class ShowAllStMaterial:
 
         # Headings.
         # Headings.
-        my_tree.heading("1", text="Id:")
-        my_tree.heading("2", text="Thickness:")
-        my_tree.heading("3", text="X size:")
-        my_tree.heading("4", text="Y size:")
-        my_tree.heading("5", text="In storage:")
-        my_tree.heading("6", text="Ordered:")
-        my_tree.heading("7", text="Write off:")
+        my_tree.heading("1", text=Languages.current_lang["treeview_id"])
+        my_tree.heading("2", text=Languages.current_lang["treeview_thickness"])
+        my_tree.heading("3", text=Languages.current_lang["treeview_x"])
+        my_tree.heading("4", text=Languages.current_lang["treeview_y"])
+        my_tree.heading("5", text=Languages.current_lang["treeview_in_storage"])
+        my_tree.heading("6", text=Languages.current_lang["treeview_order"])
+        my_tree.heading("7", text=Languages.current_lang["treeview_write_off"])
         for dt in my_result:
             my_tree.insert("", 'end', iid=dt[0], text=dt[0],
                            values=(dt[0], dt[1], dt[2], dt[3], dt[4], dt[5], dt[6]))
