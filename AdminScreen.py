@@ -15,7 +15,7 @@ class AdminScreen(tk.Toplevel):
         # setting tkinter window size
         self.child = child
         self.geometry("1000x600")
-        self.title(Languages.conf_lang["main_work_label"])
+        self.title(Languages.current_lang["main_work_label"])
         width = self.winfo_screenwidth()
         height = self.winfo_screenheight()
         self.geometry("%dx%d" % (width, height))
