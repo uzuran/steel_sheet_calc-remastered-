@@ -18,6 +18,6 @@ class OpenWindowSettings(tk.Toplevel):
 
         self.drop = ttk.Combobox(self, )
         self.drop.pack(side="top")
-
+        # Button for save options
         self.save_button = tk.Button(self, text=Languages.current_lang["save_button"])
         self.save_button.pack(pady=10)
