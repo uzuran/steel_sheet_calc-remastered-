@@ -1,9 +1,11 @@
 import tkinter as tk
 
+
 import Components
 from LoginScreen import LoginScreen
 from RegisterUserScreen import RegisterUserScreen
 import Languages
+from OptionScreen import OpenWindowSettings
 
 
 class App(tk.Tk):
@@ -19,6 +21,12 @@ class App(tk.Tk):
         self.enter_label = tk.Label(self, Components.main_label_conf())
         self.enter_label.pack(Components.option_for_labels())
         self.attributes()
+
+        # Setting button.
+        self.setting_button = tk.PhotoImage(file="img/settings-icon.png")
+        self.button_for_setting = tk.Button(self, image=self.setting_button, borderwidth=0)
+        self.button_for_setting.pack(anchor="e", padx=20)
+        self.button_for_setting["command"] = self.open_window_for_settings
 
         # Log in button.
         self.log_in_button = tk.Button(self, Components.main_button_conf_login())
@@ -44,6 +52,14 @@ class App(tk.Tk):
     # Open window for users registration.
     def open_register_user_screen(self):
         window = RegisterUserScreen(self)
+        window.grab_set()
+        window.lift()
+        window.focus_force()
+        window.grab_release()
+
+    # Open window for users registration.
+    def open_window_for_settings(self):
+        window = OpenWindowSettings(self)
         window.grab_set()
         window.lift()
         window.focus_force()
