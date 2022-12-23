@@ -16,7 +16,10 @@ class OpenWindowSettings(tk.Toplevel):
         drop_down_label = tk.Label(self, text=Languages.current_lang["choice_your_lang"])
         drop_down_label.pack(side="top")
 
-        self.drop = ttk.Combobox(self, )
+        self.languages = ["English", "Czech"]
+
+        self.drop = ttk.Combobox(self, values=self.languages)
+        self.drop.current(0)
         self.drop.pack(side="top")
         # Button for save options
         self.save_button = tk.Button(self, text=Languages.current_lang["save_button"])
