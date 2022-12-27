@@ -22,7 +22,6 @@ class App(tk.Tk):
         # Enter label.
         self.enter_label = tk.Label(self, Components.main_label_conf())
         self.enter_label.pack(Components.option_for_labels())
-        self.attributes()
 
         # Setting button.
         self.setting_button = tk.PhotoImage(file="img/settings-icon.png")
@@ -42,12 +41,13 @@ class App(tk.Tk):
         self.register_button['command'] = self.open_register_user_screen
         self.register_button.pack(Components.option_for_labels())
 
-    # Function for refresh labels and buttons
-    def refresh(self):
-        all_frames = [f for f in self.children]
-        for f_name in all_frames:
-            self.nametowidget(f_name).destroy()
-        self.put_all()
+    # # Function for refresh labels and buttons.
+    # def refresh(self):
+    #     widgets = [f for f in self.children]
+    #     for f_name in widgets:
+    #         self.nametowidget(f_name).destroy()
+    #     Languages.change_language("")
+    #     self.put_all()
 
     # Open login screen window function.
     def open_login_window(self):
@@ -66,7 +66,7 @@ class App(tk.Tk):
         window.focus_force()
         window.grab_release()
 
-    # Open window for users registration.
+    # Open window for users settings.
     def open_window_for_settings(self):
         window = OpenWindowSettings(self)
         window.grab_set()
@@ -78,5 +78,6 @@ class App(tk.Tk):
 if __name__ == "__main__":
     app = App()
     app.mainloop()
+
 
 

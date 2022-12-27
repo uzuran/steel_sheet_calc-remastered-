@@ -1,11 +1,17 @@
 import tkinter as tk
 from tkinter import ttk
 
-
+from Config import set_config
 import Languages
 
 
 class OpenWindowSettings(tk.Toplevel):
+    languages = {0: "english",
+                 1: "czech"}
+
+    def save(self, value):
+        Languages.change_language(self.languages[value])
+
     def __init__(self, child):
         super().__init__(child)
 
@@ -23,7 +29,7 @@ class OpenWindowSettings(tk.Toplevel):
         drop.pack(side="top")
 
         # Button for save options
-        self.save_button = tk.Button(self, text=Languages.current_lang["save_button"],
-                                     command=Languages.change_language())
+        self.save_button = tk.Button(self, text=Languages.current_lang["save_button"])
+        self.save_button["command"] = lambda: [self.save(drop.current())]
         self.save_button.pack(pady=10)
 
