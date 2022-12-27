@@ -13,10 +13,12 @@ class App(tk.Tk):
         super().__init__()
 
     # Configure the root window.
-        self.title(Languages.conf_lang["main_work_label"])
         self.geometry("350x200")
         self.eval("tk::PlaceWindow . center")
+        self.put_all()
 
+    def put_all(self):
+        self.title(Languages.conf_lang["main_work_label"])
         # Enter label.
         self.enter_label = tk.Label(self, Components.main_label_conf())
         self.enter_label.pack(Components.option_for_labels())
@@ -39,6 +41,13 @@ class App(tk.Tk):
         # Command for button
         self.register_button['command'] = self.open_register_user_screen
         self.register_button.pack(Components.option_for_labels())
+
+    # Function for refresh labels and buttons
+    def refresh(self):
+        all_frames = [f for f in self.children]
+        for f_name in all_frames:
+            self.nametowidget(f_name).destroy()
+        self.put_all()
 
     # Open login screen window function.
     def open_login_window(self):
