@@ -1,16 +1,15 @@
 import tkinter as tk
 from tkinter import ttk
-
-from Config import set_config
 import Languages
 
 
 class OpenWindowSettings(tk.Toplevel):
-    languages = {0: "english",
-                 1: "czech"}
+
+    lang = {0: "english",
+            1: "czech"}
 
     def save(self, value):
-        Languages.change_language(self.languages[value])
+        Languages.change_language(self.lang[value])
 
     def __init__(self, child):
         super().__init__(child)
@@ -19,12 +18,12 @@ class OpenWindowSettings(tk.Toplevel):
         self.title(Languages.current_lang["settings_title"])
 
         # Dropdown menu for options
-        self.drop_down_label = tk.Label(self, text=Languages.current_lang["choice_your_lang"])
+        self.drop_down_label = tk.Label(self)
+        self.drop_down_label["text"] = Languages.current_lang["choice_your_lang"]
         self.drop_down_label.pack(side="top")
+        self.languages = [Languages.current_lang["language_en"], Languages.current_lang["language_cz"]]
 
-        self.languages = ["English", "Czech"]
-
-        drop = ttk.Combobox(self, values=self.languages)
+        drop = ttk.Combobox(self, values=self.languages, state="readonly")
         drop.current(0)
         drop.pack(side="top")
 

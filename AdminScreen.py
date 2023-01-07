@@ -51,11 +51,12 @@ class AdminScreen(tk.Toplevel):
 
     # Function for create material in new window.
     def open_create_material_window(self):
-        window = CreateNewMaterial(self)
-        window.grab_set()
-        window.lift()
-        window.focus_force()
-        window.grab_release()
+        if not any(isinstance(x, tk.Toplevel) for x in self.winfo_children()):
+            window = CreateNewMaterial(self)
+            window.grab_set()
+            window.lift()
+            window.focus_force()
+            window.grab_release()
 
 
 

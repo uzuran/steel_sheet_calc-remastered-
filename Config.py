@@ -9,6 +9,8 @@ conf = config_object["DEFAULT"]
 def set_config(key, value):
     config_object.set("DEFAULT", key, value)
 
+    # config_object.write(value)
+
 
 def get_config(key):
     return config_object.get("DEFAULT", key)

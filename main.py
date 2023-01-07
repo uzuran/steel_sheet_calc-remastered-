@@ -11,7 +11,6 @@ from OptionScreen import OpenWindowSettings
 class App(tk.Tk):
     def __init__(self):
         super().__init__()
-
     # Configure the root window.
         self.geometry("350x200")
         self.eval("tk::PlaceWindow . center")
@@ -41,38 +40,42 @@ class App(tk.Tk):
         self.register_button['command'] = self.open_register_user_screen
         self.register_button.pack(Components.option_for_labels())
 
-    # # Function for refresh labels and buttons.
-    # def refresh(self):
-    #     widgets = [f for f in self.children]
-    #     for f_name in widgets:
-    #         self.nametowidget(f_name).destroy()
-    #     Languages.change_language("")
-    #     self.put_all()
+    # Function for refresh labels and buttons.
+    def refresh(self, master):
+        widgets = [x for x in self.children]
+        for f_name in widgets:
+            self.nametowidget(f_name).destroy()
+
+        self.put_all()
 
     # Open login screen window function.
     def open_login_window(self):
-        window = LoginScreen(self)
-        window.grab_set()
-        window.lift()
-        window.focus_force()
-        window.grab_release()
-        self.wm_state('iconic')
+        if not any(isinstance(x, tk.Toplevel) for x in self.winfo_children()):
+            window = LoginScreen(self)
+            window.grab_set()
+            window.lift()
+            window.focus_force()
+            window.grab_release()
+            self.wm_state('iconic')
 
     # Open window for users registration.
     def open_register_user_screen(self):
-        window = RegisterUserScreen(self)
-        window.grab_set()
-        window.lift()
-        window.focus_force()
-        window.grab_release()
+        if not any(isinstance(x, tk.Toplevel) for x in self.winfo_children()):
+            window = RegisterUserScreen(self)
+            window.grab_set()
+            window.lift()
+            window.focus_force()
+            window.grab_release()
 
     # Open window for users settings.
     def open_window_for_settings(self):
-        window = OpenWindowSettings(self)
-        window.grab_set()
-        window.lift()
-        window.focus_force()
-        window.grab_release()
+
+        if not any(isinstance(x, tk.Toplevel) for x in self.winfo_children()):
+            window = OpenWindowSettings(self)
+            window.grab_set()
+            window.lift()
+            window.focus_force()
+            window.grab_release()
 
 
 if __name__ == "__main__":
