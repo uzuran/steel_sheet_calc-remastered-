@@ -41,7 +41,7 @@ class App(tk.Tk):
         self.register_button.pack(Components.option_for_labels())
 
     # Function for refresh labels and buttons.
-    def refresh(self, master):
+    def refresh(self):
         widgets = [x for x in self.children]
         for f_name in widgets:
             self.nametowidget(f_name).destroy()
@@ -51,31 +51,18 @@ class App(tk.Tk):
     # Open login screen window function.
     def open_login_window(self):
         if not any(isinstance(x, tk.Toplevel) for x in self.winfo_children()):
-            window = LoginScreen(self)
-            window.grab_set()
-            window.lift()
-            window.focus_force()
-            window.grab_release()
-            self.wm_state('iconic')
+            LoginScreen(self)
 
     # Open window for users registration.
     def open_register_user_screen(self):
         if not any(isinstance(x, tk.Toplevel) for x in self.winfo_children()):
-            window = RegisterUserScreen(self)
-            window.grab_set()
-            window.lift()
-            window.focus_force()
-            window.grab_release()
+            RegisterUserScreen(self)
 
     # Open window for users settings.
     def open_window_for_settings(self):
 
         if not any(isinstance(x, tk.Toplevel) for x in self.winfo_children()):
-            window = OpenWindowSettings(self)
-            window.grab_set()
-            window.lift()
-            window.focus_force()
-            window.grab_release()
+            OpenWindowSettings(self)
 
 
 if __name__ == "__main__":
