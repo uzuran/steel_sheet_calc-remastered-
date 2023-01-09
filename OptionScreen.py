@@ -5,11 +5,8 @@ import Languages
 
 class OpenWindowSettings(tk.Toplevel):
 
-    lang = {0: "english",
-            1: "czech"}
-
     def save(self, value):
-        Languages.change_language(self.lang[value])
+        Languages.change_language(Languages.lang[value])
 
     def __init__(self, parent):
         super().__init__(parent)

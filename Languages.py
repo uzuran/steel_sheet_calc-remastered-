@@ -13,6 +13,9 @@ current_lang = {}
 
 current_lang.update(conf_lang)
 
+lang = {0: "english",
+        1: "czech"}
+
 
 def change_language(lang):
     current_lang.clear()
