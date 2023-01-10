@@ -263,3 +263,5 @@ def option_for_size_frame():
                      "height": conf["frame_height"]}
 
     return frame_options
+
+
