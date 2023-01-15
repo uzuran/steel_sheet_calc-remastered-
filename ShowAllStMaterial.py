@@ -85,6 +85,7 @@ class ShowAllStMaterial:
 
                 else:
                     return True
+
         id_variable = tk.StringVar()
 
         def update(rows):
@@ -224,6 +225,45 @@ class ShowAllStMaterial:
             else:
                 return True
 
+        def minus_material_btn_press():
+            update_write_off()
+
+        def plus_material_btn_press():
+            update_write_off(del_from_storage=False)
+
+        def update_write_off(del_from_storage=True):
+            """
+            Change write_off for each selected material. Remove from storage if del_from_storage=True,
+            else remove from write_off and add to storage.
+            """
+            # TODO - all values taken from class should be given as params: write_off_change, spin_box
+            write_off_change = int(spin_box.get()) if spin_box.get() else 0
+
+            # Selected materials from treeview
+            # TODO fix bug: cant get selection on second and next calls
+            material_ids = my_tree.selection()
+            # material_ids = my_tree.item(my_tree.focus())['text']
+
+            for material_id in material_ids:
+                material = list(Connection.select_material(material_id))
+                if material:
+                    in_storage = material[4] if material[4] else 0
+                    write_off = material[6] if material[6] else 0
+                else:
+                    continue
+
+                if in_storage - write_off_change < 0:
+                    # TODO notify user that requested write_off is bigger than available in storage
+                    continue
+                else:
+                    material[4] = in_storage - write_off_change if del_from_storage else in_storage + write_off_change
+                    material[6] = write_off_change if del_from_storage else write_off - write_off_change
+                    if material[6] < 0:
+                        material[6] = 0
+                    Connection.update_material(material)
+                spin_box.delete(0, END)
+                clear()
+
         # Bind spinbox for enter using.
         spin_box_storage.bind("<Return>", add_to_storage)
 
@@ -233,29 +273,41 @@ class ShowAllStMaterial:
         add_to_storage_material_button.pack(side=LEFT)
 
         plus_material_button = Button(frame1, text="+")
+        plus_material_button["command"] = plus_material_btn_press
         plus_material_button.pack(side=LEFT, ipadx=10)
 
         # Spinbox order.
         plus_minus = IntVar()
 
-        #def write_off_from_storage():
+        # def write_off_from_storage():
         #    var = plus_minus.get()
         #    query = "SELECT in_storage, concat(in_storage - '%"+var_str+"%') AS write_off \
         #             FROM st_material"
-            # Execute the query
+        # Execute the query
         #    my_cursor.execute(query)
         #    clear()
-
+        validator = (frame1.register(self.is_number), '%s', '%S')
         spin_box = ttk.Spinbox(
-            frame1,
+            master=frame1,
+            name='write_off_spin_box',
             textvariable=plus_minus,
             from_=0,
             to=200,
             width=3,
+            validate='all',
+            validatecommand=validator
 
         )
         spin_box.pack(side=LEFT, padx=5, ipady=1)
 
         minus_material_button = Button(frame1, text="-")
+        minus_material_button["command"] = minus_material_btn_press
         minus_material_button.pack(side=LEFT, ipadx=10)
 
+    def is_number(self, s, S):
+        # disallow anything but numbers
+        valid = S.isdigit()
+        if not valid:
+            pass
+            # TODO notify user that only numbers is allowed
+        return valid

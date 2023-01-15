@@ -11,7 +11,7 @@ from OptionScreen import OpenWindowSettings
 class App(tk.Tk):
     def __init__(self):
         super().__init__()
-    # Configure the root window.
+        # Configure the root window.
         self.geometry("350x200")
         self.eval("tk::PlaceWindow . center")
         self.put_all()
