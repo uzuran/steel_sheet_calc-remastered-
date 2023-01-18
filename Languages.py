@@ -17,10 +17,8 @@ lang = {0: "english",
         1: "czech"}
 
 
-def change_language(lang):
+def change_language(language):
     current_lang.clear()
-    config_object = ConfigParser()
-    config_object.read(f"{lang}.ini", encoding="UTF-8")
-    conf_lang = config_object["DEFAULT"]
+    config_object.read(f"{language}.ini", encoding="UTF-8")
     current_lang.update(conf_lang)
-    set_config("language", lang)
+    set_config("language", language)

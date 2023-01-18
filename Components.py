@@ -6,6 +6,8 @@ from Config import *
 
 
 # <<<Warnings!>>>
+
+
 def attribute_error_warning(frame1):
     error = msg.showwarning(title=Languages.current_lang["warning_title"],
                             message=Languages.current_lang["select_material_warning"],
@@ -14,7 +16,7 @@ def attribute_error_warning(frame1):
 
 
 def warning_msg_for_add_material_to_storage(frame1, to_storage_var):
-    warning = msg.askyesno(title=Languages.current_lang("warning_title"),
+    warning = msg.askyesno(title=Languages.current_lang["warning_title"],
                            message=f"Dou you really "
                                    f"want add this {to_storage_var} count "
                                    f"of material ?",
