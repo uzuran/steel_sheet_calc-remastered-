@@ -116,7 +116,6 @@ class CreateNewMaterial(tk.Toplevel):
         else:
             Components.warning_material_specification()
 
-
     def info_material_registration(self):
         info = msg.showinfo(title=Languages.current_lang["warning_title"],
                             message=Languages.current_lang["info_warning"],
