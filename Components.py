@@ -15,7 +15,7 @@ def attribute_error_warning(frame1):
 
 def only_numbers_is_allowed_warning(frame1):
     only_numbers_is_allowed = msg.showwarning(title=Languages.current_lang["warning_title"],
-                                              message=Languages.current_lang["select_material_warning"],
+                                              message=Languages.current_lang["only_numbers_warning"],
                                               parent=frame1)
     return only_numbers_is_allowed
 

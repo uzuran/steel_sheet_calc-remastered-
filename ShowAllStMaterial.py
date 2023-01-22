@@ -11,6 +11,7 @@ class ShowAllStMaterial:
 
     def __init__(self, frame1):
         super().__init__()
+        self.frame1 = frame1
 
         # Select all material from database.
         Connection.select_all_material()
@@ -232,13 +233,23 @@ class ShowAllStMaterial:
             update_write_off(del_from_storage=False)
 
         def update_write_off(del_from_storage=True):
+
             """
             Change write_off for each selected material. Remove from storage if del_from_storage=True,
             else remove from write_off and add to storage.
             """
             # TODO - all values taken from class should be given as params: write_off_change, spin_box
 
+            write_off_value = self.write_off.get()
+            if write_off_value.isalpha():
+                Components.tk_tlc_error_msg(frame1)
+
             write_off_change = int(spin_box.get()) if spin_box.get() else 0
+
+            # if spin_box.get():
+            #     write_off_change = int(spin_box.get())
+            # else:
+            #     write_off_change = 0
 
             # Selected materials from treeview
             for selection in my_tree.selection():
@@ -275,15 +286,18 @@ class ShowAllStMaterial:
         plus_material_button["command"] = plus_material_btn_press
         plus_material_button.pack(side=LEFT, ipadx=10)
 
-        validator = (frame1.register(self.is_number), '%s', '%S')
+
+        self.write_off = tk.StringVar()
+
         spin_box = ttk.Spinbox(
             master=frame1,
-            name='write_off_spin_box',
+            textvariable=self.write_off,
             from_=0,
             to=200,
             width=3,
             validate='all',
-            validatecommand=validator
+
+
 
         )
         spin_box.pack(side=LEFT, padx=5, ipady=1)
@@ -292,12 +306,4 @@ class ShowAllStMaterial:
         minus_material_button["command"] = minus_material_btn_press
         minus_material_button.pack(side=LEFT, ipadx=10)
 
-    def is_number(self, S):
-        # disallow anything but numbers
-        valid = S.isdigit()
-        if not valid:
 
-            print("WARNING!")
-            pass
-            # TODO notify user that only numbers is allowed
-        return valid
