@@ -104,8 +104,8 @@ class CreateNewMaterial(tk.Toplevel):
         if Connection.check_if_material_is_exist_in_database(get_material_id):
             Components.warning_material_is_exist_msg()
 
-        elif get_material_type == "st" and get_thickness != ""\
-                and get_x_size.isdigit()\
+        elif get_material_type == "st" and get_thickness != "" \
+                and get_x_size.isdigit() \
                 and get_y_size.isdigit():
 
             # If condition complete add material in to database.

@@ -15,6 +15,21 @@ def attribute_error_warning(frame1):
     return error
 
 
+def only_numbers_is_allowed_warning(frame1):
+    only_numbers_is_allowed = msg.showwarning(title=Languages.current_lang["warning_title"],
+                                              message=Languages.current_lang["only_numbers_warning"],
+                                              parent=frame1)
+    return only_numbers_is_allowed
+
+
+def warning_message_write_off_is_bigger_then_mat_in_storage(frame1):
+    write_off_warning = msg.showwarning(title=Languages.current_lang["warning_title"],
+                                        message=Languages.current_lang["warning_message_write_off_is_"
+                                                                       "bigger_then_mat_in_storage"],
+                                        parent=frame1)
+    return write_off_warning
+
+
 def warning_msg_for_add_material_to_storage(frame1, to_storage_var):
     warning = msg.askyesno(title=Languages.current_lang["warning_title"],
                            message=f"Dou you really "

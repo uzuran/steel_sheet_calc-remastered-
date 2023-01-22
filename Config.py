@@ -1,6 +1,5 @@
 from configparser import ConfigParser
 
-
 # Read config.ini file
 config_object = ConfigParser()
 config_object.read("Config.ini")
@@ -15,6 +14,3 @@ def set_config(key, value):
 
 def get_config(key):
     return config_object.get("DEFAULT", key)
-
-
-
