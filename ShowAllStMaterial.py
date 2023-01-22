@@ -241,9 +241,11 @@ class ShowAllStMaterial:
             # TODO - all values taken from class should be given as params: write_off_change, spin_box
 
             try:
-                write_off_change = int(spin_box.get()) if spin_box.get() else 0
+                int(spin_box.get()) if spin_box.get() else 0
             except ValueError:
                 Components.tk_tlc_error_msg(frame1)
+
+            write_off_change = int(spin_box.get()) if spin_box.get() else 0
             # if spin_box.get():
             #     write_off_change = int(spin_box.get())
             # else:
