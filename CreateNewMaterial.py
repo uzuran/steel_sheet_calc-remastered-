@@ -1,5 +1,6 @@
 from tkinter import *
 import tkinter as tk
+from tkinter import messagebox as msg
 
 import Components
 import Connection
@@ -11,7 +12,7 @@ class CreateNewMaterial(tk.Toplevel):
         super().__init__(child)
 
         self.geometry("350x450")
-        self.title(Languages.current_lang["user_create_button"])
+        self.title(Languages.current_lang["create_new_material_title"])
 
         # String variables for material entry
         self.material_type = StringVar()
@@ -23,6 +24,12 @@ class CreateNewMaterial(tk.Toplevel):
         # Register new material window label.
         create_material_label = tk.Label(self, Components.create_new_material_label())
         create_material_label.pack()
+
+        # Info material button.
+        self.info_button = tk.PhotoImage(file="img/question.png")
+        self.button_for_info = tk.Button(self, image=self.info_button, borderwidth=0)
+        self.button_for_info.pack(side="top")
+        self.button_for_info["command"] = self.info_material_registration
 
         # Basic information about registered material.
         type_material = tk.Label(self, text=Languages.current_lang["type_of_material_label"])
@@ -82,9 +89,6 @@ class CreateNewMaterial(tk.Toplevel):
         free_space = tk.Label(self, text='')
         free_space.pack()
 
-        info_label = tk.Label(self, text=Languages.current_lang["registration_material_label"])
-        info_label.pack()
-
     # Function for button for add material to database.
     def create_new_material_click(self):
         get_material_type = self.material_type.get()
@@ -112,3 +116,9 @@ class CreateNewMaterial(tk.Toplevel):
         else:
             Components.warning_material_specification()
 
+    def info_material_registration(self):
+        info = msg.showinfo(title=Languages.current_lang["warning_title"],
+                            message=Languages.current_lang["info_warning"],
+                            parent= self
+                            )
+        return info

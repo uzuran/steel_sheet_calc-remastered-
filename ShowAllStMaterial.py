@@ -35,13 +35,13 @@ class ShowAllStMaterial:
         my_tree['show'] = 'headings'
 
         # Width of columns and alignment
-        my_tree.column("1", width=80, anchor='c')
-        my_tree.column("2", width=80, anchor='c')
-        my_tree.column("3", width=80, anchor='c')
-        my_tree.column("4", width=80, anchor='c')
-        my_tree.column("5", width=80, anchor='c')
-        my_tree.column("6", width=80, anchor='c')
-        my_tree.column("7", width=80, anchor='c')
+        my_tree.column("1", width=150, anchor='c')
+        my_tree.column("2", width=150, anchor='c')
+        my_tree.column("3", width=150, anchor='c')
+        my_tree.column("4", width=150, anchor='c')
+        my_tree.column("5", width=150, anchor='c')
+        my_tree.column("6", width=150, anchor='c')
+        my_tree.column("7", width=150, anchor='c')
 
         # Headings.
         # Headings.
@@ -113,12 +113,12 @@ class ShowAllStMaterial:
             my_tree.identify_row(event.y)
             item = my_tree.item(my_tree.focus())
             id_string.set(item["values"][0])
-            variable.set(item["values"][5])
+            variable_order.set(item["values"][5])
 
         my_tree.bind("<Double 1>", get_row)
 
         def add_ordered_mat(event=None):
-            order_value = variable.get()
+            order_value = variable_order.get()
             if order_value is not int:
                 Components.tk_tlc_error_msg(frame1)
 
@@ -165,12 +165,14 @@ class ShowAllStMaterial:
         id_mat = tk.Entry(frame1, textvariable=id_string)
         id_mat.pack(side=tk.LEFT, ipady=3)
 
+
+
         # Spinbox order.
-        variable = tk.StringVar()
+        variable_order = tk.StringVar()
 
         spin_box = ttk.Spinbox(
             frame1,
-            textvariable=variable,
+            textvariable=variable_order,
             from_=0,
             to=200,
             width=3,

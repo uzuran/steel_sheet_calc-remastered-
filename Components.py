@@ -6,6 +6,8 @@ from Config import *
 
 
 # <<<Warnings!>>>
+
+
 def attribute_error_warning(frame1):
     error = msg.showwarning(title=Languages.current_lang["warning_title"],
                             message=Languages.current_lang["select_material_warning"],

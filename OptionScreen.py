@@ -22,6 +22,7 @@ class OpenWindowSettings(tk.Toplevel):
         self.languages = [Languages.current_lang["language_en"], Languages.current_lang["language_cz"]]
 
         drop = ttk.Combobox(self, values=self.languages, state="readonly")
+
         drop.current(0)
         drop.pack(side="top")
 
