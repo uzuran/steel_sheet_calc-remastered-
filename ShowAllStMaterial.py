@@ -119,7 +119,7 @@ class ShowAllStMaterial:
 
         def add_ordered_mat(event=None):
             order_value = variable.get()
-            if order_value.isalpha():
+            if order_value is not int:
                 Components.tk_tlc_error_msg(frame1)
 
             elif Components.warning_msg_for_add_mat_to_order(frame1, order_value):
@@ -240,12 +240,10 @@ class ShowAllStMaterial:
             """
             # TODO - all values taken from class should be given as params: write_off_change, spin_box
 
-            write_off_value = self.write_off.get()
-            if write_off_value.isalpha():
+            try:
+                write_off_change = int(spin_box.get()) if spin_box.get() else 0
+            except ValueError:
                 Components.tk_tlc_error_msg(frame1)
-
-            write_off_change = int(spin_box.get()) if spin_box.get() else 0
-
             # if spin_box.get():
             #     write_off_change = int(spin_box.get())
             # else:
@@ -285,7 +283,6 @@ class ShowAllStMaterial:
         plus_material_button = Button(frame1, text="+")
         plus_material_button["command"] = plus_material_btn_press
         plus_material_button.pack(side=LEFT, ipadx=10)
-
 
         self.write_off = tk.StringVar()
 
