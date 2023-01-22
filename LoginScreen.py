@@ -68,12 +68,9 @@ class LoginScreen(tk.Toplevel):
             Components.warning_msg_user_not_exist()
 
     def open_admin_screen(self, user_name_get):
-        window = AdminScreen(self, user_name_get)
-        window.grab_set()
-        window.lift()
-        window.focus_force()
-        window.grab_release()
-        self.withdraw()
+        if not any(isinstance(x, tk.Toplevel) for x in self.winfo_children()):
+            AdminScreen(self, user_name_get)
+
 
 
 
