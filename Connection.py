@@ -104,3 +104,14 @@ def delete_material_from_database(x):
 
 def cursor_fetch_all():
     return my_cursor.fetchall()
+
+
+def create_tables():
+    """Function for create tables at the start of the program."""
+    query = "CREATE TABLE IF NOT EXISTS login(username VARCHAR(40), userpass VARCHAR(40))"
+    my_cursor.execute(query)
+    mydb.commit()
+    query = "CREATE TABLE IF NOT EXISTS st_material(id VARCHAR(40), thickness INT, size_x INT," \
+            " size_y INT, in_storage INT, ordered VARCHAR(40), write_off INT)"
+    my_cursor.execute(query)
+    mydb.commit()

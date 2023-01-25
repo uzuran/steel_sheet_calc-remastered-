@@ -2,6 +2,7 @@ import tkinter as tk
 
 
 import Components
+import Connection
 from LoginScreen import LoginScreen
 from RegisterUserScreen import RegisterUserScreen
 import Languages
@@ -15,6 +16,7 @@ class App(tk.Tk):
         self.geometry("350x200")
         self.eval("tk::PlaceWindow . center")
         self.put_all()
+        Connection.create_tables()
 
     def put_all(self):
         self.title(Languages.conf_lang["main_work_label"])
