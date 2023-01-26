@@ -3,31 +3,40 @@ from tkinter import ttk
 import Languages
 
 
-class OpenWindowSettings(tk.Toplevel):
+import StartPage
+
+
+class OptionPage(tk.Frame):
 
     def save(self, value):
         Languages.change_language(Languages.lang[value])
 
-    def __init__(self, parent):
-        super().__init__(parent)
-        app = parent
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
 
-        self.geometry("200x250")
-        self.title(Languages.current_lang["settings_title"])
+        self.controller = controller
+        self.put_all()
 
-        # Dropdown menu for options
-        self.drop_down_label = tk.Label(self)
-        self.drop_down_label["text"] = Languages.current_lang["choice_your_lang"]
-        self.drop_down_label.pack(side="top")
-        self.languages = [Languages.current_lang["language_en"], Languages.current_lang["language_cz"]]
+    def put_all(self):
+            # Dropdown menu for options
+            self.drop_down_label = tk.Label(self)
+            self.drop_down_label["text"] = Languages.current_lang["choice_your_lang"]
+            self.drop_down_label.pack(side="top")
 
-        drop = ttk.Combobox(self, values=self.languages, state="readonly")
+            # Back to main page button.
+            self.back_button = tk.PhotoImage(file="img/back.png")
+            self.button_for_back = tk.Button(self, image=self.back_button, borderwidth=0)
+            self.button_for_back['command'] = lambda: self.controller.show_frame(StartPage.StartPage)
+            self.button_for_back.pack()
 
-        drop.current(0)
-        drop.pack(side="top")
+            self.languages = [Languages.current_lang["language_en"], Languages.current_lang["language_cz"]]
 
-        # Button for save options
-        self.save_button = tk.Button(self, text=Languages.current_lang["save_button"])
-        self.save_button["command"] = lambda: [self.save(drop.current()), app.refresh()]
-        self.save_button.pack(pady=10)
+            drop = ttk.Combobox(self, values=self.languages, state="readonly")
 
+            drop.current(0)
+            drop.pack(side="top")
+
+            # Button for save options
+            self.save_button = tk.Button(self, text=Languages.current_lang["save_button"])
+            self.save_button["command"] = lambda: [self.save(drop.current()), self.controller.refresh()]
+            self.save_button.pack(pady=10)

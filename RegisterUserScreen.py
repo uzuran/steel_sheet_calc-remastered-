@@ -4,14 +4,12 @@ import hashlib
 import Connection
 import Components
 import Languages
+import StartPage
 
 
-class RegisterUserScreen(tk.Toplevel):
-    def __init__(self, child):
-        super().__init__(child)
-
-        self.geometry("350x450")
-        self.title("Steel sheet calculator.")
+class RegistrationPage(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
 
         # Add username, password string line.
         self.user_name = tk.StringVar()
@@ -21,6 +19,13 @@ class RegisterUserScreen(tk.Toplevel):
         register_label = tk.Label(self, Components.registration_new_user_conf())
         register_label.pack()
 
+        # Back to main page button.
+
+        self.back_button = tk.PhotoImage(file="img/back.png")
+        self.button_for_back = tk.Button(self, image=self.back_button, borderwidth=0)
+        self.button_for_back['command'] = lambda: controller.show_frame(StartPage.StartPage)
+        self.button_for_back.pack()
+
         # User name label.
         user_name_label = tk.Label(self, text=Languages.current_lang["username_label"])
         user_name_label.pack()
@@ -29,6 +34,7 @@ class RegisterUserScreen(tk.Toplevel):
         self.user_name_entry = tk.Entry(self, textvariable=self.user_name)
         self.user_name_entry.pack()
 
+
         # Password label.
         pass_label = tk.Label(self, text=Languages.current_lang["password_label"])
         pass_label.pack()
@@ -36,6 +42,7 @@ class RegisterUserScreen(tk.Toplevel):
         # User password entry.
         self.pass_entry = tk.Entry(self, textvariable=self.password, show="*")
         self.pass_entry.pack()
+
 
         empty_space = tk.Label(self, text="")
         empty_space.pack()

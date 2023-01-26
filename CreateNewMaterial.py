@@ -119,6 +119,6 @@ class CreateNewMaterial(tk.Toplevel):
     def info_material_registration(self):
         info = msg.showinfo(title=Languages.current_lang["warning_title"],
                             message=Languages.current_lang["info_warning"],
-                            parent= self
+                            parent=self
                             )
         return info

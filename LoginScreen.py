@@ -5,18 +5,24 @@ import Components
 import Connection
 from AdminScreen import AdminScreen
 import Languages
+import StartPage
 
 
-class LoginScreen(tk.Toplevel):
-    def __init__(self, child):
-        super().__init__(child)
+# second window frame page1
+class LoginPage(tk.Frame):
 
-        self.title(Languages.current_lang["login_title"])
-        self.geometry("350x450")
-
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
         # Main label.
         login_label = tk.Label(self, Components.login_user_conf())
         login_label.pack()
+
+        # Back to main page button.
+
+        self.back_button = tk.PhotoImage(file="img/back.png")
+        self.button_for_back = tk.Button(self, image=self.back_button, borderwidth=0)
+        self.button_for_back['command'] = lambda: controller.show_frame(StartPage.StartPage)
+        self.button_for_back.pack()
 
         self.user_name = tk.StringVar()
         self.user_pass_verify = tk.StringVar()
@@ -25,8 +31,10 @@ class LoginScreen(tk.Toplevel):
         tk.Label(self, text=Languages.current_lang["username_label"]).pack()
 
         # Username entry.
-        self.user_name_entry = tk.Entry(self, textvariable=self.user_name)
-        self.user_name_entry.pack()
+        self.user_name_log = tk.Entry(self, textvariable=self.user_name)
+        self.user_name_log.pack()
+        self.user_name_log.focus_set()
+
 
         # Blank line.
         tk.Label(self, text="").pack()
@@ -35,6 +43,7 @@ class LoginScreen(tk.Toplevel):
         # User pass entry.
         self.user_pass_entry = tk.Entry(self, textvariable=self.user_pass_verify, show="*")
         self.user_pass_entry.pack()
+
 
         empty_space = tk.Label(self, text="")
         empty_space.pack()
@@ -46,13 +55,13 @@ class LoginScreen(tk.Toplevel):
         # user_pass_entry bind for enter use.
         self.user_pass_entry.bind("<Return>", self.login_verify)
         login_user_button.pack()
-
     # Login verify function for check users.
+
     def login_verify(self, event=None):
         user_name_label_get = self.user_name.get()
         password_get = self.user_pass_verify.get()
         # Clean entry after press the button.
-        self.user_name_entry.delete(0, tk.END)
+        self.user_name_log.delete(0, tk.END)
         self.user_pass_entry.delete(0, tk.END)
 
         # Check a database for username and userpass.
