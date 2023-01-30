@@ -21,10 +21,10 @@ class RegistrationPage(tk.Frame):
 
         # Back to main page button.
 
-        self.back_button = tk.PhotoImage(file="img/back.png")
-        self.button_for_back = tk.Button(self, image=self.back_button, borderwidth=0)
-        self.button_for_back['command'] = lambda: controller.show_frame(StartPage.StartPage)
-        self.button_for_back.pack()
+        self.back_image = tk.PhotoImage(file="img/back.png")
+        self.button_image_for_back = tk.Button(self, image=self.back_image, borderwidth=0)
+        self.button_image_for_back['command'] = lambda: controller.show_frame(StartPage.StartPage)
+        self.button_image_for_back.pack()
 
         # User name label.
         user_name_label = tk.Label(self, text=Languages.current_lang["username_label"])
@@ -34,7 +34,6 @@ class RegistrationPage(tk.Frame):
         self.user_name_entry = tk.Entry(self, textvariable=self.user_name)
         self.user_name_entry.pack()
 
-
         # Password label.
         pass_label = tk.Label(self, text=Languages.current_lang["password_label"])
         pass_label.pack()
@@ -42,7 +41,6 @@ class RegistrationPage(tk.Frame):
         # User password entry.
         self.pass_entry = tk.Entry(self, textvariable=self.password, show="*")
         self.pass_entry.pack()
-
 
         empty_space = tk.Label(self, text="")
         empty_space.pack()

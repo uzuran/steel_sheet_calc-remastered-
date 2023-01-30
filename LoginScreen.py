@@ -19,10 +19,10 @@ class LoginPage(tk.Frame):
 
         # Back to main page button.
 
-        self.back_button = tk.PhotoImage(file="img/back.png")
-        self.button_for_back = tk.Button(self, image=self.back_button, borderwidth=0)
-        self.button_for_back['command'] = lambda: controller.show_frame(StartPage.StartPage)
-        self.button_for_back.pack()
+        self.back_image = tk.PhotoImage(file="img/back.png")
+        self.button_image_for_back = tk.Button(self, image=self.back_image, borderwidth=0)
+        self.button_image_for_back['command'] = lambda: controller.show_frame(StartPage.StartPage)
+        self.button_image_for_back.pack()
 
         self.user_name = tk.StringVar()
         self.user_pass_verify = tk.StringVar()
@@ -35,7 +35,6 @@ class LoginPage(tk.Frame):
         self.user_name_log.pack()
         self.user_name_log.focus_set()
 
-
         # Blank line.
         tk.Label(self, text="").pack()
         tk.Label(self, text=Languages.current_lang["password_label"]).pack()
@@ -43,7 +42,6 @@ class LoginPage(tk.Frame):
         # User pass entry.
         self.user_pass_entry = tk.Entry(self, textvariable=self.user_pass_verify, show="*")
         self.user_pass_entry.pack()
-
 
         empty_space = tk.Label(self, text="")
         empty_space.pack()

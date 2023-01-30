@@ -15,19 +15,20 @@ class OptionPage(tk.Frame):
         tk.Frame.__init__(self, parent)
 
         self.controller = controller
-        self.put_all()
+        self.create_widgets()
 
-    def put_all(self):
+    def create_widgets(self):
+
             # Dropdown menu for options
             self.drop_down_label = tk.Label(self)
             self.drop_down_label["text"] = Languages.current_lang["choice_your_lang"]
             self.drop_down_label.pack(side="top")
 
-            # Back to main page button.
-            self.back_button = tk.PhotoImage(file="img/back.png")
-            self.button_for_back = tk.Button(self, image=self.back_button, borderwidth=0)
-            self.button_for_back['command'] = lambda: self.controller.show_frame(StartPage.StartPage)
-            self.button_for_back.pack()
+            # Back to main page image button.
+            self.back_image = tk.PhotoImage(file="img/back.png")
+            self.button_image_for_back = tk.Button(self, image=self.back_image, borderwidth=0)
+            self.button_image_for_back['command'] = lambda: self.controller.show_frame(StartPage.StartPage)
+            self.button_image_for_back.pack()
 
             self.languages = [Languages.current_lang["language_en"], Languages.current_lang["language_cz"]]
 

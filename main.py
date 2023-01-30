@@ -47,16 +47,10 @@ class App(tk.Tk):
         self.destroy()
         self.__init__()
 
-    # def refresh(self):
-    #     widgets = [x for x in self.children]
-    #     for f_name in widgets:
-    #         self.nametowidget(f_name).destroy()
-    #     self.put_all()
-
     # to display the current frame passed as
     # parameter
-    def show_frame(self, cont):
-        frame = self.frames[cont]
+    def show_frame(self, frame_name):
+        frame = self.frames[frame_name]
         frame.tkraise()
 
 

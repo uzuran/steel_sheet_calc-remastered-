@@ -1,7 +1,6 @@
 import tkinter as tk
-from tkinter import ttk
-import Components
 
+import Components
 import LoginScreen
 import OptionScreen
 import RegisterUserScreen
@@ -11,9 +10,9 @@ class StartPage(tk.Frame):
     def __init__(self, children, controller):
         tk.Frame.__init__(self, children)
         self.controller = controller
-        self.put_all()
+        self.create_widgets()
 
-    def put_all(self):
+    def create_widgets(self):
 
             # Enter label.
             self.enter_label = tk.Label(self, Components.main_label_conf())
