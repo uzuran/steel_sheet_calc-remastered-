@@ -15,87 +15,80 @@ class CreateNewMaterial(tk.Toplevel):
         self.title(Languages.current_lang["create_new_material_title"])
 
         # String variables for material entry
-        self.material_type = StringVar()
-        self.m_identification = StringVar()
-        self.thickness = StringVar()
-        self.x_size = StringVar()
-        self.y_size = StringVar()
+        self.material_type_variable = StringVar()
+        self.m_identification_variable = StringVar()
+        self.thickness_variable = StringVar()
+        self.x_size_variable = StringVar()
+        self.y_size_variable = StringVar()
 
         # Register new material window label.
         create_material_label = tk.Label(self, Components.create_new_material_label())
         create_material_label.pack()
 
         # Info material button.
-        self.info_button = tk.PhotoImage(file="img/question.png")
-        self.button_for_info = tk.Button(self, image=self.info_button, borderwidth=0)
-        self.button_for_info.pack(side="top")
-        self.button_for_info["command"] = self.info_material_registration
+        self.info_button_image = tk.PhotoImage(file="img/question.png")
+        self.image_button_info = tk.Button(self, image=self.info_button_image, borderwidth=0)
+        self.image_button_info.pack(side="top")
+        self.image_button_info["command"] = self.info_material_registration
 
         # Basic information about registered material.
-        type_material = tk.Label(self, text=Languages.current_lang["type_of_material_label"])
-        type_material.pack()
+        type_material_label = tk.Label(self, text=Languages.current_lang["type_of_material_label"])
+        type_material_label.pack()
 
-        type_material_entry = tk.Entry(self, textvariable=self.material_type)
+        type_material_entry = tk.Entry(self, textvariable=self.material_type_variable)
         type_material_entry.pack()
 
-        material_id = tk.Label(self, text=Languages.current_lang["id_label"])
-        material_id.pack()
+        material_id_label = tk.Label(self, text=Languages.current_lang["id_label"])
+        material_id_label.pack()
 
         # ID entry.
-        ID_entry = tk.Entry(self, textvariable=self.m_identification)
-        ID_entry.pack()
+        id_entry = tk.Entry(self, textvariable=self.m_identification_variable)
+        id_entry.pack()
 
         # Material thickness.
-        material_thickness = tk.Label(self, text=Languages.current_lang["thickness_label"])
-        material_thickness.pack()
+        material_thickness_label = tk.Label(self, text=Languages.current_lang["thickness_label"])
+        material_thickness_label.pack()
 
         # Material thickness entry.
-        material_thickness_entry = tk.Entry(self, textvariable=self.thickness)
+        material_thickness_entry = tk.Entry(self, textvariable=self.thickness_variable)
         material_thickness_entry.pack()
 
         # Material size_x
-        x_size = tk.Label(self, text=Languages.current_lang["x_size_label"])
-        x_size.pack()
+        x_size_label = tk.Label(self, text=Languages.current_lang["x_size_label"])
+        x_size_label.pack()
 
         # Material size_x entry
-        self.x_size_entry = tk.Entry(self, textvariable=self.x_size)
+        self.x_size_entry = tk.Entry(self, textvariable=self.x_size_variable)
         self.x_size_entry.pack()
 
         # Material size_y
-        y_size = tk.Label(self, text=Languages.current_lang["y_size_label"])
-        y_size.pack()
+        y_size_label = tk.Label(self, text=Languages.current_lang["y_size_label"])
+        y_size_label.pack()
 
         # Material size_y entry
-        self.y_size_entry = tk.Entry(self, textvariable=self.y_size)
+        self.y_size_entry = tk.Entry(self, textvariable=self.y_size_variable)
         self.y_size_entry.pack()
 
         # Empty space
-        e_space = tk.Label(self, text=' ')
-        e_space.pack()
+        empty_space = tk.Label(self, text=' ')
+        empty_space.pack()
 
         # Button for material register.
         button_for_register_material = tk.Button(self, text=Languages.current_lang["registration_material_button"])
         button_for_register_material['command'] = lambda: [self.create_new_material_click()]
         button_for_register_material.pack()
         # Free space.
-        free_space = tk.Label(self, text='')
-        free_space.pack()
 
-        # Free space.
-        free_space = tk.Label(self, text='')
-        free_space.pack()
-
-        # Free space.
-        free_space = tk.Label(self, text='')
-        free_space.pack()
+        empty_space = tk.Label(self, text='')
+        empty_space.pack()
 
     # Function for button for add material to database.
     def create_new_material_click(self):
-        get_material_type = self.material_type.get()
-        get_material_id = self.m_identification.get()
-        get_thickness = self.thickness.get()
-        get_x_size = self.x_size.get()
-        get_y_size = self.y_size.get()
+        get_material_type = self.material_type_variable.get()
+        get_material_id = self.m_identification_variable.get()
+        get_thickness = self.thickness_variable.get()
+        get_x_size = self.x_size_variable.get()
+        get_y_size = self.y_size_variable.get()
 
         # Check if material is in database.
         Connection.check_if_material_is_exist_in_database(get_material_id)
@@ -116,9 +109,10 @@ class CreateNewMaterial(tk.Toplevel):
         else:
             Components.warning_material_specification()
 
+    # Info.
     def info_material_registration(self):
         info = msg.showinfo(title=Languages.current_lang["warning_title"],
                             message=Languages.current_lang["info_warning"],
-                            parent= self
+                            parent=self
                             )
         return info

@@ -1,4 +1,3 @@
-from tkinter import *
 import tkinter as tk
 from tkinter import ttk
 
@@ -26,19 +25,19 @@ class AdminScreen(tk.Toplevel):
         # Check who is login
         Components.check_who_is_login(self, user_name_label_get)
 
-        create_new_material = tk.Button(self, Components.create_new_material_button())
-        create_new_material["command"] = self.open_create_material_window
-        create_new_material.pack()
+        create_new_material_button = tk.Button(self, Components.create_new_material_button())
+        create_new_material_button["command"] = self.open_create_material_window
+        create_new_material_button.pack()
 
         # Add notebook of a materials to the second frame.
         notebook = ttk.Notebook(self)
         notebook.pack()
 
-        frame1 = Frame(notebook, Components.option_for_size_frame())
-        frame2 = Frame(notebook, Components.option_for_size_frame())
-        frame3 = Frame(notebook, Components.option_for_size_frame())
-        frame4 = Frame(notebook, Components.option_for_size_frame())
-        frame5 = Frame(notebook, Components.option_for_size_frame())
+        frame1 = tk.Frame(notebook, Components.option_for_size_frame())
+        frame2 = tk.Frame(notebook, Components.option_for_size_frame())
+        frame3 = tk.Frame(notebook, Components.option_for_size_frame())
+        frame4 = tk.Frame(notebook, Components.option_for_size_frame())
+        frame5 = tk.Frame(notebook, Components.option_for_size_frame())
 
         # Add notebook on screen.
         notebook.add(frame1, text=Languages.current_lang["frame1"])

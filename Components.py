@@ -6,8 +6,6 @@ from Config import *
 
 
 # <<<Warnings!>>>
-
-
 def attribute_error_warning(frame1):
     error = msg.showwarning(title=Languages.current_lang["warning_title"],
                             message=Languages.current_lang["select_material_warning"],
@@ -218,6 +216,16 @@ def create_new_material_button():
 def main_label_conf():
     """Configurate , text, background, width, height, font for main label."""
     label = {"text": Languages.current_lang["main_label"],
+             "bg": conf["main_background"],
+             "width": conf["main_label_width"],
+             "height": conf["main_label_height"],
+             "font": conf["font"]}
+    return label
+
+
+def label_for_option_screen():
+    """Configurate , text, background, width, height, font for option screen label."""
+    label = {"text": Languages.current_lang["choice_your_lang"],
              "bg": conf["main_background"],
              "width": conf["main_label_width"],
              "height": conf["main_label_height"],

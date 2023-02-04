@@ -5,35 +5,46 @@ import Components
 import Connection
 from AdminScreen import AdminScreen
 import Languages
+import StartPage
 
 
-class LoginScreen(tk.Toplevel):
-    def __init__(self, child):
-        super().__init__(child)
+# second window frame page1
+class LoginPage(tk.Frame):
 
-        self.title(Languages.current_lang["login_title"])
-        self.geometry("350x450")
-
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
         # Main label.
         login_label = tk.Label(self, Components.login_user_conf())
         login_label.pack()
 
-        self.user_name = tk.StringVar()
-        self.user_pass_verify = tk.StringVar()
+        # Back to main page button.
+
+        self.back_image = tk.PhotoImage(file="img/back.png")
+        self.button_image_for_back = tk.Button(self, image=self.back_image, borderwidth=0)
+        self.button_image_for_back['command'] = lambda: controller.show_frame(StartPage.StartPage)
+        self.button_image_for_back.pack()
+
+        self.user_name_variable = tk.StringVar()
+        self.user_pass_variable = tk.StringVar()
 
         # Username label
-        tk.Label(self, text=Languages.current_lang["username_label"]).pack()
+        username_label = tk.Label(self, text=Languages.current_lang["username_label"])
+        username_label.pack()
 
         # Username entry.
-        self.user_name_entry = tk.Entry(self, textvariable=self.user_name)
-        self.user_name_entry.pack()
+        self.user_name_login_entry = tk.Entry(self, textvariable=self.user_name_variable)
+        self.user_name_login_entry.pack()
+        self.user_name_login_entry.focus_set()
 
-        # Blank line.
-        tk.Label(self, text="").pack()
-        tk.Label(self, text=Languages.current_lang["password_label"]).pack()
+        empty_space = tk.Label(self, text="")
+        empty_space.pack()
+
+        # Password label
+        self.password_label = tk.Label(self, text=Languages.current_lang["password_label"])
+        self.password_label.pack()
 
         # User pass entry.
-        self.user_pass_entry = tk.Entry(self, textvariable=self.user_pass_verify, show="*")
+        self.user_pass_entry = tk.Entry(self, textvariable=self.user_pass_variable, show="*")
         self.user_pass_entry.pack()
 
         empty_space = tk.Label(self, text="")
@@ -49,20 +60,20 @@ class LoginScreen(tk.Toplevel):
 
     # Login verify function for check users.
     def login_verify(self, event=None):
-        user_name_label_get = self.user_name.get()
-        password_get = self.user_pass_verify.get()
+        user_name_get = self.user_name_variable.get()
+        password_get = self.user_pass_variable.get()
         # Clean entry after press the button.
-        self.user_name_entry.delete(0, tk.END)
+        self.user_name_login_entry.delete(0, tk.END)
         self.user_pass_entry.delete(0, tk.END)
 
         # Check a database for username and userpass.
         hashed = hashlib.md5(str.encode(password_get)).hexdigest()
-        Connection.check_for_user_and_pass(user_name_label_get, hashed)
+        Connection.check_for_user_and_pass(user_name_get, hashed)
 
-        if Connection.check_for_user_and_pass(user_name_label_get, hashed):
+        if Connection.check_for_user_and_pass(user_name_get, hashed):
 
             # Open admin screen
-            self.open_admin_screen(user_name_label_get)
+            self.open_admin_screen(user_name_get)
 
         else:
             Components.warning_msg_user_not_exist()
