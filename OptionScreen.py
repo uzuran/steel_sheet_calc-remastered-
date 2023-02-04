@@ -1,5 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
+
+import Components
 import Languages
 
 
@@ -20,9 +22,8 @@ class OptionPage(tk.Frame):
     def create_widgets(self):
 
             # Dropdown menu for options
-            self.drop_down_label = tk.Label(self)
-            self.drop_down_label["text"] = Languages.current_lang["choice_your_lang"]
-            self.drop_down_label.pack(side="top")
+            self.option_screen_label = tk.Label(self, Components.label_for_option_screen())
+            self.option_screen_label.pack()
 
             # Back to main page image button.
             self.back_image = tk.PhotoImage(file="img/back.png")
@@ -33,7 +34,6 @@ class OptionPage(tk.Frame):
             self.languages = [Languages.current_lang["language_en"], Languages.current_lang["language_cz"]]
 
             drop = ttk.Combobox(self, values=self.languages, state="readonly")
-
             drop.current(0)
             drop.pack(side="top")
 

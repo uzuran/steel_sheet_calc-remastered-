@@ -17,16 +17,16 @@ class ShowAllStMaterial:
         Connection.select_all_material()
         my_result = Connection.cursor_fetch_all()
 
-        wraper1 = tk.LabelFrame(frame1, text=Languages.current_lang["frame1"])
-        wraper1.pack(fill="both", expand=1)
+        wrapper = tk.LabelFrame(frame1, text=Languages.current_lang["frame1"])
+        wrapper.pack(fill="both", expand=1)
 
         # SCROLL BAR
-        scrolllbary = tk.Scrollbar(frame1, orient=tk.VERTICAL)
-        my_tree = ttk.Treeview(wraper1, selectmode='browse', height=20)
+        scroll_bar = tk.Scrollbar(frame1, orient=tk.VERTICAL)
+        my_tree = ttk.Treeview(wrapper, selectmode='browse', height=20)
 
         my_tree.pack()
 
-        my_tree.configure(yscrollcommand=scrolllbary.set)
+        my_tree.configure(yscrollcommand=scroll_bar.set)
         my_tree.configure(selectmode="extended")
 
         # Number of columns
@@ -97,9 +97,9 @@ class ShowAllStMaterial:
 
         # Function for search material by ID.
         def search(event=None):
-            id_variable2 = id_variable.get()
+            id_get = id_variable.get()
             # Search material in database where id.
-            Connection.search_material_in_database(id_variable2)
+            Connection.search_material_in_database(id_get)
             rows = Connection.cursor_fetch_all()
             update(rows)
 
@@ -112,23 +112,23 @@ class ShowAllStMaterial:
         def get_row(event):
             my_tree.identify_row(event.y)
             item = my_tree.item(my_tree.focus())
-            id_string.set(item["values"][0])
+            id_variable.set(item["values"][0])
             variable_order.set(item["values"][5])
 
         my_tree.bind("<Double 1>", get_row)
 
         def add_ordered_mat(event=None):
-            order_value = variable_order.get()
-            if order_value is not int:
+            order_get = variable_order.get()
+            if order_get is not int:
                 Components.tk_tlc_error_msg(frame1)
 
-            elif Components.warning_msg_for_add_mat_to_order(frame1, order_value):
+            elif Components.warning_msg_for_add_mat_to_order(frame1, order_get):
 
                 for selected in my_tree.selection():
                     self.set_selection = my_tree.set(selected, "#1")
 
                 try:
-                    Connection.update_ordered_material(order_value, self.set_selection)
+                    Connection.update_ordered_material(order_get, self.set_selection)
                 except AttributeError:
                     Components.warning_for_selecting_material(frame1)
 
@@ -138,7 +138,7 @@ class ShowAllStMaterial:
             else:
                 return True
 
-        id_string = tk.StringVar()
+        id_variable = tk.StringVar()
 
         # Delete material button
         delete_material_button = tk.Button(frame1, Components.delete_material_button())
@@ -162,10 +162,8 @@ class ShowAllStMaterial:
         entry_search.bind("<Return>", search)
 
         # ID mat entry.
-        id_mat = tk.Entry(frame1, textvariable=id_string)
+        id_mat = tk.Entry(frame1, textvariable=id_variable)
         id_mat.pack(side=tk.LEFT, ipady=3)
-
-
 
         # Spinbox order.
         variable_order = tk.StringVar()
@@ -209,15 +207,15 @@ class ShowAllStMaterial:
                 # Warning for TlcError
                 Components.tk_tlc_error_msg(frame1)
 
-            to_storage_var = variable_to_storage.get()
+            to_storage_var_get = variable_to_storage.get()
 
-            if Components.warning_msg_for_add_material_to_storage(frame1, to_storage_var):
+            if Components.warning_msg_for_add_material_to_storage(frame1, to_storage_var_get):
                 # Select item from treeview
                 for selected in my_tree.selection():
                     self.set_selection = my_tree.set(selected, "#1")
                 try:
                     # Update material in storage.
-                    Connection.update_material_in_storage(to_storage_var, self.set_selection)
+                    Connection.update_material_in_storage(to_storage_var_get, self.set_selection)
                 except AttributeError:
                     Components.attribute_error_warning(frame1)
 
@@ -286,7 +284,7 @@ class ShowAllStMaterial:
 
         plus_material_button = Button(frame1, text="+")
         plus_material_button["command"] = plus_material_btn_press
-        plus_material_button.pack(side=LEFT, ipadx=10)
+        plus_material_button.pack(side=RIGHT, ipadx=10)
 
         self.write_off = tk.StringVar()
 
@@ -301,10 +299,10 @@ class ShowAllStMaterial:
 
 
         )
-        spin_box.pack(side=LEFT, padx=5, ipady=1)
+        spin_box.pack(side=RIGHT, padx=5, ipady=1)
 
         minus_material_button = Button(frame1, text="-")
         minus_material_button["command"] = minus_material_btn_press
-        minus_material_button.pack(side=LEFT, ipadx=10)
+        minus_material_button.pack(side=RIGHT, ipadx=10, )
 
 

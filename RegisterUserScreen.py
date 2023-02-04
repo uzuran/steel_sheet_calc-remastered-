@@ -12,8 +12,8 @@ class RegistrationPage(tk.Frame):
         tk.Frame.__init__(self, parent)
 
         # Add username, password string line.
-        self.user_name = tk.StringVar()
-        self.password = tk.StringVar()
+        self.user_name_variable = tk.StringVar()
+        self.password_variable = tk.StringVar()
 
         # Register window label.
         register_label = tk.Label(self, Components.registration_new_user_conf())
@@ -31,15 +31,15 @@ class RegistrationPage(tk.Frame):
         user_name_label.pack()
 
         # Username entry.
-        self.user_name_entry = tk.Entry(self, textvariable=self.user_name)
+        self.user_name_entry = tk.Entry(self, textvariable=self.user_name_variable)
         self.user_name_entry.pack()
 
         # Password label.
-        pass_label = tk.Label(self, text=Languages.current_lang["password_label"])
-        pass_label.pack()
+        password_label = tk.Label(self, text=Languages.current_lang["password_label"])
+        password_label.pack()
 
         # User password entry.
-        self.pass_entry = tk.Entry(self, textvariable=self.password, show="*")
+        self.pass_entry = tk.Entry(self, textvariable=self.password_variable, show="*")
         self.pass_entry.pack()
 
         empty_space = tk.Label(self, text="")
@@ -57,23 +57,23 @@ class RegistrationPage(tk.Frame):
     def register_users(self, event=None):
         """Function for register new users, validate name without numbers,store all info in text file,
         hash password."""
-        username_info = self.user_name.get()
-        password_info = self.password.get()
+        username_get = self.user_name_variable.get()
+        password_get = self.password_variable.get()
 
-        if username_info.isdigit():
+        if username_get.isdigit():
             Components.warning_for_registration()
             # If password have only blank on field label say it.
 
-        elif password_info == "":
+        elif password_get == "":
             Components.warning_for_registration()
 
-        elif Connection.check_if_user_exist_in_database(username_info):
+        elif Connection.check_if_user_exist_in_database(username_get):
             Components.warning_user_exist()
 
         else:
             # Register user to database
-            hashed = hashlib.md5(str.encode(password_info)).hexdigest()
-            Connection.register_user_to_database(username_info, hashed)
+            hashed = hashlib.md5(str.encode(password_get)).hexdigest()
+            Connection.register_user_to_database(username_get, hashed)
 
             self.user_name_entry.delete(0, tk.END)
             self.pass_entry.delete(0, tk.END)

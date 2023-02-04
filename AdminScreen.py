@@ -26,9 +26,9 @@ class AdminScreen(tk.Toplevel):
         # Check who is login
         Components.check_who_is_login(self, user_name_label_get)
 
-        create_new_material = tk.Button(self, Components.create_new_material_button())
-        create_new_material["command"] = self.open_create_material_window
-        create_new_material.pack()
+        create_new_material_button = tk.Button(self, Components.create_new_material_button())
+        create_new_material_button["command"] = self.open_create_material_window
+        create_new_material_button.pack()
 
         # Add notebook of a materials to the second frame.
         notebook = ttk.Notebook(self)
