@@ -138,7 +138,7 @@ class ShowAllStMaterial:
             else:
                 return True
 
-        id_variable = tk.StringVar()
+        id_variable_string = tk.StringVar()
 
         # Delete material button
         delete_material_button = tk.Button(frame1, Components.delete_material_button())
@@ -151,7 +151,7 @@ class ShowAllStMaterial:
         update_material_button.pack(side=tk.LEFT)
 
         # Search entry.
-        entry_search = tk.Entry(frame1, textvariable=id_variable)
+        entry_search = tk.Entry(frame1, textvariable=id_variable_string)
         entry_search.pack(side=tk.LEFT, ipady=3)
 
         # Search button.
