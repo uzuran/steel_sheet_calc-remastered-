@@ -1,4 +1,4 @@
-from tkinter import *
+
 from tkinter import ttk
 import tkinter as tk
 
@@ -157,7 +157,7 @@ class ShowAllStMaterial:
         # Search button.
         search_material_button = tk.Button(frame1, Components.search_button())
         search_material_button["command"] = search
-        search_material_button.pack(side=LEFT)
+        search_material_button.pack(side=tk.LEFT)
         # Bind entry search for enter using.
         entry_search.bind("<Return>", search)
 
@@ -197,7 +197,7 @@ class ShowAllStMaterial:
             width=3,
 
         )
-        spin_box_storage.pack(side=LEFT, padx=5, ipady=1)
+        spin_box_storage.pack(side=tk.LEFT, padx=5, ipady=1)
 
         # Function for adding material into storage
         def add_to_storage(event=None):
@@ -219,7 +219,7 @@ class ShowAllStMaterial:
                 except AttributeError:
                     Components.attribute_error_warning(frame1)
 
-                spin_box_storage.delete(0, END)
+                spin_box_storage.delete(0, tk.END)
                 Connection.mydb.commit()
 
                 clear()
@@ -271,20 +271,20 @@ class ShowAllStMaterial:
                     if material[6] < 0:
                         material[6] = 0
                     Connection.update_material(material)
-                spin_box.delete(0, END)
+                spin_box.delete(0, tk.END)
                 clear()
 
         # Bind spinbox for enter using.
         spin_box_storage.bind("<Return>", add_to_storage)
 
         # Add to storage button.
-        add_to_storage_material_button = Button(frame1, Components.add_material_to_storage_button())
+        add_to_storage_material_button = tk.Button(frame1, Components.add_material_to_storage_button())
         add_to_storage_material_button["command"] = add_to_storage
-        add_to_storage_material_button.pack(side=LEFT)
+        add_to_storage_material_button.pack(side=tk.LEFT)
 
-        plus_material_button = Button(frame1, text="+")
+        plus_material_button = tk.Button(frame1, text="+")
         plus_material_button["command"] = plus_material_btn_press
-        plus_material_button.pack(side=RIGHT, ipadx=10)
+        plus_material_button.pack(side=tk.RIGHT, ipadx=10)
 
         self.write_off = tk.StringVar()
 
@@ -299,10 +299,10 @@ class ShowAllStMaterial:
 
 
         )
-        spin_box.pack(side=RIGHT, padx=5, ipady=1)
+        spin_box.pack(side=tk.RIGHT, padx=5, ipady=1)
 
-        minus_material_button = Button(frame1, text="-")
+        minus_material_button = tk.Button(frame1, text="-")
         minus_material_button["command"] = minus_material_btn_press
-        minus_material_button.pack(side=RIGHT, ipadx=10, )
+        minus_material_button.pack(side=tk.RIGHT, ipadx=10, )
 
 

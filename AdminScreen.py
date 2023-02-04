@@ -1,4 +1,3 @@
-from tkinter import *
 import tkinter as tk
 from tkinter import ttk
 
@@ -34,11 +33,11 @@ class AdminScreen(tk.Toplevel):
         notebook = ttk.Notebook(self)
         notebook.pack()
 
-        frame1 = Frame(notebook, Components.option_for_size_frame())
-        frame2 = Frame(notebook, Components.option_for_size_frame())
-        frame3 = Frame(notebook, Components.option_for_size_frame())
-        frame4 = Frame(notebook, Components.option_for_size_frame())
-        frame5 = Frame(notebook, Components.option_for_size_frame())
+        frame1 = tk.Frame(notebook, Components.option_for_size_frame())
+        frame2 = tk.Frame(notebook, Components.option_for_size_frame())
+        frame3 = tk.Frame(notebook, Components.option_for_size_frame())
+        frame4 = tk.Frame(notebook, Components.option_for_size_frame())
+        frame5 = tk.Frame(notebook, Components.option_for_size_frame())
 
         # Add notebook on screen.
         notebook.add(frame1, text=Languages.current_lang["frame1"])

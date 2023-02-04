@@ -3,8 +3,6 @@ from tkinter import ttk
 
 import Components
 import Languages
-
-
 import StartPage
 
 
