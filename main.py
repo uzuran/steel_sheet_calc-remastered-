@@ -5,6 +5,7 @@ import LoginScreen
 import RegisterUserScreen
 import StartPage
 import OptionScreen
+import Connection
 
 
 class App(tk.Tk):
@@ -16,6 +17,8 @@ class App(tk.Tk):
 
         self.geometry("400x450")
         self.eval("tk::PlaceWindow . center")
+
+        Connection.create_tables()
         self.title(Languages.current_lang["main_work_label"])
 
         # creating a container
