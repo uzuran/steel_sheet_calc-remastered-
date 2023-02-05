@@ -1,7 +1,7 @@
 import tkinter as tk
 
 import Languages
-import LoginScreen
+from screens.LoginScreen import LoginPage
 import RegisterUserScreen
 import StartPage
 import OptionScreen
@@ -28,14 +28,18 @@ class App(tk.Tk):
         self.container.grid_rowconfigure(0, weight=1)
         self.container.grid_columnconfigure(0, weight=1)
 
-        # initializing frames to an empty array
+        # initializing frames to an empty dict
         self.frames = {}
 
         # iterating through a tuple consisting
         # of the different page layouts
-
-        for F in (StartPage.StartPage, LoginScreen.LoginPage, RegisterUserScreen.RegistrationPage,
-                  OptionScreen.OptionPage):
+        screens_or_frames_or_pages = [
+            StartPage.StartPage,
+            LoginPage,
+            RegisterUserScreen.RegistrationPage,
+            OptionScreen.OptionPage
+        ]
+        for F in screens_or_frames_or_pages:
             frame = F(self.container, self)
 
             # initializing frame of that object
