@@ -119,7 +119,8 @@ class ShowAllStMaterial:
 
         def add_ordered_mat(event=None):
             order_get = variable_order.get()
-            if order_get is not int:
+            if order_get.isalpha():
+
                 Components.tk_tlc_error_msg(frame1)
 
             elif Components.warning_msg_for_add_mat_to_order(frame1, order_get):
