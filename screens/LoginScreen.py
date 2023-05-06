@@ -5,7 +5,7 @@ import Components
 import Connection
 from AdminScreen import AdminScreen
 import Languages
-import StartPage
+from StartPage import StartPage
 
 
 # second window frame page1
@@ -19,9 +19,9 @@ class LoginPage(tk.Frame):
 
         # Back to main page button.
 
-        self.back_image = tk.PhotoImage(file="img/back.png")
+        self.back_image = tk.PhotoImage(file="./img/back.png")
         self.button_image_for_back = tk.Button(self, image=self.back_image, borderwidth=0)
-        self.button_image_for_back['command'] = lambda: controller.show_frame(StartPage.StartPage)
+        self.button_image_for_back['command'] = lambda: controller.show_frame(StartPage)
         self.button_image_for_back.pack()
 
         self.user_name_variable = tk.StringVar()
