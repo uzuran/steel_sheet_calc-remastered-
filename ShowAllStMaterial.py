@@ -90,7 +90,7 @@ class ShowAllStMaterial:
         id_variable = tk.StringVar()
 
         def update(rows):
-            entry_search.delete(0, tk.END)
+
             my_tree.delete(*my_tree.get_children())
             for row in rows:
                 my_tree.insert("", "end", values=row)
@@ -149,16 +149,13 @@ class ShowAllStMaterial:
         update_material_button["command"] = _build_tree
         update_material_button.pack(side=tk.LEFT)
 
+        label_for_search = tk.Label(frame1, text="Search: ")
+        label_for_search.pack(side=tk.LEFT, ipady=3)
+
         # Search entry.
         entry_search = tk.Entry(frame1, textvariable=id_variable_string)
         entry_search.pack(side=tk.LEFT, ipady=3)
-
-        # Search button.
-        search_material_button = tk.Button(frame1, Components.search_button())
-        search_material_button["command"] = search
-        search_material_button.pack(side=tk.LEFT)
-        # Bind entry search for enter using.
-        entry_search.bind("<Return>", search)
+        entry_search.bind("<KeyRelease>", search)
 
         # ID mat entry.
         id_mat = tk.Entry(frame1, textvariable=id_variable)
