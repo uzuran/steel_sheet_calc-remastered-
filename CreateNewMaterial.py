@@ -1,6 +1,7 @@
 from tkinter import *
 import tkinter as tk
 from tkinter import messagebox as msg
+from tkinter import ttk
 
 import Components
 import Connection
@@ -35,8 +36,12 @@ class CreateNewMaterial(tk.Toplevel):
         type_material_label = tk.Label(self, text=Languages.current_lang["type_of_material_label"])
         type_material_label.pack()
 
-        type_material_entry = tk.Entry(self, textvariable=self.material_type_variable)
-        type_material_entry.pack()
+        self.materials_types = ["st", "al", "sp"]
+
+        drop_material_type = ttk.Combobox(self, values=self.materials_types, state="readonly")
+        drop_material_type.current(0)  # Set the default selection
+        drop_material_type.pack(side="top")
+        self.selected_material = drop_material_type.get()
 
         material_id_label = tk.Label(self, text=Languages.current_lang["id_label"])
         material_id_label.pack()
@@ -84,7 +89,6 @@ class CreateNewMaterial(tk.Toplevel):
 
     # Function for button for add material to database.
     def create_new_material_click(self):
-        get_material_type = self.material_type_variable.get()
         get_material_id = self.m_identification_variable.get()
         get_thickness = self.thickness_variable.get()
         get_x_size = self.x_size_variable.get()
@@ -97,7 +101,7 @@ class CreateNewMaterial(tk.Toplevel):
         if Connection.check_if_material_is_exist_in_database(get_material_id):
             Components.warning_material_is_exist_msg()
 
-        elif get_material_type == "st" and get_thickness != "" \
+        elif self.selected_material == "st" and get_thickness != "" \
                 and get_x_size.isdigit() \
                 and get_y_size.isdigit():
 
