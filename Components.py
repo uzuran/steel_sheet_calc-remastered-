@@ -81,10 +81,11 @@ def warning_user_exist():
     return warning
 
 
-def registration_success():
+def registration_success(top_level):
     """If registration is success send it on screen."""
     success = msg.showinfo(title=Languages.current_lang["registration_success"],
-                           message=Languages.current_lang["registration_success"])
+                           message=Languages.current_lang["registration_success"],
+                           parent=top_level)
 
     return success
 

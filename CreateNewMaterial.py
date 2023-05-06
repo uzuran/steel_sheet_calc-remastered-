@@ -108,7 +108,8 @@ class CreateNewMaterial(tk.Toplevel):
             # If condition complete add material in to database.
             Connection.add_material_to_database(get_material_id, get_thickness, get_x_size, get_y_size)
             # Success registration Label.
-            Components.registration_success()
+            # TODO: here need to fix or rebuild, registration_success(self).
+            Components.registration_success(self)
 
         else:
             Components.warning_material_specification()

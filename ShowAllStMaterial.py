@@ -2,6 +2,7 @@
 from tkinter import ttk
 import tkinter as tk
 
+
 import Connection
 import Components
 import Languages
@@ -149,6 +150,8 @@ class ShowAllStMaterial:
         update_material_button["command"] = _build_tree
         update_material_button.pack(side=tk.LEFT)
 
+        # TODO: multi language.
+        # Search label
         label_for_search = tk.Label(frame1, text="Search: ")
         label_for_search.pack(side=tk.LEFT, ipady=3)
 
@@ -157,34 +160,16 @@ class ShowAllStMaterial:
         entry_search.pack(side=tk.LEFT, ipady=3)
         entry_search.bind("<KeyRelease>", search)
 
+        # Selected material label.
+        selected_material_label = tk.Label(frame1, text="Selected material: ")
+        selected_material_label.pack(side=tk.LEFT, ipady=3)
+
         # ID mat entry.
         id_mat = tk.Entry(frame1, textvariable=id_variable)
         id_mat.pack(side=tk.LEFT, ipady=3)
 
-        # Spinbox order.
-        variable_order = tk.StringVar()
-
-        spin_box = ttk.Spinbox(
-            frame1,
-            textvariable=variable_order,
-            from_=0,
-            to=200,
-            width=3,
-
-        )
-        spin_box.pack(side=tk.LEFT, padx=5, ipady=1)
-
-        # Bind spinbox for enter using.
-        spin_box.bind("<Return>", add_ordered_mat)
-
-        # Add to storage button.
-        add_to_ordered_material_button = tk.Button(frame1, Components.add_to_order_button())
-        add_to_ordered_material_button["command"] = add_ordered_mat
-        add_to_ordered_material_button.pack(side=tk.LEFT)
-
         # Spinbox storage.
         variable_to_storage = tk.IntVar()
-
         spin_box_storage = ttk.Spinbox(
             frame1,
             textvariable=variable_to_storage,
@@ -221,6 +206,27 @@ class ShowAllStMaterial:
                 clear()
             else:
                 return True
+
+        # Add to storage button.
+        add_to_storage_material_button = tk.Button(frame1, Components.add_material_to_storage_button())
+        add_to_storage_material_button["command"] = add_to_storage
+        add_to_storage_material_button.pack(side=tk.LEFT)
+
+        # Spinbox order.
+        variable_order = tk.StringVar()
+
+        spin_box = ttk.Spinbox(
+            frame1,
+            textvariable=variable_order,
+            from_=0,
+            to=200,
+            width=3,
+
+        )
+        spin_box.pack(side=tk.LEFT, padx=5, ipady=1)
+
+        # Bind spinbox for enter using.
+        spin_box.bind("<Return>", add_ordered_mat)
 
         def minus_material_btn_press():
             update_write_off()
@@ -273,11 +279,12 @@ class ShowAllStMaterial:
         # Bind spinbox for enter using.
         spin_box_storage.bind("<Return>", add_to_storage)
 
-        # Add to storage button.
-        add_to_storage_material_button = tk.Button(frame1, Components.add_material_to_storage_button())
-        add_to_storage_material_button["command"] = add_to_storage
-        add_to_storage_material_button.pack(side=tk.LEFT)
+        # Add to ordered material button.
+        add_to_ordered_material_button = tk.Button(frame1, Components.add_to_order_button())
+        add_to_ordered_material_button["command"] = add_ordered_mat
+        add_to_ordered_material_button.pack(side=tk.LEFT)
 
+        # Plus material button.
         plus_material_button = tk.Button(frame1, text="+")
         plus_material_button["command"] = plus_material_btn_press
         plus_material_button.pack(side=tk.RIGHT, ipadx=10)
