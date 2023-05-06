@@ -119,12 +119,10 @@ class ShowAllStMaterial:
 
         def add_ordered_mat(event=None):
             order_get = variable_order.get()
+
             if order_get.isalpha():
-
                 Components.tk_tlc_error_msg(frame1)
-
-            elif Components.warning_msg_for_add_mat_to_order(frame1, order_get):
-
+            elif Components.warning_msg_for_add_mat_to_order(frame1):
                 for selected in my_tree.selection():
                     self.set_selection = my_tree.set(selected, "#1")
 
@@ -210,7 +208,7 @@ class ShowAllStMaterial:
 
             to_storage_var_get = variable_to_storage.get()
 
-            if Components.warning_msg_for_add_material_to_storage(frame1, to_storage_var_get):
+            if Components.warning_msg_for_add_material_to_storage(frame1):
                 # Select item from treeview
                 for selected in my_tree.selection():
                     self.set_selection = my_tree.set(selected, "#1")

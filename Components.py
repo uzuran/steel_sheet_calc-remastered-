@@ -28,11 +28,9 @@ def warning_message_write_off_is_bigger_then_mat_in_storage(frame1):
     return write_off_warning
 
 
-def warning_msg_for_add_material_to_storage(frame1, to_storage_var):
+def warning_msg_for_add_material_to_storage(frame1):
     warning = msg.askyesno(title=Languages.current_lang["warning_title"],
-                           message=f"Dou you really "
-                                   f"want add this {to_storage_var} count "
-                                   f"of material ?",
+                           message=Languages.current_lang["warning_message_add_material"],
                            parent=frame1)
     return warning
 
@@ -45,11 +43,9 @@ def tk_tlc_error_msg(frame1):
     return tk_tlc_error
 
 
-def warning_msg_for_add_mat_to_order(frame1, order_value):
+def warning_msg_for_add_mat_to_order(frame1):
     warning = msg.askyesno(title=Languages.current_lang["warning_title"],
-                           message=f"Dou you really "
-                                   f"want add this {order_value} count "
-                                   f"of material ?",
+                           message=Languages.current_lang["warning_message_add_material"],
                            parent=frame1)
     return warning
 
