@@ -92,13 +92,13 @@ class ShowAllStMaterial:
         def update(rows):
             entry_search.delete(0, tk.END)
             my_tree.delete(*my_tree.get_children())
-            for i in rows:
-                my_tree.insert("", "end", values=i)
+            for row in rows:
+                my_tree.insert("", "end", values=row)
 
         # Function for search material by ID.
         def search(event=None):
-            id_get = id_variable.get()
-            # Search material in database where id.
+            id_get = entry_search.get()
+            # Assuming Connection is a class with search_material_in_database and cursor_fetch_all methods
             Connection.search_material_in_database(id_get)
             rows = Connection.cursor_fetch_all()
             update(rows)

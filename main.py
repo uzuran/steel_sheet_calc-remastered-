@@ -29,6 +29,7 @@ class App(tk.Tk):
         self.container.grid_columnconfigure(0, weight=1)
 
         # initializing frames to an empty array
+
         self.frames = {}
 
         # iterating through a tuple consisting
