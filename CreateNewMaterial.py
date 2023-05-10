@@ -12,6 +12,7 @@ import Languages
 class CreateNewMaterial(tk.Toplevel):
     def __init__(self, child):
         super().__init__(child)
+        self.refresh_tree = ShowAllStMaterial
 
         self.geometry("350x450")
         self.title(Languages.current_lang["create_new_material_title"])
@@ -81,7 +82,7 @@ class CreateNewMaterial(tk.Toplevel):
 
         # Button for material register.
         button_for_register_material = tk.Button(self, text=Languages.current_lang["registration_material_button"])
-        button_for_register_material['command'] = lambda: [self.create_new_material_click()]
+        button_for_register_material['command'] = lambda: [self.create_new_material_click(), ]
         button_for_register_material.pack()
         # Free space.
 

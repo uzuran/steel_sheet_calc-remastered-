@@ -25,6 +25,8 @@ class ShowAllStMaterial:
 
         # Insert treeview ----->>
         self.my_tree.pack()
+        # Binding my_tree for double click and select id material.
+        self.my_tree.bind("<Double-1>", self.get_row)
 
         self.my_tree.configure(yscrollcommand=scroll_bar.set)
         self.my_tree.configure(selectmode="extended")
@@ -146,6 +148,7 @@ class ShowAllStMaterial:
 
     # Function for update records button, firstly select all from database table, then delete treeview
     # and load again.
+
     def build_tree(self):
         # Select all material from database.
         Connection.select_all_material()
@@ -193,13 +196,12 @@ class ShowAllStMaterial:
         self.update(rows)
 
     def get_row(self, event):
-        id_variable = tk.StringVar()
         item_id = self.my_tree.identify_row(event.y)
         item = self.my_tree.item(item_id)
-        id_variable.set(item["values"][0])
-        self.variable_to_order.set(item["values"][5])
+        self.id_variable.set(item["values"][0])
 
-        self.my_tree.bind("<Double-1>", self.get_row)
+
+
 
     def add_ordered_mat(self, event=None):
         order_get = self.variable_to_order.get()
