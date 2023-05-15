@@ -201,8 +201,6 @@ class ShowAllStMaterial:
         self.id_variable.set(item["values"][0])
 
 
-
-
     def add_ordered_mat(self, event=None):
         order_get = self.variable_to_order.get()
 

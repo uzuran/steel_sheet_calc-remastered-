@@ -78,5 +78,5 @@ class RegistrationPage(tk.Frame):
             self.user_name_entry.delete(0, tk.END)
             self.pass_entry.delete(0, tk.END)
 
-            Components.registration_success()
+            Components.registration_success(self)
 
