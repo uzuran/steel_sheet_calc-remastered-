@@ -3,7 +3,7 @@ import tkinter as tk
 from tkinter import messagebox as msg
 from tkinter import ttk
 
-from ShowAllStMaterial import ShowAllStMaterial
+
 import Components
 import Connection
 import Languages
@@ -12,7 +12,6 @@ import Languages
 class CreateNewMaterial(tk.Toplevel):
     def __init__(self, child):
         super().__init__(child)
-        self.refresh_tree = ShowAllStMaterial(self)
 
         self.geometry("350x450")
         self.title(Languages.current_lang["create_new_material_title"])
@@ -82,8 +81,7 @@ class CreateNewMaterial(tk.Toplevel):
 
         # Button for material register.
         button_for_register_material = tk.Button(self, text=Languages.current_lang["registration_material_button"])
-        button_for_register_material['command'] = lambda: [self.create_new_material_click(),
-                                                           self.refresh_tree.build_tree()]
+        button_for_register_material['command'] = lambda: [self.create_new_material_click()]
         button_for_register_material.pack()
         # Free space.
 
